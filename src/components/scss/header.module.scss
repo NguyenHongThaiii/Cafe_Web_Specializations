@@ -1,0 +1,7 @@
+.buttonHeaderHover {
+  &:hover {
+    background-color: #eee;
+    box-shadow: 0 0 2px 0 rgb(0 0 0 / 20%), 0 0 10px 0 rgb(0 0 0 / 19%);
+    transition: box-shadow 0.1s;
+  }
+}
