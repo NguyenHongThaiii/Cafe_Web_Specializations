@@ -11,7 +11,6 @@ function Purpose() {
     (async () => {
       try {
         const data = await purposesApi.getAll();
-        console.log(data);
         setState(data);
         // setState(data.data[0].topic);
         window.addEventListener("resize", handleResize);
