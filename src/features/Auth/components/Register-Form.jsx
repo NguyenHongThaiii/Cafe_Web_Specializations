@@ -44,10 +44,7 @@ function RegisterForm({ onSubmit = null }) {
     if (!onSubmit) return null;
     try {
       await onSubmit(value);
-    } catch (error) {
-      console.log(error);
-      setError(error.message);
-    }
+    } catch (error) {}
   };
   return (
     <form onSubmit={handleSubmit(handleOnSubmit)}>

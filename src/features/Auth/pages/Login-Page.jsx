@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { createPortal } from "react-dom";
 import { CgCloseO } from "react-icons/cg";
 import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import { login, signup } from "../authSlice";
 import LoginForm from "../components/Login-Form";
 import RegisterForm from "./../components/Register-Form";
@@ -13,6 +14,7 @@ LoginPage.propTypes = {
 };
 
 function LoginPage({ onClick }) {
+  const navigation = useNavigate();
   if (typeof document === "undefined") return <div>Login Page</div>;
   const [isLogin, setIsLogin] = useState(true);
 
@@ -26,12 +28,12 @@ function LoginPage({ onClick }) {
       const action = signup(value);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
+      navigation(`/verify?email=${value.email}`);
     }
   };
 
   const handleClick = () => {
     setIsLogin((prev) => !prev);
-    // setIsLogin(false);
   };
   return createPortal(
     <div className="fixed inset-0 w-[100vw] h-[100vh] z-[10000] flex items-center justify-center bg-[rgba(0,0,0,.65)] ">

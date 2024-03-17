@@ -13,6 +13,10 @@ const usersApi = {
     const url = "/auth/logout";
     return axiosClient.get(url);
   },
+  validateRegistration(data) {
+    const url = "/auth/validateRegister";
+    return axiosClient.post(url, data);
+  },
 };
 
 export default usersApi;

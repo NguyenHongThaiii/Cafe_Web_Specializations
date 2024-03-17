@@ -21,6 +21,8 @@ export const login = createAsyncThunk("users/login", async (data, thunkAPI) => {
 export const signup = createAsyncThunk(
   "users/signup",
   async (data, thunkAPI) => {
+    const response = await usersApi.signup(data);
+    console.log("response", response);
     return null;
   }
 );
