@@ -17,6 +17,18 @@ const usersApi = {
     const url = "/auth/validateRegister";
     return axiosClient.post(url, data);
   },
+  forgotPasswords(data) {
+    const url = "/auth/forgotPassword";
+    return axiosClient.post(url, data);
+  },
+  validateResetPassword(data) {
+    const url = "/auth/validateReset";
+    return axiosClient.post(url, data);
+  },
+  handleResetPassword(data) {
+    const url = "/auth/resetPassword";
+    return axiosClient.post(url, data);
+  },
 };
 
 export default usersApi;

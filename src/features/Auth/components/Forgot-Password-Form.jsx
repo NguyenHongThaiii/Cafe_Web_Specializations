@@ -1,27 +1,20 @@
+import { yupResolver } from "@hookform/resolvers/yup";
 import PropTypes from "prop-types";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import InputControl from "../../../components/Form-Control/Input-Control";
-import PasswordControl from "../../../components/Form-Control/Password-Control";
+import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
-import { yupResolver } from "@hookform/resolvers/yup";
+import InputControl from "../../../components/Form-Control/Input-Control";
 
-LoginForm.propTypes = {
-  onSubmit: PropTypes.func,
-};
+ForgotPasswordForm.propTypes = { onSubmit: PropTypes.func };
 const schema = yup.object({
   email: yup
     .string("Vui lòng nhập email của bạn.")
     .trim()
     .email("Email không hợp lệ")
     .required("Vui lòng nhập email của bạn"),
-  password: yup
-    .string()
-    .trim()
-    .required("Vui lòng nhập mật khẩu của bạn.")
-    .min(6, "Password ít nhất là 6 kí tự."),
 });
-function LoginForm({ onSubmit = null }) {
+function ForgotPasswordForm({ onSubmit = null }) {
   const [error, setError] = useState("");
   const { control, handleSubmit, setValue, formState } = useForm({
     mode: "onSubmit",
@@ -58,23 +51,7 @@ function LoginForm({ onSubmit = null }) {
           {formState.errors["email"]?.message}
         </span>
       )}
-      <div className="py-[6px]">
-        <label htmlFor="password" className="text-base mb-[4px] inline-block">
-          Mật khẩu
-        </label>
-        <PasswordControl
-          control={control}
-          name="password"
-          id="password"
-          setValue={setValue}
-          placeholder="********"
-        />
-      </div>
-      {formState?.errors["password"] && (
-        <span className="block font-medium text-sm text-primary transition-all duration-150">
-          {formState.errors["password"]?.message}
-        </span>
-      )}
+
       {error.length > 0 && (
         <span className="block font-medium text-sm text-primary transition-all duration-150">
           {error}
@@ -84,7 +61,7 @@ function LoginForm({ onSubmit = null }) {
         formNoValidate={true}
         className=" w-full my-[14px] p-2 text-[18px] font-medium tracking-[0.4px] border-none outline-none rounded-[4px] text-white bg-primary"
       >
-        Đăng nhập
+        Quên mật khẩu
       </button>
 
       <div className="relative text-center overflow-hidden p-2">
@@ -96,4 +73,4 @@ function LoginForm({ onSubmit = null }) {
   );
 }
 
-export default LoginForm;
+export default ForgotPasswordForm;

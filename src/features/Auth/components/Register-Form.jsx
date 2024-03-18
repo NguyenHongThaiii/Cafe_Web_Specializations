@@ -1,6 +1,6 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import PropTypes from "prop-types";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import InputControl from "../../../components/Form-Control/Input-Control";
@@ -35,6 +35,8 @@ const schema = yup.object({
 });
 
 function RegisterForm({ onSubmit = null }) {
+  const [error, setError] = useState("");
+
   const { control, handleSubmit, setValue, formState } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
@@ -44,7 +46,9 @@ function RegisterForm({ onSubmit = null }) {
     if (!onSubmit) return null;
     try {
       await onSubmit(value);
-    } catch (error) {}
+    } catch (error) {
+      setError(error?.message);
+    }
   };
   return (
     <form onSubmit={handleSubmit(handleOnSubmit)}>
@@ -58,6 +62,7 @@ function RegisterForm({ onSubmit = null }) {
           focus
           id="name"
           type="text"
+          placeholder="123123"
         />
       </div>
       {formState.errors["name"] && (
@@ -70,7 +75,13 @@ function RegisterForm({ onSubmit = null }) {
         <label htmlFor="email" className="text-base mb-[4px] inline-block">
           Email
         </label>
-        <InputControl control={control} name="email" id="email" type="email" />
+        <InputControl
+          control={control}
+          name="email"
+          id="email"
+          type="email"
+          placeholder="example@gmail.com"
+        />
       </div>
       {formState.errors["email"] && (
         <span className="block font-medium text-sm text-primary transition-all duration-150">
@@ -87,6 +98,7 @@ function RegisterForm({ onSubmit = null }) {
           name="password"
           id="password"
           setValue={setValue}
+          placeholder="123123"
         />
       </div>
       {formState.errors["password"] && (
@@ -106,6 +118,7 @@ function RegisterForm({ onSubmit = null }) {
           name="passwordConfirm"
           id="passwordConfirm"
           setValue={setValue}
+          placeholder="123123"
         />
       </div>
       {formState.errors["passwordConfirm"] && (
@@ -114,6 +127,11 @@ function RegisterForm({ onSubmit = null }) {
         </span>
       )}
 
+      {error.length > 0 && (
+        <span className="block font-medium text-sm text-primary transition-all duration-150">
+          {error}
+        </span>
+      )}
       <button
         formNoValidate={true}
         className={`w-full my-[14px] p-2 text-[18px] font-medium tracking-[0.4px] border-none outline-none rounded-[4px] text-white bg-primary transition-all duration-300  ${styled.buttonHover} `}

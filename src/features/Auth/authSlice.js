@@ -26,6 +26,14 @@ export const signup = createAsyncThunk(
     return null;
   }
 );
+export const forgotPassword = createAsyncThunk(
+  "users/signup",
+  async (data, thunkAPI) => {
+    const response = await usersApi.forgotPasswords(data);
+    console.log("response", response);
+    return null;
+  }
+);
 
 const authSlice = createSlice({
   name: "auth",
