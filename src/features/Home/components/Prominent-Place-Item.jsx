@@ -7,7 +7,6 @@ ProminentPlaceItem.propTypes = {
 };
 
 function ProminentPlaceItem({ item }) {
-  const address = item?.startLocation?.address?.split(",")[1];
   const navigate = useNavigate();
   const handleClick = () => {
     navigate(`/place/${item.slug}`);
@@ -34,7 +33,7 @@ function ProminentPlaceItem({ item }) {
         <p className="text-text font-bold text-[18px] pt-[6px] pb-[2px]">
           {item?.name}
         </p>
-        <p className="text-black text-[14px] pb-[6px]">{address}</p>
+        <p className="text-black text-[14px] pb-[6px]">{item?.location}</p>
       </div>
     </Link>
   );

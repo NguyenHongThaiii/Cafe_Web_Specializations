@@ -1,16 +1,27 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useNavigate } from "react-router-dom";
+import blogsApi from "../../../api/blogsApi";
 NearAreaItem.propTypes = {
   item: PropTypes.object,
 };
 
 function NearAreaItem({ item }) {
+  const [state, setState] = useState(0);
   const navigate = useNavigate();
-  const name =
-    item?.startLocation?.address?.split(",")[
-      item?.startLocation?.address?.split(",")?.length - 1
-    ];
+  const filters = {
+    slugArea: `${item?.slug}`,
+  };
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await blogsApi.getAll(filters);
+        setState(data?.length ? data.length : 0);
+      } catch (error) {
+        console.log("Error 💥", error.message);
+      }
+    })();
+  }, []);
   const handleClick = () => {
     navigate(`/search?area=${item?.area}`);
   };
@@ -26,7 +37,7 @@ function NearAreaItem({ item }) {
       />
       <div className="absolute inset-0 flex justify-end text-white flex-col px-[20px] py-[16px] cursor-pointer bg-near-gradient-webkit">
         <h4 className="text-[24px] text-white font-bold ">{item?.name}</h4>
-        <p className="text-[14px] font-normal ">{item?.slug}</p>
+        <p className="text-[14px] font-normal ">{state} quán cafe</p>
       </div>
     </div>
   );
