@@ -1,0 +1,8 @@
+.buttonHover {
+  background-image: linear-gradient(90deg, #e03, #ff567d 51%, #e03);
+  background-image: -webkit-linear-gradient(left, #e03, #ff567d 51%, #e03);
+  background-size: 200% auto;
+  &:hover {
+    background-position: 100%;
+  }
+}

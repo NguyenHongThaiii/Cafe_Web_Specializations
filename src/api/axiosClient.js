@@ -38,7 +38,6 @@ axiosClient.interceptors.response.use(
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
     const message = error?.response?.data?.message;
-    console.log(error);
     if (
       error.code === "ERR_BAD_REQUEST" &&
       error?.response?.data?.error?.statusCode === 401 &&
@@ -54,8 +53,9 @@ axiosClient.interceptors.response.use(
       removeLocalStorage(STORAGE_KEY.USER);
       throw new Error(message);
     }
-    throw new Error(error);
-    // return Promise.reject(error);
+    if (message) error.message = message;
+    console.log("error", error);
+    return Promise.reject(error);
   }
 );
 

@@ -7,6 +7,8 @@ import HeaderUser from "../ChildrenComponent/Header-User";
 import NavMenu from "../ChildrenComponent/Nav-Menu";
 import NavMobile from "../ChildrenComponent/Nav-Mobile";
 import MenuDrawer from "../ChildrenComponent/Menu-Drawer";
+import { hideLoginPage, showLoginPage } from "../../features/Auth/authSlice";
+import LoginPage from "../../features/Auth/pages/Login-Page";
 
 function Header() {
   const [show, setShow] = useState(false);
@@ -15,13 +17,12 @@ function Header() {
 
   const isShowLoginPage = useSelector((state) => state.auth.isShowLoginPage);
   const user = useSelector((state) => state.auth.current);
-  console.log("user", user);
   const dispatch = useDispatch();
   const location = useLocation();
   useEffect(() => {
     return () => {
       setHide(false);
-      // handleHideLoginPage();
+      handleHideLoginPage();
     };
   }, []);
   const handleClick = () => {
@@ -34,12 +35,12 @@ function Header() {
   };
 
   const handleShowLoginPage = (e) => {
-    // const action = showLoginPage();
-    // dispatch(action);
+    const action = showLoginPage();
+    dispatch(action);
   };
   const handleHideLoginPage = (e) => {
-    // const action = hideLoginPage();
-    // dispatch(action);
+    const action = hideLoginPage();
+    dispatch(action);
   };
   return (
     <header className="flex items-center justify-between h-[54px] px-[6px] pb-[2px] lg:px-10 lg:pb-0  lg:h-[60px] shadow-lg">
@@ -58,7 +59,7 @@ function Header() {
             <input
               type="text"
               placeholder="Tìm kiếm quán cafe"
-              className="cursor-text outline-none border-none w-full h-full text-[#606770] font-normal px-[2px] py-[1px] ml-[6px] text-base leading-[28px]"
+              className="bg-transparent cursor-text outline-none border-none w-full h-full text-[#606770] font-normal px-[2px] py-[1px] ml-[6px] text-base leading-[28px]"
             />
             <SearchModal show={focus} onShow={handleFocus} />
           </div>

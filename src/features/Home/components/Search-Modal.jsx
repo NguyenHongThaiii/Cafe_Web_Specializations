@@ -29,9 +29,9 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
   useEffect(() => {
     (async () => {
       try {
-        // const { data } = await blogsApi.getAll(filters);
-        // setState(data.data);
-        setState([]);
+        const data = await blogsApi.getAll(filters);
+        setState(data);
+        // setState([]);
       } catch (error) {
         console.log("Error 💥", error.message);
       }
@@ -93,23 +93,21 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
           <h3 className="py-1 pb-1 text-base font-bold">Đã xem gần đây</h3>
 
           {state.map((item) => (
-            <div key={item._id}>
+            <div key={item?.id}>
               <div
                 onClick={() => handlePlacePace(item)}
                 className="px-[6px] py-[10px] flex relative hover:bg-[#eee] cursor-pointer transition-all duration-300"
               >
                 <img
-                  src={`${import.meta.env.VITE_URL_BLOGS}${item.image}`}
+                  src={`${import.meta.env.VITE_URL_BLOGS}${item?.image}`}
                   alt=""
                   className="mr-[10px] w-[50px] h-[50px] object-cover rounded-[4px]"
                 />
                 <div className="pr-3 mr-[10px] flex-1">
                   <p className="text-base text-black font-semibold mb-[2px]">
-                    {item.name}
+                    {item?.name}
                   </p>
-                  <p className="text-sm text-[#6b6b6b] ">
-                    {item.startLocation.address}
-                  </p>
+                  <p className="text-sm text-[#6b6b6b] ">{item?.description}</p>
                 </div>
 
                 <div className="absolute top-0 bottom-0 right-0  flex items-center justify-center z-10 ">

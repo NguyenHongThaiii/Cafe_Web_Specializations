@@ -1,6 +1,8 @@
 import { lazy, useEffect } from "react";
-import { useHide } from "./context/Global-Provider";
 import { Route, Routes } from "react-router-dom";
+import { useHide } from "./context/Global-Provider";
+import VerifyCodePage from "./features/VerifyCode/pages/Verify-Code-Page";
+import SearchPage from "./features/SearchPage/pages/Search-Page";
 
 const HomePage = lazy(() => import("./features/Home/pages/Home-Page"));
 
@@ -20,6 +22,8 @@ function App() {
   return (
     <Routes>
       <Route path="/" element={<HomePage />} />
+      <Route path="/verify" element={<VerifyCodePage />} />
+      <Route path="/search" element={<SearchPage />} />
     </Routes>
   );
 }

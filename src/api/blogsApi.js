@@ -8,6 +8,11 @@ const blogsApi = {
       params,
     });
   },
+  getCount(count) {
+    const url = `/products/count/${count}`;
+    return axiosClient.get(url);
+  },
+  getCountReviewProduct(product) {},
 };
 
 export default blogsApi;

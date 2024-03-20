@@ -19,7 +19,6 @@ function ProminentPlace({ data = [], limit = 5 }) {
           outstanding: 1,
         });
         setState(data);
-        console.log(data);
       } catch (error) {
         console.log("Error 💥", error.message);
       }

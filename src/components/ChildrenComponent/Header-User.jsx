@@ -5,6 +5,8 @@ import { MdMailOutline, MdPowerSettingsNew } from "react-icons/md";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import styled from "../scss/header.module.scss";
+import usersApi from "../../api/usersApi";
+import { logout } from "../../features/Auth/authSlice";
 
 HeaderUser.propTypes = {
   user: PropTypes.object,
@@ -16,6 +18,9 @@ function HeaderUser({ user = {} }) {
   const navigate = useNavigate();
   const handleLogout = async () => {
     try {
+      await usersApi.logout();
+      const action = logout();
+      dispatch(action);
       navigate("/");
     } catch (error) {
       console.log("Error", error);
@@ -47,7 +52,11 @@ function HeaderUser({ user = {} }) {
         className={`relative cursor-pointer w-[40px] h-[40px] rounded-full ${styled.buttonHeaderHover}`}
       >
         <img
-          src={`${import.meta.env.VITE_URL_USERS}${user?.photo}`}
+          src={`${
+            user.image != null
+              ? user?.photo
+              : "/img/72273536_138453484190292_758641522559156224_n.jpg"
+          }`}
           alt={user.name}
           className="w-full h-full object-cover rounded-full "
         />
@@ -63,7 +72,11 @@ function HeaderUser({ user = {} }) {
           >
             <div className="relative cursor-pointer w-[40px] h-[40px] rounded-full overflow-hidden  ">
               <img
-                src={`${import.meta.env.VITE_URL_USERS}${user?.photo}`}
+                src={`${
+                  user.image != null
+                    ? user?.photo
+                    : "/img/72273536_138453484190292_758641522559156224_n.jpg"
+                }`}
                 alt={user.name}
                 className="w-full h-full object-cover"
               />
