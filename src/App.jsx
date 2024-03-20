@@ -4,6 +4,7 @@ import { useHide } from "./context/Global-Provider";
 import VerifyCodePage from "./features/VerifyCode/pages/Verify-Code-Page";
 import SearchPage from "./features/SearchPage/pages/Search-Page";
 
+
 const HomePage = lazy(() => import("./features/Home/pages/Home-Page"));
 
 function App() {
@@ -23,7 +24,9 @@ function App() {
     <Routes>
       <Route path="/" element={<HomePage />} />
       <Route path="/verify" element={<VerifyCodePage />} />
+
       <Route path="/search" element={<SearchPage />} />
+
     </Routes>
   );
 }
