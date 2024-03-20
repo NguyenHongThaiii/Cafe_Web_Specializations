@@ -59,7 +59,7 @@ function Header() {
             <input
               type="text"
               placeholder="Tìm kiếm quán cafe"
-              className="cursor-text outline-none border-none w-full h-full text-[#606770] font-normal px-[2px] py-[1px] ml-[6px] text-base leading-[28px]"
+              className="bg-transparent cursor-text outline-none border-none w-full h-full text-[#606770] font-normal px-[2px] py-[1px] ml-[6px] text-base leading-[28px]"
             />
             <SearchModal show={focus} onShow={handleFocus} />
           </div>

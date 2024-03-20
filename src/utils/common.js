@@ -44,29 +44,50 @@ export const removeLocalStorage = (name) => {
   return localStorage.removeItem(name);
 };
 
-export const handleTransformStringToDate = (transformString) => {
-  if (!transformString.length === 0) return false;
-  const start = transformString.split("-")[0];
+// export const handleTransformStringToDate = (transformString) => {
+//   if (!transformString.length === 0) return false;
+//   const start = transformString.split("-")[0];
 
-  const end = transformString.split("-")[1];
-  const date = new Date();
-  const hoursCurr = date.getHours().toString();
-  const minutesCurr = date.getMinutes().toString();
-  const startHours = start.split(":")[0].trim();
-  const startMinutes = start.split(":")[1].trim();
-  const endHours = end.split(":")[0].trim();
-  const endMinutes = end.split(":")[1].trim();
+//   const end = transformString.split("-")[1];
+//   const date = new Date();
+//   const hoursCurr = date.getHours().toString();
+//   const minutesCurr = date.getMinutes().toString();
+//   const startHours = start.split(":")[0].trim();
+//   const startMinutes = start.split(":")[1].trim();
+//   const endHours = end.split(":")[0].trim();
+//   const endMinutes = end.split(":")[1].trim();
+//   if (
+//     hoursCurr < startHours ||
+//     (hoursCurr === endHours && minutesCurr > endMinutes) ||
+//     hoursCurr > endHours ||
+//     (hoursCurr === startHours && minutesCurr < startMinutes)
+//   )
+//     return false;
+
+//   return true;
+// };
+
+export const handleTransformStringToDate = (startTime, endTime) => {
+  const currentTime = new Date();
+  const currentMilliseconds =
+    currentTime.getHours() * 3600000 +
+    currentTime.getMinutes() * 60000 +
+    currentTime.getSeconds() * 1000;
+
+  // Lấy thời gian bắt đầu và kết thúc từ dữ liệu của bạn (đơn vị thời gian là milliseconds)
+  const startTimeMilliseconds = startTime * 1000; // startTime = 28800 seconds = 28800 * 1000 milliseconds
+  const endTimeMilliseconds = endTime * 1000; // endTime = 90000 seconds = 90000 * 1000 milliseconds
+
+  // Kiểm tra xem thời điểm hiện tại có nằm trong khoảng mở cửa hay không
   if (
-    hoursCurr < startHours ||
-    (hoursCurr === endHours && minutesCurr > endMinutes) ||
-    hoursCurr > endHours ||
-    (hoursCurr === startHours && minutesCurr < startMinutes)
-  )
+    currentMilliseconds >= startTimeMilliseconds &&
+    currentMilliseconds <= endTimeMilliseconds
+  ) {
+    return true;
+  } else {
     return false;
-
-  return true;
+  }
 };
-
 export const handleCalculateDateFromNow = (date) => {
   const temp1 = new Date();
   const dayTemp1 = `0${temp1.getDate()}`.slice(-2);

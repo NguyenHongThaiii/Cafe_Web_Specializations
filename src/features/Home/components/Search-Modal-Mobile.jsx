@@ -90,7 +90,7 @@ function SearchModalMobile({ show, onShow }) {
             <h3 className="py-1 pb-1 text-base font-bold">Đã xem gần đây</h3>
 
             {state.map((item) => (
-              <div key={item._id} onClick={() => handleToPlacePage(item)}>
+              <div key={item.id} onClick={() => handleToPlacePage(item)}>
                 <div className="px-[6px] py-[10px] flex relative hover:bg-[#eee] cursor-pointer transition-all duration-300">
                   <img
                     src={`${import.meta.env.VITE_URL_BLOGS}${item.image}`}
