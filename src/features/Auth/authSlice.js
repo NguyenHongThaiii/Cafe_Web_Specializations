@@ -14,7 +14,6 @@ export const login = createAsyncThunk("users/login", async (data, thunkAPI) => {
   const response = await usersApi.login(data);
   setLocalStorage(STORAGE_KEY.TOKEN, response.token);
   setLocalStorage(STORAGE_KEY.USER, JSON.stringify(response));
-  console.log("response", response);
   return response;
 });
 
@@ -22,7 +21,6 @@ export const signup = createAsyncThunk(
   "users/signup",
   async (data, thunkAPI) => {
     const response = await usersApi.signup(data);
-    console.log("response", response);
     return null;
   }
 );
@@ -30,7 +28,6 @@ export const forgotPassword = createAsyncThunk(
   "users/signup",
   async (data, thunkAPI) => {
     const response = await usersApi.forgotPasswords(data);
-    console.log("response", response);
     return null;
   }
 );

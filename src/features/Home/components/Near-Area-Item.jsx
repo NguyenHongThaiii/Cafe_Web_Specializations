@@ -23,7 +23,7 @@ function NearAreaItem({ item }) {
     })();
   }, []);
   const handleClick = () => {
-    navigate(`/search?area=${item?.area}`);
+    navigate(`/search?areas=${item?.slug}`);
   };
   return (
     <div

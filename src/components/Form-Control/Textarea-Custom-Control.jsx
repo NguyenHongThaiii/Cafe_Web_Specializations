@@ -27,7 +27,6 @@ function TextareaCustomControl({
     const value = event.target.value;
     setHeight("auto");
     setTextarea(event.target.value);
-    console.log(event.key);
 
     if (timeoutRef.current) {
       clearInterval(timeoutRef.current);
@@ -39,7 +38,6 @@ function TextareaCustomControl({
   };
 
   const handleOnKeyPress = (event) => {
-    console.log(event.shiftKey);
     if (
       !onKeyPress ||
       (event.key === "Enter" && !textarea && !event.shiftKey)

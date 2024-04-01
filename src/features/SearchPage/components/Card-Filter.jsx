@@ -8,7 +8,6 @@ const NAME_LIST = ["slugPurpose", "slugArea", "slugConvenience", "slugKind"];
 
 function CardFilter(props) {
   const [filters, setFilters] = useContext(FiltersContext);
-  console.log(filters);
   const newFilters = NAME_LIST.map((item) => {
     if (filters && filters[item]) {
       return { [item]: filters[item] };

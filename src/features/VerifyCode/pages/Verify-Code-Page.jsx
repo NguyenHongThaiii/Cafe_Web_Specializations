@@ -42,11 +42,8 @@ function VerifyCodePage(props) {
   const email =
     queryString.parse(location.search)?.email || "example@example.com";
   const handleOnVerification = async () => {
-    console.log(verificationCode);
     try {
       setLoading(true);
-
-      setLoading(false);
       if (type === "forgot") {
         await usersApi.validateResetPassword({
           email,
@@ -58,8 +55,8 @@ function VerifyCodePage(props) {
           email,
           otp: verificationCode,
         });
-        navigation("/");
       }
+      setLoading(false);
     } catch (error) {
       setLoading(false);
     }
@@ -86,7 +83,9 @@ function VerifyCodePage(props) {
           <button
             onClick={handleOnVerification}
             disabled={loading}
-            className=" w-full my-[14px] p-2 text-[18px] font-medium tracking-[0.4px] border-none outline-none rounded-[4px] text-white bg-primary"
+            className={` w-full my-[14px] p-2 text-[18px] font-medium tracking-[0.4px] border-none outline-none rounded-[4px] text-white ${
+              loading ? "bg-gray-400" : "bg-primary"
+            } transition-all`}
           >
             Verify OTP
           </button>
