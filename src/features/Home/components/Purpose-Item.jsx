@@ -11,7 +11,7 @@ PurposeItem.propTypes = {
 function PurposeItem({ item, index = 0 }) {
   const navigate = useNavigate();
   const handleClick = () => {
-    navigate(`/search?topic=${item?.name}`);
+    navigate(`/search?purposes=${item?.slug}`);
   };
   return (
     <div

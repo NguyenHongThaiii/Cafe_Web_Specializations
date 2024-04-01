@@ -9,6 +9,8 @@ import { forgotPassword, login, signup } from "../authSlice";
 import LoginForm from "../components/Login-Form";
 import RegisterForm from "./../components/Register-Form";
 import ForgotPasswordForm from "../components/Forgot-Password-Form";
+import "react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 
 LoginPage.propTypes = {
   onClick: PropTypes.func.isRequired,
@@ -25,13 +27,13 @@ function LoginPage({ onClick }) {
       const action = login(value);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
+      toast("Login successfully");
     } else if (!isLogin && !isForgot) {
       const action = signup(value);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
-      navigation(`/verify?email=${value.email}`);
+      toast("Register successfully");
     } else {
-      console.log("run");
       const action = forgotPassword(value);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);

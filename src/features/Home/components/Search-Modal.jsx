@@ -40,7 +40,6 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
 
   const handleSearchChange = (value, e) => {
     e.preventDefault();
-    console.log(value);
     setFilters((prev) => {
       return { ...prev, ...value };
     });

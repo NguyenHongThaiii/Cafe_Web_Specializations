@@ -134,7 +134,10 @@ function RegisterForm({ onSubmit = null }) {
       )}
       <button
         formNoValidate={true}
-        className={`w-full my-[14px] p-2 text-[18px] font-medium tracking-[0.4px] border-none outline-none rounded-[4px] text-white bg-primary transition-all duration-300  ${styled.buttonHover} `}
+        className={` w-full my-[14px] p-2 text-[18px] font-medium tracking-[0.4px] border-none outline-none rounded-[4px] text-white ${
+          formState.isSubmitting ? "bg-gray-400" : "bg-primary"
+        } transition-all`}
+        disabled={formState.isSubmitting}
       >
         Tạo tài khoản
       </button>
