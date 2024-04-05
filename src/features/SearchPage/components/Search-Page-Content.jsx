@@ -55,10 +55,11 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
 
     onChange({
       name: "",
-      slugArea: [],
-      slugPurpose: [],
+      slugArea: null,
+      slugPurpose: null,
+      slugKind: null,
+      slugConvenience: null,
     });
-    removeLocalStorage("search_now");
     navigate(`/search`);
   };
   return (
@@ -71,8 +72,7 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
             filters?.slugPurpose ||
             filters?.slugConvenience ||
             filters?.slugKind ||
-            queryString.parse(location.search)?.name?.length > 0 ||
-            getLocalStorage("search_now")) && (
+            queryString.parse(location.search)?.name?.length > 0) && (
             <span
               onClick={handleReset}
               className="mx-2 font-bold text-sm text-black cursor-pointer"

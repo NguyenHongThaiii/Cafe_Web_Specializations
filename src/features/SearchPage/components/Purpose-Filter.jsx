@@ -67,6 +67,7 @@ function PurposeFilter({
               id={item?.name}
               value={item?.slug}
               type={type}
+              checked={item?.slug === filters?.slugPurpose}
               onChange={handleOnChange}
             />
           ))}

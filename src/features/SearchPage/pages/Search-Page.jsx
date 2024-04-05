@@ -19,6 +19,7 @@ function SearchPage(props) {
   const [show, setShow] = useState(false);
   const [hide, setHide] = useHide();
   const location = useLocation();
+
   const [filters, setFilters] = useState(() => {
     const queryParams = queryString.parse(location.search);
 
