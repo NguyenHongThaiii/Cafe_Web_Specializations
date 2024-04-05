@@ -23,6 +23,7 @@ function AreaFilter({
   onChange = null,
   mobile = false,
   type = "radio",
+  filters = {},
 }) {
   const [show, setShow] = useState(true);
 
@@ -64,6 +65,7 @@ function AreaFilter({
               name={"slugArea"}
               id={item?.name}
               value={item?.slug}
+              checked={item?.slug === filters?.slugArea}
               type={type}
               onChange={handleOnChange}
             />

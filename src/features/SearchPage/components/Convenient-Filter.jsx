@@ -66,6 +66,7 @@ function ConvenientFilter({
               id={item?.name}
               value={item?.slug}
               type={type}
+              checked={item?.slug === filters?.slugConvenience}
               onChange={handleOnChange}
             />
           ))}

@@ -64,6 +64,7 @@ function TypeFilter({
               id={item?.name}
               value={item?.slug}
               type={type}
+              checked={item?.slug === filters?.slugKind}
               onChange={handleOnChange}
             />
           ))}
