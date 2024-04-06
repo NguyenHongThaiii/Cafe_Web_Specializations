@@ -24,7 +24,8 @@ function JudgePublic({
   const [filters, setFilers] = useState({
     page: 1,
     limit: 5,
-    sortBy: "createdAt",
+    sortBy: "createdAtDesc",
+    productId: item?.id,
   });
   const [page, setPage] = useState(1);
   useEffect(() => {
@@ -42,29 +43,9 @@ function JudgePublic({
   };
   useEffect(() => {
     (() => {
-      async () => {
-        // try {
-        //   // socket = io.connect("http://localhost:5000");
-        //   socket.on("favor", (data) => {
-        //     setReviews(data);
-        //   });
-        //   socket.on("createReply", (data) => {
-        //     // console.log(data);
-        //     setReviews(data);
-        //   });
-        // } catch (error) {
-        //   console.log("Error", error);
-        //   socket.on("disconnect", () => {
-        //     console.log("disconnect success");
-        //   });
-        // }
-      };
+      async () => {};
     })();
-    return () => {
-      // socket.on("disconnect", (res) => {
-      //   console.log(res);
-      // });
-    };
+    return () => {};
   }, []);
 
   const handleClickFavor = (userId, reviewId) => {
@@ -137,6 +118,7 @@ function JudgePublic({
           item={item}
           onShow={hideShow}
           onSubmit={(values) => setReviews((prev) => [...prev, values])}
+          onReFetch={setFilers}
         />
       )}
     </div>

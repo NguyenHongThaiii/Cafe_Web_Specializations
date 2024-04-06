@@ -18,7 +18,7 @@ function ProminentPlaceItem({ item }) {
       target="_blank"
       className="rounded-[10px] flex-shrink-0 block  cursor-pointer hover-scale hover:shadow-2xl transition-all duration-200 overflow-hidden shadow-[0_1px_4px_rgb(0,0,0,0.15)]"
     >
-      <div className="w-full  leading-[0] overflow-hidden h-[200px] md:h-[240px] lg:max-w-[280px]">
+      <div className="w-full  leading-[0] overflow-hidden h-[200px] md:h-[240px] lg:max-w-[282px]">
         <img
           src={
             item?.listImage !== null &&

@@ -33,7 +33,7 @@ function ParticularLocation({ data = {} }) {
             className="text-black text-base whitespace-nowrap overflow-hidden text-ellipsis hover:underline transition-all"
             target="_blank"
           >
-            {data?.startLocation?.address}
+            {data?.location}
           </a>
         </div>
       </div>

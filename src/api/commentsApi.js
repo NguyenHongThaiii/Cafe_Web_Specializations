@@ -1,6 +1,6 @@
 import axiosClient from "./axiosClient";
 
-const commentApis = {
+const commentsApi = {
   getAll(params) {
     const url = "/comments";
     return axiosClient.get(url, {
@@ -13,4 +13,4 @@ const commentApis = {
   },
 };
 
-export default commentApis;
+export default commentsApi;

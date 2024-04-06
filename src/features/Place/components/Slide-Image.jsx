@@ -18,7 +18,7 @@ function SlideImage({ data = {}, handleShowModalImage = null }) {
         className="absolute flex items-center gap-x-3 z-10 bottom-[20px] left-[10px] py-1 px-[10px] text-white bg-[rgba(0,0,0,.6666666666666666)] rounded-[10px] "
       >
         <FaImage />
-        Xem tất cả ảnh ({data?.imgPreview?.length})
+        Xem tất cả ảnh ({data?.listImage?.length})
       </Link>
 
       <div

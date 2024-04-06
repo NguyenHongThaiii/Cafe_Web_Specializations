@@ -41,8 +41,15 @@ function PlacePage(props) {
   useEffect(() => {
     (async () => {
       try {
-        const data = await blogsApi.getBySlug(slug);
-        setState(data);
+        const blog = await blogsApi.getBySlug(slug);
+        const listId = blog.areas?.map((area) => area?.id);
+        const concernBlog = await blogsApi.getAll({
+          limit: 4,
+          page: 1,
+          slugArea: blog?.areas?.length > 0 ? blog.areas[0]?.slug : null,
+        });
+        setState(blog);
+        setConcern(concernBlog);
         // setConcern();
         if (typeof document !== "undefined") {
           document.getElementById("root").style.overflow = "unset";
@@ -205,7 +212,9 @@ function PlacePage(props) {
             <h2 className="lg:text-[28px] text-[20px] font-semibold flex items-center justify-between">
               Địa điểm lân cận
               <Link
-                to={`/search?area=${state?.area}`}
+                to={`/search?areas=${
+                  state?.areas?.length > 0 && state.areas[0]?.slug
+                }`}
                 className="font-normal text-sm text-primary curosr-pointer hover:underline transition-all lg:text-base"
               >
                 Xem thêm

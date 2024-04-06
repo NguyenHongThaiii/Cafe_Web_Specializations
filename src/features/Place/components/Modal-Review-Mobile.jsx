@@ -6,14 +6,22 @@ import { useDispatch, useSelector } from "react-redux";
 import { createReview } from "../../Auth/authSlice";
 import CustomRate from "./Custom-Rate";
 import YourJudge from "./Your-Judge";
-
+import reviewsApi from "../../../api/reviewApi";
+import "react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 ModalReviewMobile.propTypes = {
   item: PropTypes.object,
   onShow: PropTypes.func,
   onSubmit: PropTypes.func,
+  onReFetch: PropTypes.func,
 };
 
-function ModalReviewMobile({ item = {}, onShow = null, onSubmit = null }) {
+function ModalReviewMobile({
+  item = {},
+  onShow = null,
+  onSubmit = null,
+  onReFetch = null,
+}) {
   const user = useSelector((state) => state.auth.current);
   const dispatch = useDispatch();
   const formRef = useRef(null);
@@ -23,9 +31,9 @@ function ModalReviewMobile({ item = {}, onShow = null, onSubmit = null }) {
     space: 5,
     price: 5,
     location: 5,
-    review: "",
+    name: "",
   });
-
+  const [loading, setLoading] = useState(false);
   if (typeof document === "undefined")
     return <div className="modal">Modal</div>;
   useEffect(() => {
@@ -36,17 +44,30 @@ function ModalReviewMobile({ item = {}, onShow = null, onSubmit = null }) {
   };
   const handleClick = async () => {
     try {
-      if (values.review.trim().length < 10) return null;
-      console.log({ ...values, blogId: item._id, userId: user._id });
-
-      socket.emit("createReview", {
-        ...values,
-        blogId: item._id,
-        userId: user._id,
+      setLoading(true);
+      if (values?.name?.trim()?.length < 10) return null;
+      console.log({ ...values, productId: item?.id, userId: user?.id });
+      const formData = new FormData();
+      formData.append("name", values?.name);
+      // formdata.append("listImageFlies", values?.listImageFlies);
+      values?.listImageFiles?.forEach((file, index) => {
+        formData.append(`listImageFiles[${index}]`, file);
       });
+      formData.append("price", values?.price);
+      formData.append("location", values?.location);
+      formData.append("service", values?.service);
+      formData.append("food", values?.food);
+      formData.append("space", values?.space);
+      formData.append("productId", item?.id);
+      formData.append("userId", user?.id);
+      const data = await reviewsApi.createReview(formData);
+      onReFetch((prev) => ({ ...prev }));
+      onShow(false);
     } catch (error) {
       console.log("Error", error.message);
+      toast(error?.message);
     }
+    setLoading(false);
   };
 
   return createPortal(
@@ -101,11 +122,13 @@ function ModalReviewMobile({ item = {}, onShow = null, onSubmit = null }) {
           </form>
           <div className="p-[10px] border-t-[1px] border-t-[rgba(0,0,0,.1)] flex items-center justify-end">
             <button
-              disabled={values.review.trim().length > 10 ? false : true}
+              disabled={
+                values.name.trim().length >= 10 && !loading ? false : true
+              }
               onClick={handleClick}
               className={`px-[10px] py-[6px]  rounded-[6px] text-base font-medium outline-none
               ${
-                values.review.trim().length >= 10
+                values.name.trim().length >= 10 && !loading
                   ? "bg-primary text-white"
                   : "text-[#bcc0c4] bg-[#e4e6eb]"
               }

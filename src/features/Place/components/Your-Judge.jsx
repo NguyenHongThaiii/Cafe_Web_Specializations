@@ -37,7 +37,7 @@ function YourJudge({ item = {}, onChange = null }) {
     });
     setFiles((prev) => [...prev, ...files]);
     if (!onChange) return;
-    onChange({ files: arrayFiles });
+    onChange({ listImageFiles: arrayFiles });
   };
   return (
     <div>
@@ -60,7 +60,7 @@ function YourJudge({ item = {}, onChange = null }) {
         <div>
           <TextareaCustomControl
             onChange={onChange}
-            name="review"
+            name="name"
             id="reviewUser"
             placeholder="Nhập tối thối 10 kí tự."
           />

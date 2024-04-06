@@ -3,11 +3,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaEllipsisH, FaHeart, FaReplyAll } from "react-icons/fa";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import commentsApi from "../../../api/commentsApi";
 import { handleCalculateDateFromNow } from "../../../utils";
 import ModalImage from "./Modal-Image";
 import ReadMore from "./Read-More";
 import ReplyUser from "./Reply-User";
-import commentApis from "../../../api/commentApis";
 
 JudgeUser.propTypes = {
   item: PropTypes.object,
@@ -25,6 +25,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
     index: 0,
   });
   const [isReply, setIsReply] = useState(false);
+  const [amountFavorite, setAmountFavorite] = useState(0);
   const [more, setMore] = useState(true);
   const moreRef = useRef(null);
 
@@ -43,8 +44,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
 
     (async () => {
       try {
-        const data = await commentApis.getAll({ reviewId: item.id, page: 0 });
-        console.log(data);
+        const data = await commentsApi.getAll({ reviewId: item.id, page: 0 });
         setReplies(data);
       } catch (error) {}
     })();
@@ -148,7 +148,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
           >
             <FaHeart className={`w-3 h-3 mr-1 `} />
             {item.favorite > 0 && (
-              <span className="mx-[2px] ">{item?.favorite}</span>
+              <span className="mx-[2px] ">{item?.amount}</span>
             )}
             Thích
           </button>

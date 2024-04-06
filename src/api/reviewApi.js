@@ -13,6 +13,14 @@ const reviewsApi = {
       params,
     });
   },
+  createReview(body) {
+    const url = "/reviews";
+    return axiosClient.post(url, body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
 };
 
 export default reviewsApi;

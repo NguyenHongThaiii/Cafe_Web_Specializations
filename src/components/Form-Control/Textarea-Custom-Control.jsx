@@ -50,19 +50,8 @@ function TextareaCustomControl({
     }
   };
 
-  // React.useLayoutEffect(() => {
-  //   // Reset height - important to shrink on delete
-  //   textareaRef.current.style.height = "inherit";
-  //   // Set height
-  //   textareaRef.current.style.height = `${Math.max(
-  //     textareaRef.current.scrollHeight,
-  //     MIN_TEXTAREA_HEIGHT
-  //   )}px`;
-  // }, [textarea]);
-
   React.useLayoutEffect(() => {
     setHeight(`${textareaRef?.current?.scrollHeight}px`);
-    // setParentHeight(`${textareaRef?.current?.scrollHeight}px`);
   }, [textarea]);
   return (
     <div className="mt-4">
@@ -71,7 +60,7 @@ function TextareaCustomControl({
         ref={textareaRef}
         placeholder="Nhập tối thiểu 10 kí tự."
         value={textarea}
-        onKeyPress={handleOnKeyPress}
+        // onKeyPress={handleOnKeyPress}
         onChange={handleOnChange}
         className={`resize-none overflow-hidden leading-normal w-full text-base border outline-none rounded-[10px] px-2 py-1 ${className}`}
         autoFocus={isFocus}

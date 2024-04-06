@@ -23,16 +23,16 @@ function ConcernSlide({ data = [] }) {
 
   return (
     <>
-      <div className="lg:grid hidden grid-cols-4 gap-x-3  flex-nowrap overflow-hidden  py-1 ">
+      <div className="lg:grid hidden grid-cols-4 gap-x-3  flex-nowrap overflow-hidden mt-2 py-1 ">
         {data.map((item) => (
-          <div className="flex-1 " key={item._id}>
+          <div className="flex-1 " key={item.id}>
             <ProminentPlaceItem item={item} />
           </div>
         ))}
       </div>
       <div className="md:grid grid-cols-2 lg:hidden gap-x-3   flex-nowrap overflow-hidden  py-1 ">
         {data.slice(0, 2).map((item) => (
-          <div className="flex-1 " key={item._id}>
+          <div className="flex-1 " key={item.id}>
             <ProminentPlaceItem item={item} />
           </div>
         ))}
