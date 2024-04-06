@@ -1,0 +1,17 @@
+.swiper {
+  z-index: 1000;
+  & > .swiper-button-prev {
+    @apply hidden;
+  }
+  & > .swiper-button-next {
+    @apply hidden;
+  }
+
+  & > .swiper-pagination {
+    @apply hidden;
+
+    & > .swiper-pagination-bullet {
+      @apply hidden;
+    }
+  }
+}

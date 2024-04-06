@@ -127,3 +127,9 @@ export const handleCheckIsLocalImage = (url) => {
   }
   return false;
 };
+export function formatToVND(number) {
+  return new Intl.NumberFormat("vi-VN", {
+    style: "currency",
+    currency: "VND",
+  }).format(number);
+}
