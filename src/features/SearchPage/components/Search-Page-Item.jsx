@@ -5,14 +5,16 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import { handleTransformStringToDate } from "../../../utils";
 import reviewsApi from "../../../api/reviewApi";
+import blogSavedApi from "../../../api/blog-savedApi";
+import { showLoginPage } from "../../Auth/authSlice";
 
 SearchPageItem.propTypes = {
   data: PropTypes.object,
 };
 
 function SearchPageItem({ data = {} }) {
-  console.log(data);
   const [countReview, setCountReview] = useState(0);
+  const [isSaved, setIsSaved] = useState(false);
   const ratingsAverage = data?.avgRating || 0;
   const startTime =
     data?.schedules &&
@@ -29,12 +31,26 @@ function SearchPageItem({ data = {} }) {
         status: 1,
         productId: data?.id,
       });
+      const isSave = await blogSavedApi.checkBlogIsSavedByUserId({
+        userId: user?.id,
+        productId: data?.id,
+      });
+      setIsSaved(isSave);
       setCountReview(review?.length || 0);
     })();
   }, []);
   const dispatch = useDispatch();
 
-  const handleClickSaveBlog = async () => {};
+  const handleClickSaveBlog = async () => {
+    if (!user?.id) {
+      dispatch(showLoginPage);
+      return;
+    }
+    await blogSavedApi.toggleBlogSaved({
+      productId: data?.id,
+      userId: user?.id,
+    });
+  };
 
   return (
     <div className="relative hover-scale lg:mb-5 mb-[6px] flex bg-white rounded-[10px] shadow-xl hover:shadow-2xl cursor-pointer transition-all duration-300">
@@ -45,9 +61,9 @@ function SearchPageItem({ data = {} }) {
         <div className=" lg:w-[270px] lg:h-[210px]  w-[120px] h-[110px]  overflow-hidden ">
           <img
             src={
-              data?.listImage &&
-              data?.listImage?.length > 0 &&
-              data?.listImage[0]?.url
+              data?.listImage && data?.listImage?.length > 0
+                ? data?.listImage[0]?.url
+                : ""
             }
             alt={data?.name}
             className="w-full h-full object-cover rounded-[6px] "
@@ -120,9 +136,7 @@ function SearchPageItem({ data = {} }) {
         <div className="w-[36px] h-[36px] rounded-full shadow-xl flex items-center justify-center hover:opacity-80 ">
           <i
             className={`fa-solid fa-bookmark transition-all  ${
-              user?.blogSaved?.includes(data?.id)
-                ? "text-primary"
-                : "text-secondary"
+              isSaved ? "text-primary" : "text-secondary"
             }`}
           ></i>
         </div>
