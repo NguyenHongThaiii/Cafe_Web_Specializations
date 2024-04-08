@@ -3,9 +3,9 @@ import CustomLayoutFilter from "./CustomLayoutFilter";
 import PropTypes from "prop-types";
 import CustomFilterMobile from "./Custom-Filter-Mobile";
 import areasApi from "../../../api/areasApi";
-import purposeApis from "../../../api/purposeApis";
 import kindsApi from "../../../api/kindsApi";
 import conveniencesApi from "../../../api/conveniencesApi";
+import purposesApi from "../../../api/purposesApi";
 SearchPageFilter.propTypes = {
   onChange: PropTypes.func,
   show: PropTypes.bool,
@@ -25,7 +25,7 @@ function SearchPageFilter({
     (async () => {
       try {
         const areas = await areasApi.getAll();
-        const purposes = await purposeApis.getAll();
+        const purposes = await purposesApi.getAll();
         const kinds = await kindsApi.getAll();
         const conveniences = await conveniencesApi.getAll();
         const data = {

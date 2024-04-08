@@ -93,7 +93,9 @@ function SearchModalMobile({ show, onShow }) {
               <div key={item.id} onClick={() => handleToPlacePage(item)}>
                 <div className="px-[6px] py-[10px] flex relative hover:bg-[#eee] cursor-pointer transition-all duration-300">
                   <img
-                    src={`${import.meta.env.VITE_URL_BLOGS}${item.image}`}
+                    src={
+                      item?.listImage.src?.length > 0 && item?.listImage[0]?.url
+                    }
                     alt=""
                     className="mr-[10px] w-[50px] h-[50px] object-cover rounded-[4px]"
                   />
@@ -101,9 +103,7 @@ function SearchModalMobile({ show, onShow }) {
                     <p className="text-base text-black font-semibold mb-[2px]">
                       {item.name}
                     </p>
-                    <p className="text-sm text-[#6b6b6b] ">
-                      {item.startLocation.address}
-                    </p>
+                    <p className="text-sm text-[#6b6b6b] ">{item?.location}</p>
                   </div>
 
                   <div className="absolute top-0 bottom-0 right-0  flex items-center justify-center z-10 ">

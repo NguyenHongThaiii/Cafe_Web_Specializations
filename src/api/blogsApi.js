@@ -8,6 +8,10 @@ const blogsApi = {
       params,
     });
   },
+  getBySlug(slug) {
+    const url = `/products/${slug}`;
+    return axiosClient.get(url, {});
+  },
   getCount(count) {
     const url = `/products/count/${count}`;
     return axiosClient.get(url);

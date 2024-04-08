@@ -24,7 +24,7 @@ function TextareaCustomControl({
   const timeoutRef = useRef(null);
 
   const handleOnChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.trim();
     setHeight("auto");
     setTextarea(event.target.value);
 
@@ -37,32 +37,20 @@ function TextareaCustomControl({
     }, 0);
   };
 
-  const handleOnKeyPress = (event) => {
-    if (
-      !onKeyPress ||
-      (event.key === "Enter" && !textarea && !event.shiftKey)
-    ) {
+  const handleOnKeyPress = async (event) => {
+    if (!onKeyPress || (event.key === "Enter" && event.shiftKey)) {
       event.preventDefault();
       return;
     } else if (event.key === "Enter" && textarea) {
+      if (!textarea || textarea.trim() === "" || /^[\n]+$/.test(textarea))
+        return;
       onKeyPress();
       setTextarea("".trim());
     }
   };
 
-  // React.useLayoutEffect(() => {
-  //   // Reset height - important to shrink on delete
-  //   textareaRef.current.style.height = "inherit";
-  //   // Set height
-  //   textareaRef.current.style.height = `${Math.max(
-  //     textareaRef.current.scrollHeight,
-  //     MIN_TEXTAREA_HEIGHT
-  //   )}px`;
-  // }, [textarea]);
-
   React.useLayoutEffect(() => {
     setHeight(`${textareaRef?.current?.scrollHeight}px`);
-    // setParentHeight(`${textareaRef?.current?.scrollHeight}px`);
   }, [textarea]);
   return (
     <div className="mt-4">

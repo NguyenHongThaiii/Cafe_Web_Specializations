@@ -1,0 +1,11 @@
+.modalImage {
+  & > .swiper {
+    z-index: 1000;
+    & > .swiper-button-prev {
+      display: flex !important;
+    }
+    & > .swiper-button-next {
+      display: flex !important;
+    }
+  }
+}

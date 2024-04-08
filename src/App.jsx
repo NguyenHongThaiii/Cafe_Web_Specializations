@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import { useHide } from "./context/Global-Provider";
 import VerifyCodePage from "./features/VerifyCode/pages/Verify-Code-Page";
 import SearchPage from "./features/SearchPage/pages/Search-Page";
-
+import PlacePage from "./features/Place/pages/Place-Page";
 
 const HomePage = lazy(() => import("./features/Home/pages/Home-Page"));
 
@@ -26,7 +26,7 @@ function App() {
       <Route path="/verify" element={<VerifyCodePage />} />
 
       <Route path="/search" element={<SearchPage />} />
-
+      <Route path="/place/:name" element={<PlacePage />}></Route>
     </Routes>
   );
 }
