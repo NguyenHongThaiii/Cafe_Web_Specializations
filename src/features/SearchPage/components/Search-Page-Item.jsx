@@ -11,6 +11,7 @@ SearchPageItem.propTypes = {
 };
 
 function SearchPageItem({ data = {} }) {
+  console.log(data);
   const [countReview, setCountReview] = useState(0);
   const ratingsAverage = data?.avgRating || 0;
   const startTime =
@@ -95,8 +96,8 @@ function SearchPageItem({ data = {} }) {
           <i className="fa-solid fa-location-dot w-[18px]"></i>
           {data?.location}
         </div>
-        <div className="lg:pt-[6px] lg:text-base text-sm">
-          <i className="fa-solid fa-clock w-[18px] pr-[18px] lg:block hidden"></i>
+        <div className="lg:pt-[6px] lg:text-base text-sm flex items-center gap-3">
+          <i className="fa-solid fa-clock w-[18px] pr-[18px] lg:block hidden pt-1"></i>
           <span
             className={`${
               handleTransformStringToDate(startTime, endTime)
@@ -108,7 +109,7 @@ function SearchPageItem({ data = {} }) {
               ? "Đang mở cửa"
               : "Đang đóng cửa"}
           </span>
-          {data?.timeStart && data?.timeStart[0]}
+          {data?.schedules?.length > 0 && data?.schedules[0]?.startTime}
         </div>
       </div>
 
