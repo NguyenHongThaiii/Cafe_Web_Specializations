@@ -30,19 +30,28 @@ function Details({ item = {} }) {
             <span
               className={`${
                 item?.timeStart &&
-                handleTransformStringToDate(item?.timeStart[0])
+                handleTransformStringToDate(
+                  item?.schedules?.length > 0 && item?.schedules[0]?.startTime,
+                  item?.schedules?.length > 0 && item?.schedules[0]?.endTime
+                )
                   ? "text-secondary "
                   : "text-primary"
               } font-medium`}
             >
               {item?.timeStart &&
-              handleTransformStringToDate(item?.timeStart[0])
+              handleTransformStringToDate(
+                item?.schedules?.length > 0 && item?.schedules[0]?.startTime,
+                item?.schedules?.length > 0 && item?.schedules[0]?.endTime
+              )
                 ? "Đang mở cửa"
                 : "Đang đóng cửa"}
             </span>{" "}
             <span className="ml-1">
               {" "}
-              {item.timeStart && item?.timeStart[0]}
+              <span className="pb-0.5 inline-block">
+                {" "}
+                {item?.schedules?.length > 0 && item?.schedules[0]?.startTime}
+              </span>
             </span>
           </div>
         </div>
