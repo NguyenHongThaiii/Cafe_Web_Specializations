@@ -69,7 +69,6 @@ const authSlice = createSlice({
       setLocalStorage(STORAGE_KEY.USER, JSON.stringify({ ...userLocal }));
     },
     createReview: (state, action) => {
-      console.log(action.payload);
       const userLocal = JSON.parse(getLocalStorage(STORAGE_KEY.USER));
       userLocal.listReviews = [...userLocal?.listReviews, action.payload];
       state.current = { ...userLocal };

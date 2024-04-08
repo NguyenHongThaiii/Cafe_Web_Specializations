@@ -24,7 +24,7 @@ function TextareaCustomControl({
   const timeoutRef = useRef(null);
 
   const handleOnChange = (event) => {
-    const value = event.target.value;
+    const value = event.target.value.trim();
     setHeight("auto");
     setTextarea(event.target.value);
 
@@ -37,14 +37,13 @@ function TextareaCustomControl({
     }, 0);
   };
 
-  const handleOnKeyPress = (event) => {
-    if (
-      !onKeyPress ||
-      (event.key === "Enter" && !textarea && !event.shiftKey)
-    ) {
+  const handleOnKeyPress = async (event) => {
+    if (!onKeyPress || (event.key === "Enter" && event.shiftKey)) {
       event.preventDefault();
       return;
     } else if (event.key === "Enter" && textarea) {
+      if (!textarea || textarea.trim() === "" || /^[\n]+$/.test(textarea))
+        return;
       onKeyPress();
       setTextarea("".trim());
     }
@@ -60,7 +59,7 @@ function TextareaCustomControl({
         ref={textareaRef}
         placeholder="Nhập tối thiểu 10 kí tự."
         value={textarea}
-        // onKeyPress={handleOnKeyPress}
+        onKeyPress={handleOnKeyPress}
         onChange={handleOnChange}
         className={`resize-none overflow-hidden leading-normal w-full text-base border outline-none rounded-[10px] px-2 py-1 ${className}`}
         autoFocus={isFocus}

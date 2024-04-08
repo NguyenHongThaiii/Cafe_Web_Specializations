@@ -35,7 +35,6 @@ function SearchPage(props) {
     };
   });
   const scrollRef = useRef(null);
-  console.log(filters);
   useEffect(() => {
     (async () => {
       try {

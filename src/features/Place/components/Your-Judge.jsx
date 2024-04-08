@@ -28,7 +28,6 @@ function YourJudge({ item = {}, onChange = null }) {
     }
   };
   const handleOnChangeFile = (e) => {
-    console.log(e.target.files);
     const files = Array.from(e.target.files).map((item, index) => {
       return URL.createObjectURL(e.target.files[index]);
     });

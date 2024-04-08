@@ -46,10 +46,8 @@ function ModalReviewMobile({
     try {
       setLoading(true);
       if (values?.name?.trim()?.length < 10) return null;
-      console.log({ ...values, productId: item?.id, userId: user?.id });
       const formData = new FormData();
       formData.append("name", values?.name);
-      // formdata.append("listImageFlies", values?.listImageFlies);
       values?.listImageFiles?.forEach((file, index) => {
         formData.append(`listImageFiles[${index}]`, file);
       });

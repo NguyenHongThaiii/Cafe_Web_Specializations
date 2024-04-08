@@ -1,10 +1,13 @@
-import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import { Link } from "react-router-dom";
-import JudgeUser from "./Judge-User";
-import ModalReviewMobile from "./Modal-Review-Mobile";
+import React, { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import favoritesApi from "../../../api/favoritesApi";
 import reviewsApi from "../../../api/reviewApi";
 import Pagination from "../../../common/Pagination";
+import JudgeUser from "./Judge-User";
+import ModalReviewMobile from "./Modal-Review-Mobile";
+import { showLoginPage } from "../../Auth/authSlice";
+import commentsApi from "../../../api/commentsApi";
 
 JudgePublic.propTypes = {
   item: PropTypes.object,
@@ -28,6 +31,7 @@ function JudgePublic({
     productId: item?.id,
   });
   const [page, setPage] = useState(1);
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       const data = await reviewsApi.getAll(filters);
@@ -48,10 +52,20 @@ function JudgePublic({
     return () => {};
   }, []);
 
-  const handleClickFavor = (userId, reviewId) => {
-    console.log("run");
+  const handleClickFavor = async (userId, reviewId) => {
+    try {
+      if (!userId) {
+        const action = showLoginPage();
+        dispatch(action);
+        return;
+      }
+      await favoritesApi.toggleFavoriteReview({ userId, reviewId });
+    } catch (error) {}
   };
-  const handleCreateReply = (data) => {};
+  const handleCreateReply = async (data) => {
+    await commentsApi.createComment(data);
+    setFilers((prev) => ({ ...prev }));
+  };
   return (
     <div className="pt-1 px-[14px] pb-[10px] mb-[6px] lg:px-4 lg:py-2 shadow-[0_1px_4px_rgb(0,0,0,0.3)] rounded-[10px] flex-1 h-fit">
       <div className="flex items-center justify-between pb-[6px]">

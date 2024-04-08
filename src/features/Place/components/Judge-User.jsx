@@ -1,13 +1,15 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
 import { FaEllipsisH, FaHeart, FaReplyAll } from "react-icons/fa";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import commentsApi from "../../../api/commentsApi";
 import { handleCalculateDateFromNow } from "../../../utils";
 import ModalImage from "./Modal-Image";
 import ReadMore from "./Read-More";
 import ReplyUser from "./Reply-User";
+import favoritesApi from "../../../api/favoritesApi";
+import { showLoginPage } from "../../Auth/authSlice";
 
 JudgeUser.propTypes = {
   item: PropTypes.object,
@@ -25,13 +27,22 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
     index: 0,
   });
   const [isReply, setIsReply] = useState(false);
-  const [amountFavorite, setAmountFavorite] = useState(0);
+  const [amountFavoriteReviews, setAmountFavoriteReviews] = useState(0);
   const [more, setMore] = useState(true);
   const moreRef = useRef(null);
-
+  const [filters, setFilters] = useState({
+    reviewId: item.id,
+    page: 0,
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const dispatch = useDispatch();
   const handleClickFavor = (reviewId) => {
     if (!onClick) return null;
-    onClick(user._id, reviewId);
+    setIsSubmitting(true);
+    if (isSubmitting) return;
+    onClick(user?.id, reviewId);
+    setFilters((prev) => ({ ...prev }));
+    setIsSubmitting(false);
   };
 
   const handleShowReply = () => {
@@ -44,13 +55,15 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
 
     (async () => {
       try {
-        const data = await commentsApi.getAll({ reviewId: item.id, page: 0 });
+        const data = await commentsApi.getAll(filters);
+        const favor = await favoritesApi.getAmountFavoriteReview(item?.id);
+        setAmountFavoriteReviews(favor);
         setReplies(data);
       } catch (error) {}
     })();
 
     return () => window.removeEventListener("resize", handleClick);
-  }, []);
+  }, [item, filters]);
 
   const handleClick = () => {
     if (moreRef && moreRef.current && moreRef.current?.offsetHeight > 90) {
@@ -58,6 +71,10 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
     } else {
       setMore(true);
     }
+  };
+  const handleSubmitReply = async (data) => {
+    if (!onSubmit) return;
+    onSubmit(data);
   };
   const handleShowModalImage = (index) => {
     setIsShowModalImage((prev) => ({ ...prev, show: true, index }));
@@ -143,17 +160,21 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
           <button
             onClick={() => handleClickFavor(item.id)}
             className={`flex items-center lg:text-sm  ${
-              item.favorite > 0 ? "text-primary" : ""
+              amountFavoriteReviews > 0 ? "text-primary" : ""
             }`}
           >
             <FaHeart className={`w-3 h-3 mr-1 `} />
-            {item.favorite > 0 && (
-              <span className="mx-[2px] ">{item?.amount}</span>
+            {amountFavoriteReviews > 0 && (
+              <span className="mx-[2px] ">{amountFavoriteReviews}</span>
             )}
             Thích
           </button>
           <button
             onClick={() => {
+              if (!user?.id) {
+                dispatch(showLoginPage());
+                return;
+              }
               handleShowReply();
               setShow(true);
             }}
@@ -169,7 +190,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
         <ReplyUser
           isReply={isReply}
           review={item}
-          onSubmit={onSubmit}
+          onSubmit={handleSubmitReply}
           hideReply={() => setIsReply(false)}
         />
       )}

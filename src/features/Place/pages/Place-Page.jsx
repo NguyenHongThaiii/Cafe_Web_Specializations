@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import blogsApi from "../../../../src/api/blogsApi";
 import { GlobalProvider, useHide } from "../../../context/Global-Provider";
-import { createSaveBlog, removeSaveBlog } from "../../Auth/authSlice";
+import {
+  createSaveBlog,
+  removeSaveBlog,
+  showLoginPage,
+} from "../../Auth/authSlice";
 import ConcernSlide from "../components/Concern-Slide";
 import ConvenientSlider from "../components/Convenient-Slider";
 import Judge from "../components/Judge";
@@ -42,7 +46,6 @@ function PlacePage(props) {
     (async () => {
       try {
         const blog = await blogsApi.getBySlug(slug);
-        const listId = blog.areas?.map((area) => area?.id);
         const concernBlog = await blogsApi.getAll({
           limit: 4,
           page: 1,
@@ -50,7 +53,6 @@ function PlacePage(props) {
         });
         setState(blog);
         setConcern(concernBlog);
-        // setConcern();
         if (typeof document !== "undefined") {
           document.getElementById("root").style.overflow = "unset";
         }
@@ -71,25 +73,7 @@ function PlacePage(props) {
     };
   }, [location, location.pathname]);
 
-  const handleSaveBlogs = async () => {
-    if (user?.blogSaved?.includes(state._id)) {
-      await blogsApi.removeBlogSaved({
-        userId: user?._id,
-        blogId: state?._id,
-      });
-      dispatch(removeSaveBlog(state._id));
-      console.log("remove success");
-
-      return;
-    }
-
-    await blogsApi.createBlogSaved({
-      userId: user?._id,
-      blogId: state?._id,
-    });
-
-    dispatch(createSaveBlog(state._id));
-  };
+  const handleSaveBlogs = async () => {};
 
   const handleShowModalImage = (index) => {
     setShowModalImage((prev) => ({ ...prev, index, show: true }));
@@ -177,7 +161,17 @@ function PlacePage(props) {
           <div
             className={`flex flex-col lg:flex-row  justify-between gap-x-4 lg:mt-2 lg:mb-5  `}
           >
-            <Judge item={state} show={show} onShow={() => setShow(true)} />
+            <Judge
+              item={state}
+              show={show}
+              onShow={() => {
+                if (!user?.id) {
+                  dispatch(showLoginPage());
+                  return;
+                }
+                setShow(true);
+              }}
+            />
 
             <Details item={state} />
             <ParticularLocation data={state} />
@@ -191,12 +185,29 @@ function PlacePage(props) {
             <JudgePublic
               item={state}
               show={show}
-              onShow={() => setShow(true)}
+              onShow={() => {
+                if (!user?.id) {
+                  dispatch(showLoginPage());
+                  return;
+                }
+                setShow(true);
+              }}
               hideShow={() => setShow(false)}
             />
 
             <div className="w-[calc(33.33%_-_20px)] lg:block hidden sticky top-[20px]  position-[-webkit-sticky] h-fit mb-[6px]   ">
-              <Judge item={state} show={show} onShow={() => setShow(true)} />
+              <Judge
+                item={state}
+                show={show}
+                onShow={() => {
+                  console.log(user?.id);
+                  if (!user?.id) {
+                    dispatch(showLoginPage());
+                    return;
+                  }
+                  setShow(true);
+                }}
+              />
 
               <div className="p-4 shadow-[0_2px_8px_rgb(0,0,0,0.15)] bg-white rounded-[10px] ">
                 <img

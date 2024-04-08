@@ -11,6 +11,10 @@ const commentsApi = {
     const url = `/comments/id/${id}`;
     return axiosClient.get(url, {});
   },
+  createComment(data) {
+    const url = "/comments";
+    return axiosClient.post(url, data);
+  },
 };
 
 export default commentsApi;

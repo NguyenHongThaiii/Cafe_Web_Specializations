@@ -18,8 +18,6 @@ function ReplyUser({
   onSubmit = null,
 }) {
   const user = useSelector((state) => state.auth.current);
-  console.log(user);
-
   const replyRef = useRef(null);
   const [state, setState] = useState({});
 
@@ -30,18 +28,13 @@ function ReplyUser({
   }, [isReply]);
 
   const handleSubmit = async () => {
-    console.log({
-      reply: state.reply,
-      userId: user.id,
-      reviewId: review.id,
-    });
     await onSubmit({
-      reply: state.reply,
-      userId: user.id,
-      reviewId: review.id,
+      name: state?.reply,
+      userId: user?.id,
+      reviewId: review?.id,
+      status: 1,
     });
-
-    // hideReply();
+    hideReply();
   };
   const handleOnChange = (value) => {
     setState(value);
