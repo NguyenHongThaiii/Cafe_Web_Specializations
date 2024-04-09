@@ -124,7 +124,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
               <ReadMore range={280}>{item?.name}</ReadMore>
               {item?.listImage?.length > 0 && (
                 <div className="flex items-center whitespace-normal mt-[6px] gap-x-2 ">
-                  {item?.listImage?.slice(0, 3)?.map((img, index) => (
+                  {item?.listImage?.map((img, index) => (
                     <div
                       onClick={() => handleShowModalImage(index)}
                       className={`rounded-[6px] overflow-hidden relative lg:w-[116px] lg:h-[116px] w-[100px] h-[100px]  ${
@@ -142,8 +142,8 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                         <div className="absolute inset-0 cursor-pointer hover:bg-[rgba(0,0,0,.4)] transition-all"></div>
                       )}
                       <img
-                        src={`${img?.url}`}
-                        alt={`${img}`}
+                        src={img?.url}
+                        alt={img}
                         className=" w-full h-full object-cover"
                       />
                     </div>
@@ -253,7 +253,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
       {isShowModalImage.show && (
         <ModalImage
           imageList={item?.listImage}
-          data={blog}
+          data={item}
           url={import.meta.env.VITE_URL_REVIEWS}
           length={item?.photo?.length}
           index={isShowModalImage?.index}

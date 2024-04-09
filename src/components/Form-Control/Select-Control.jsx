@@ -17,15 +17,28 @@ function SelectControl({ control, options = [], ...props }) {
     control: control,
   });
   return (
-    <div className="">
-      <select {...field} {...props} className="custom-select">
-        {options.map((option) => (
+    <select
+      {...field}
+      {...props}
+      className={`custom-select ${props?.className}`}
+    >
+      <option value="">None</option>
+      {options.map((option, index) =>
+        index === 0 ? (
+          <option
+            value={option.value}
+            key={option.id}
+            defaultValue={option.value}
+          >
+            {option.label}
+          </option>
+        ) : (
           <option value={option.value} key={option.id}>
             {option.label}
           </option>
-        ))}
-      </select>
-    </div>
+        )
+      )}
+    </select>
   );
 }
 

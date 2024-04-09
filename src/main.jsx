@@ -27,9 +27,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
             pauseOnHover
             theme="light"
           />
-          <Suspense fallback={<div>Fall Back</div>}>
-            <App />
-          </Suspense>
+          {/* <Suspense fallback={<div>Fall Back</div>}> */}
+          <App />
+          {/* </Suspense> */}
         </GlobalProvider>
       </BrowserRouter>
     </Provider>
