@@ -8,9 +8,15 @@ BasicInfor.propTypes = {
   control: PropTypes.object,
   areas: PropTypes.array,
   onChange: PropTypes.func,
+  formState: PropTypes.object,
 };
 
-function BasicInfor({ control = null, areas = [], onChange = null }) {
+function BasicInfor({
+  control = null,
+  areas = [],
+  onChange = null,
+  formState = null,
+}) {
   const options = areas.map((area) => ({
     id: area?.id,
     label: area?.name,
@@ -33,9 +39,14 @@ function BasicInfor({ control = null, areas = [], onChange = null }) {
               name="name"
               id="name"
               type="text"
-              placeholder="example@gmail.com"
+              placeholder="Cafe Ha Noi"
             />
           </div>
+          {formState?.errors["name"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["name"]?.message}
+            </span>
+          )}
           <div className="flex items-center ">
             <label htmlFor="area_id" className="min-w-20 text-[14px] mr-16">
               Khu vực
@@ -49,19 +60,29 @@ function BasicInfor({ control = null, areas = [], onChange = null }) {
               className="w-full h-[38px]"
             />
           </div>
+          {formState?.errors["area_id"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["area_id"]?.message}
+            </span>
+          )}
           <div className="flex items-center ">
-            <label htmlFor="address" className="min-w-20 text-[14px] mr-16">
+            <label htmlFor="location" className="min-w-20 text-[14px] mr-16">
               Địa chỉ
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
             <InputControlCommon
               control={control}
-              name="address"
-              id="address"
+              name="location"
+              id="location"
               type="text"
-              placeholder="example@gmail.com"
+              placeholder="Dong Da Ha Noi"
             />
           </div>
+          {formState?.errors["location"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["location"]?.message}
+            </span>
+          )}
           <div className="flex items-center ">
             <label htmlFor="description" className="min-w-20 text-[14px] mr-16">
               Giới thiệu
@@ -71,12 +92,17 @@ function BasicInfor({ control = null, areas = [], onChange = null }) {
               control={control}
               name="description"
               id="description"
-              placeholder="example@gmail.com"
+              placeholder="Quan cafe rat dep"
               className="w-full mt-0"
               onChange={onChange}
               onKeyPress={() => undefined}
             />
           </div>
+          {formState?.errors["description"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["description"]?.message}
+            </span>
+          )}
         </div>
       </div>
     </>

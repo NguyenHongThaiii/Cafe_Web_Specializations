@@ -133,3 +133,9 @@ export function formatToVND(number) {
     currency: "VND",
   }).format(number);
 }
+export function timeToNumber(timeString) {
+  if (!timeString) return;
+  const [hours, minutes] = timeString.split(":").map(Number);
+
+  return hours * 100 + minutes * (100 / 60);
+}

@@ -4,9 +4,10 @@ import InputControlCommon from "../../../components/Form-Control/Input-Control-C
 
 ContactInfor.propTypes = {
   control: PropTypes.object,
+  formState: PropTypes.object,
 };
 
-function ContactInfor({ control = null }) {
+function ContactInfor({ control = null, formState = null }) {
   return (
     <>
       <p className="text-[21px] font-medium text-primary pb-2  border-b-[1px]">
@@ -35,7 +36,7 @@ function ContactInfor({ control = null }) {
               name="facebook"
               id="facebook"
               type="text"
-              placeholder="example@gmail.com"
+              placeholder="https://www.facebook.com"
             />
           </div>
           <div className="flex items-center ">
@@ -47,7 +48,7 @@ function ContactInfor({ control = null }) {
               name="phone"
               id="phone"
               type="text"
-              placeholder="example@gmail.com"
+              placeholder="0971151472"
             />
           </div>
         </div>

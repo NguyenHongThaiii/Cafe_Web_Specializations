@@ -9,6 +9,7 @@ OtherInfor.propTypes = {
   conveniences: PropTypes.array,
   purposes: PropTypes.array,
   onChange: PropTypes.func,
+  formState: PropTypes.object,
 };
 
 function OtherInfor({
@@ -17,6 +18,7 @@ function OtherInfor({
   conveniences = [],
   purposes = [],
   onChange = null,
+  formState = null,
 }) {
   const kindOptions = kinds.map((kind) => ({
     id: kind?.id,
@@ -40,83 +42,140 @@ function OtherInfor({
       </p>
       <div>
         <div className="py-5 px-4 flex  items-center">
-          <label htmlFor="startTime" className="min-w-36 text-[14px]">
-            Thời gian mở cửa
-            <span className="text-primary pl-1 font-bold">*</span>
-          </label>
+          <div className="flex items-center justify-between flex-1 gap-8">
+            <div className="flex items-center justify-between">
+              <label htmlFor="startTime" className="min-w-36 text-[14px]">
+                Thời gian mở cửa
+                <span className="text-primary pl-1 font-bold">*</span>
+              </label>
+              <InputControlCommon
+                control={control}
+                name="startTime"
+                id="startTime"
+                type="text"
+                placeholder="07:00"
+              />
+            </div>
 
-          <div className="flex items-center justify-between flex-1 gap-8">
-            <InputControlCommon
-              control={control}
-              name="startTime"
-              id="startTime"
-              type="text"
-              placeholder="07:00"
-            />
-            <label htmlFor="endTime" className="min-w-[60px] text-[14px]">
-              Đến:
-              <span className="text-primary pl-1 font-bold">*</span>
-            </label>
-            <InputControlCommon
-              control={control}
-              name="endTime"
-              id="endTime"
-              type="text"
-              placeholder="20:00"
-            />
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="endTime"
+                className="min-w-[60px] text-[14px] mr-4"
+              >
+                Đến:
+                <span className="text-primary pl-1 font-bold">*</span>
+              </label>
+              <InputControlCommon
+                control={control}
+                name="endTime"
+                id="endTime"
+                type="text"
+                placeholder="20:00"
+              />
+            </div>
           </div>
         </div>
-        <div className="py-5 px-4 flex  items-center">
-          <label htmlFor="priceMin" className="min-w-36 text-[14px]">
-            Khoảng giá
-            <span className="text-primary pl-1 font-bold">*</span>
-          </label>
-          <div className="flex items-center justify-between flex-1 gap-8">
-            <InputControlCommon
-              control={control}
-              name="priceMin"
-              id="priceMin"
-              type="number"
-              placeholder="0"
-            />
-            <label htmlFor="priceMax" className="min-w-[60px] text-[14px]">
-              Đến:
-              <span className="text-primary pl-1 font-bold">*</span>
-            </label>
-            <InputControlCommon
-              control={control}
-              name="priceMax"
-              id="priceMax"
-              type="number"
-              placeholder="1000000"
-            />
-          </div>
+        <div className="flex items-center justify-between gap-10 px-4">
+          {formState?.errors["startTime"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["startTime"]?.message}
+            </span>
+          )}
+          {formState?.errors["endTime"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["endTime"]?.message}
+            </span>
+          )}
         </div>
         <div className="py-5 px-4 flex  items-center">
-          <label htmlFor="latitude" className="min-w-36 text-[14px]">
-            Vĩ độ
-            <span className="text-primary pl-1 font-bold">*</span>
-          </label>
           <div className="flex items-center justify-between flex-1 gap-8">
-            <InputControlCommon
-              control={control}
-              name="latitude"
-              id="latitude"
-              type="text"
-              placeholder="21.0336724"
-            />
-            <label htmlFor="longitude" className="min-w-[60px] text-[14px]">
-              Kinh độ
-              <span className="text-primary pl-1 font-bold">*</span>
-            </label>
-            <InputControlCommon
-              control={control}
-              name="longitude"
-              id="longitude"
-              type="text"
-              placeholder="105.8109417"
-            />
+            <div className="flex items-center justify-between">
+              <label htmlFor="priceMin" className="min-w-36 text-[14px]">
+                Khoảng giá
+                <span className="text-primary pl-1 font-bold">*</span>
+              </label>
+              <InputControlCommon
+                control={control}
+                name="priceMin"
+                id="priceMin"
+                type="number"
+                placeholder="0"
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="priceMax"
+                className="min-w-[60px] text-[14px] mr-4"
+              >
+                Đến:
+                <span className="text-primary pl-1 font-bold">*</span>
+              </label>
+              <InputControlCommon
+                control={control}
+                name="priceMax"
+                id="priceMax"
+                type="number"
+                placeholder="1000000"
+              />
+            </div>
           </div>
+        </div>
+        <div className="flex items-center justify-between gap-10 px-4">
+          {formState?.errors["priceMin"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["priceMin"]?.message}
+            </span>
+          )}
+          {formState?.errors["priceMax"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["priceMax"]?.message}
+            </span>
+          )}
+        </div>
+        <div className="py-5 px-4 flex  items-center">
+          <div className="flex items-center justify-between flex-1 gap-8">
+            <div className="flex items-center justify-between">
+              <label htmlFor="latitude" className="min-w-36 text-[14px] ">
+                Vĩ độ
+                <span className="text-primary pl-1 font-bold">*</span>
+              </label>
+              <InputControlCommon
+                control={control}
+                name="latitude"
+                id="latitude"
+                type="text"
+                placeholder="21.0336724"
+              />
+            </div>
+            <div className="flex items-center justify-between">
+              <label
+                htmlFor="longitude"
+                className="min-w-[60px] text-[14px] mr-4"
+              >
+                Kinh độ
+                <span className="text-primary pl-1 font-bold">*</span>
+              </label>
+              <InputControlCommon
+                control={control}
+                name="longitude"
+                id="longitude"
+                type="text"
+                placeholder="105.8109417"
+              />
+            </div>
+          </div>
+        </div>
+        <div className="flex items-center justify-between gap-10 px-4">
+          {formState?.errors["latitude"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["latitude"]?.message}
+            </span>
+          )}
+          {formState?.errors["longitude"] && (
+            <span className="block font-medium text-sm text-primary transition-all duration-150">
+              {formState.errors["longitude"]?.message}
+            </span>
+          )}
         </div>
         <div className="py-5 px-4 flex gap-5 items-center">
           <div className="flex items-center flex-1">
@@ -133,6 +192,11 @@ function OtherInfor({
             />
           </div>
         </div>
+        {formState?.errors["kind_id"] && (
+          <span className="block font-medium text-sm text-primary transition-all duration-150">
+            {formState.errors["kind_id"]?.message}
+          </span>
+        )}
         <div className="py-5 px-4 flex gap-5 items-center">
           <div className="flex items-center flex-1">
             <label htmlFor="convenience_id" className="min-w-36 text-[14px]">
@@ -148,6 +212,11 @@ function OtherInfor({
             />
           </div>
         </div>
+        {formState?.errors["convenience_id"] && (
+          <span className="block font-medium text-sm text-primary transition-all duration-150">
+            {formState.errors["convenience_id"]?.message}
+          </span>
+        )}
         <div className="py-5 px-4 flex gap-5 items-center">
           <div className="flex items-center flex-1">
             <label htmlFor="purpose_id" className="min-w-36 text-[14px]">
@@ -162,7 +231,12 @@ function OtherInfor({
               className="w-full h-[38px]"
             />
           </div>
-        </div>
+        </div>{" "}
+        {formState?.errors["purpose_id"] && (
+          <span className="block font-medium text-sm text-primary transition-all duration-150">
+            {formState.errors["purpose_id"]?.message}
+          </span>
+        )}
       </div>
     </>
   );

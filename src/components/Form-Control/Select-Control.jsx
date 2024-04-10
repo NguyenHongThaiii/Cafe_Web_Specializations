@@ -22,7 +22,7 @@ function SelectControl({ control, options = [], ...props }) {
       {...props}
       className={`custom-select ${props?.className}`}
     >
-      <option value="">None</option>
+      <option value={0}>None</option>
       {options.map((option, index) =>
         index === 0 ? (
           <option
