@@ -13,7 +13,10 @@ function ProfileContent({ data = {} }) {
   const [state, setState] = useState([]);
   useEffect(() => {
     (async () => {
-      const reviews = await reviewsApi.getAll({ userId: data?.id, page: 0 });
+      const reviews = await reviewsApi.getAll({
+        userId: data?.id || 0,
+        page: 0,
+      });
       setState(reviews);
     })();
   }, [data]);

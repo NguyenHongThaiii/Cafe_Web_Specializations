@@ -10,6 +10,7 @@ import ReadMore from "./Read-More";
 import ReplyUser from "./Reply-User";
 import favoritesApi from "../../../api/favoritesApi";
 import { showLoginPage } from "../../Auth/authSlice";
+import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
 
 JudgeUser.propTypes = {
   item: PropTypes.object,
@@ -50,7 +51,6 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
     setFilters((prev) => ({ ...prev }));
     setIsSubmitting(false);
   };
-
   const handleShowReply = () => {
     setIsReply(true);
   };
@@ -108,12 +108,38 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                 >
                   {item?.userDto?.name}
                 </Link>
-                <span className="text-xs font-normal text-[#898c95] mb-[2px] block hover:underline cursor-pointer">
-                  Đã đánh giá{" "}
-                  {handleCalculateDateFromNow(
-                    new Date(item?.createdAt).toLocaleDateString("en-US")
-                  )}{" "}
-                </span>
+                <div className="pt-[2px] flex items-center text-[14px]">
+                  {item?.rating?.averageRating > 0 && (
+                    <span className="mr-[6px] font-bold">
+                      {item?.rating?.averageRating?.toFixed(1)}
+                    </span>
+                  )}
+                  {Array.from(new Array(5)).map((x, index) =>
+                    item?.rating?.averageRating >= index + 1 ? (
+                      <MdStar
+                        key={index}
+                        className={`lg:text-[14px] text-[10px] text-primary`}
+                      />
+                    ) : item?.rating?.averageRating >= index + 0.5 ? (
+                      <MdStarHalf
+                        key={index}
+                        className="lg:text-[14px] text-[10px] text-primary"
+                      />
+                    ) : (
+                      <MdStarOutline
+                        key={index}
+                        className="lg:text-[14px] text-[10px]"
+                      />
+                    )
+                  )}
+                  <span className="mx-2 text-gray-400">●</span>{" "}
+                  <span className=" text-sm text-[#898c95] block">
+                    Đã đánh giá{" "}
+                    {handleCalculateDateFromNow(
+                      new Date(item?.createdAt).toLocaleDateString("en-US")
+                    )}
+                  </span>
+                </div>
               </div>
             </div>
 

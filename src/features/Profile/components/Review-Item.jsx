@@ -2,22 +2,22 @@ import PropTypes from "prop-types";
 import React, { useEffect, useState } from "react";
 import {
   FaCaretRight,
+  FaHeart,
   FaRegCommentAlt,
   FaRegHeart,
-  FaHeart,
   FaRegShareSquare,
 } from "react-icons/fa";
+import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
+import blogsApi from "../../../api/blogsApi";
+import commentsApi from "../../../api/commentsApi";
+import favoritesApi from "../../../api/favoritesApi";
+import GridImage from "../../../components/ChildrenComponent/Grid-Image";
 import { handleCalculateDateFromNow } from "../../../utils";
 import ReadMore from "../../Place/components/Read-More";
 import ReviewItemForm from "./Review-Item-Form";
 import ReviewItemReply from "./Review-Item-Reply";
-import GridImage from "../../../components/ChildrenComponent/Grid-Image";
-import reviewsApi from "../../../api/reviewApi";
-import favoritesApi from "../../../api/favoritesApi";
-import commentsApi from "../../../api/commentsApi";
-import blogsApi from "../../../api/blogsApi";
 
 ReviewItem.propTypes = {
   data: PropTypes.object,
@@ -121,12 +121,38 @@ function ReviewItem({ data = {} }) {
               {state?.blog?.name}
             </Link>
           </div>
-          <span className=" text-sm text-[#898c95] block">
-            Đã đánh giá{" "}
-            {handleCalculateDateFromNow(
-              new Date(state?.createdAt).toLocaleDateString("en-US")
+          <div className="pt-[2px] flex items-center text-[14px]">
+            {data?.rating?.averageRating > 0 && (
+              <span className="mr-[6px] font-bold">
+                {data?.rating?.averageRating?.toFixed(1)}
+              </span>
             )}
-          </span>
+            {Array.from(new Array(5)).map((x, index) =>
+              data?.rating?.averageRating >= index + 1 ? (
+                <MdStar
+                  key={index}
+                  className={`lg:text-[14px] text-[10px] text-primary`}
+                />
+              ) : data?.rating?.averageRating >= index + 0.5 ? (
+                <MdStarHalf
+                  key={index}
+                  className="lg:text-[14px] text-[10px] text-primary"
+                />
+              ) : (
+                <MdStarOutline
+                  key={index}
+                  className="lg:text-[14px] text-[10px]"
+                />
+              )
+            )}
+            <span className="mx-2 text-gray-400">●</span>{" "}
+            <span className=" text-sm text-[#898c95] block">
+              Đã đánh giá{" "}
+              {handleCalculateDateFromNow(
+                new Date(state?.createdAt).toLocaleDateString("en-US")
+              )}
+            </span>
+          </div>
         </div>
       </div>
 

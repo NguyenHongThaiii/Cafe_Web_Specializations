@@ -29,8 +29,6 @@ function JudgePublic({
     limit: 5,
     sortBy: "createdAtDesc",
   });
-  console.log(item?.id);
-
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
