@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useDispatch } from "react-redux";
 import favoritesApi from "../../../api/favoritesApi";
 import reviewsApi from "../../../api/reviewApi";

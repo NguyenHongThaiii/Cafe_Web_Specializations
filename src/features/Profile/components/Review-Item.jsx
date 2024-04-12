@@ -44,8 +44,6 @@ function ReviewItem({ data = {} }) {
         });
         const blog = await blogsApi.getById(data?.productId);
         setState({ favorite: favor, comments, blog });
-        // const data = await reviewsApi.getAll({ id: reviewId });
-        // setState(data.data[0]);
       } catch (error) {
         console.log("Error", error);
       }
@@ -86,14 +84,7 @@ function ReviewItem({ data = {} }) {
     }
     setLoadingComment(false);
   };
-  const handleClickFavorReply = (replyId) => {
-    // const socket = io.connect("http://localhost:5000");
-    // socket.emit("favorReply", {
-    //   userId: user?._id,
-    //   reviewId: state?._id,
-    //   replyId,
-    // });
-  };
+  const handleClickFavorReply = (replyId) => {};
   return (
     <div className="bg-white lg:py-3 py-2 px-4 lg:mb-5 mb-2 rounded-[10px] shadow-[0_2px_8px_rgb(0,0,0,0.15)] ">
       <div className="pb-1 flex items-center">
@@ -159,10 +150,11 @@ function ReviewItem({ data = {} }) {
       <div className="py-1 px-[2px] ">
         <ReadMore range={200}>{data?.name || ""}</ReadMore>
         <div className="mt-1">
-          {state?.photo?.length > 0 && (
+          {data?.listImage?.length > 0 && (
             <GridImage
               length={data?.listImage?.length}
               imageList={data?.listImage}
+              data={data}
             />
           )}
         </div>

@@ -188,7 +188,7 @@ function ProfilePage(props) {
                   </button>
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   style={({ isActive }) => ({
                     borderBottomColor: isActive && "#e03",
@@ -209,7 +209,7 @@ function ProfilePage(props) {
                     Đang theo dõi{" "}
                   </button>
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
             <ul className="h-full lg:flex items-center gap-x-[6px] hidden">
               <li
