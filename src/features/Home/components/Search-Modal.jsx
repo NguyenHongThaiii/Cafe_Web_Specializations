@@ -98,7 +98,7 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
                 className="px-[6px] py-[10px] flex relative hover:bg-[#eee] cursor-pointer transition-all duration-300"
               >
                 <img
-                  src={`${import.meta.env.VITE_URL_BLOGS}${item?.image}`}
+                  src={item?.listImage?.length > 0 && item?.listImage[0]?.url}
                   alt=""
                   className="mr-[10px] w-[50px] h-[50px] object-cover rounded-[4px]"
                 />

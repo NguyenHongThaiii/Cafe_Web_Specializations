@@ -37,13 +37,13 @@ function ModalMenu({ data = {}, hideModalMenu }) {
           </div>
 
           <div className="p-4 overflow-y-auto">
-            {data?.menu?.length > 0 ? (
+            {data?.listMenu?.length > 0 ? (
               <div className="grid lg:grid-cols-3 grid-cols-2 gap-x-3 gap-y-3 min-h-[200px] max-h-[calc(96vh_-_100px)]  ">
                 {data?.menu?.map((img, index) => (
                   <img
                     onClick={() => handleShowModalImage(index)}
                     key={index}
-                    src={`${import.meta.env.VITE_URL_BLOGS}${img}`}
+                    src={menu?.url}
                     alt={data?.name}
                     className="w-full h-full object-cover rounded-[10px] border-primary border max-h-[220px] cursor-pointer"
                   />

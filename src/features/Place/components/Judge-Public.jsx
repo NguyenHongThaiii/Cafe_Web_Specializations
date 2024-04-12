@@ -36,9 +36,6 @@ function JudgePublic({
   useEffect(() => {
     (async () => {
       const data = await reviewsApi.getAll({ ...filters, productId: item?.id });
-      console.log("data ", data);
-      console.log(" filters ", filters);
-
       const count = await reviewsApi.getAll({ page: 0, productId: item?.id });
       setReviews(data);
       setCount(count?.length);

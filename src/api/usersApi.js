@@ -25,9 +25,25 @@ const usersApi = {
     const url = "/auth/validateReset";
     return axiosClient.post(url, data);
   },
+  getBySlug(slug) {
+    const url = `/auth/users/profile/${slug}`;
+    return axiosClient.get(url);
+  },
   handleResetPassword(data) {
     const url = "/auth/resetPassword";
     return axiosClient.post(url, data);
+  },
+  getAll(params) {
+    const url = `/auth/users`;
+    return axiosClient.get(url, { params });
+  },
+  uploadAvatar(slug, body) {
+    const url = `/auth/avatar/${slug}`;
+    return axiosClient.post(url, body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
   },
 };
 
