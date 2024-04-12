@@ -53,7 +53,7 @@ function TextareaCustomControl({
     setHeight(`${textareaRef?.current?.scrollHeight}px`);
   }, [textarea]);
   return (
-    <div className="mt-4">
+    <div className={`mt-4 ${className} `}>
       <textarea
         autoComplete="off"
         ref={textareaRef}

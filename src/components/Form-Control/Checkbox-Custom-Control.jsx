@@ -36,7 +36,7 @@ function CheckboxCustomControl({ onChange = null, ...props }) {
       <input
         type="checkbox"
         {...props}
-        className="hidden"
+        // className="hidden"
         onChange={handleOnChange}
       />
     </div>

@@ -16,6 +16,14 @@ const blogsApi = {
     const url = `/products/count/${count}`;
     return axiosClient.get(url);
   },
+  createProduct(body) {
+    const url = `/products`;
+    return axiosClient.post(url, body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
   getCountReviewProduct(product) {},
 };
 

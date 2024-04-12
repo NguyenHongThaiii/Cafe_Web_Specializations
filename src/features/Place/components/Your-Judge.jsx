@@ -59,6 +59,7 @@ function YourJudge({ item = {}, onChange = null }) {
         <div>
           <TextareaCustomControl
             onChange={onChange}
+            onKeyPress={() => undefined}
             name="name"
             id="reviewUser"
             placeholder="Nhập tối thối 10 kí tự."

@@ -101,7 +101,7 @@ module.exports = {
         move: "move 0.5s alternate infinite ",
       },
       screens: {
-        xs: "414px",
+        xs: "0",
         md: "768px",
         // => @media (min-width: 768px) { ... }
 

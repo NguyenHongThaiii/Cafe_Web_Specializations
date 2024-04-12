@@ -4,12 +4,9 @@ import { MdLocationPin, MdSaveAlt } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import blogsApi from "../../../../src/api/blogsApi";
+import LayoutUser from "../../../components/Layout/Layout-User";
 import { GlobalProvider, useHide } from "../../../context/Global-Provider";
-import {
-  createSaveBlog,
-  removeSaveBlog,
-  showLoginPage,
-} from "../../Auth/authSlice";
+import { showLoginPage } from "../../Auth/authSlice";
 import ConcernSlide from "../components/Concern-Slide";
 import ConvenientSlider from "../components/Convenient-Slider";
 import Judge from "../components/Judge";
@@ -17,11 +14,10 @@ import JudgePublic from "../components/Judge-Public";
 import MapBox from "../components/MapBox";
 import ModalImage from "../components/Modal-Image";
 import ModalMenu from "../components/Modal-Menu";
-import Details from "./../components/Details";
-import SwiperImage from "../components/Swiper-Image";
 import ParticularLocation from "../components/Particular-Location";
 import SlideImage from "../components/Slide-Image";
-import LayoutUser from "../../../components/Layout/Layout-User";
+import SwiperImage from "../components/Swiper-Image";
+import Details from "./../components/Details";
 
 PlacePage.propTypes = {};
 

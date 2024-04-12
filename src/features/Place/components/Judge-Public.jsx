@@ -28,13 +28,17 @@ function JudgePublic({
     page: 1,
     limit: 5,
     sortBy: "createdAtDesc",
-    productId: item?.id,
   });
+  console.log(item?.id);
+
   const [page, setPage] = useState(1);
   const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
-      const data = await reviewsApi.getAll(filters);
+      const data = await reviewsApi.getAll({ ...filters, productId: item?.id });
+      console.log("data ", data);
+      console.log(" filters ", filters);
+
       const count = await reviewsApi.getAll({ page: 0, productId: item?.id });
       setReviews(data);
       setCount(count?.length);
@@ -45,12 +49,6 @@ function JudgePublic({
     setPage(page);
     setFilers((prev) => ({ ...prev, page }));
   };
-  useEffect(() => {
-    (() => {
-      async () => {};
-    })();
-    return () => {};
-  }, []);
 
   const handleClickFavor = async (userId, reviewId) => {
     try {
@@ -71,7 +69,7 @@ function JudgePublic({
       <div className="flex items-center justify-between pb-[6px]">
         <h2 className="text-xl lg:text-[28px] font-semibold">
           Đánh giá từ cộng đồng{" "}
-          <span className=" text-[#8a8a8a]">({reviews.length})</span>
+          <span className=" text-[#8a8a8a]">({count})</span>
         </h2>
         <button
           onClick={onShow}

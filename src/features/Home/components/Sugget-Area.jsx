@@ -1,8 +1,21 @@
 import React from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { showLoginPage } from "../../Auth/authSlice";
 
 SuggestArea.propTypes = {};
 
 function SuggestArea() {
+  const user = useSelector((state) => state.auth.current);
+  const navigation = useNavigate();
+  const dispatch = useDispatch();
+  const handleNavigateToAddPlace = () => {
+    if (!user?.id) {
+      dispatch(showLoginPage);
+      return;
+    }
+    navigation("/add-place");
+  };
   return (
     <section>
       <div className="max-w-[1200px] px-4 mx-auto pl-4 pb-[2px] mb-[72px] mt-[-6px] lg:m-0 lg:mx-auto  lg:pb-9">
@@ -19,9 +32,8 @@ function SuggestArea() {
               Chúng tôi đang bỏ lỡ địa điểm nào bạn biết ?
             </h2>
             <button
+              onClick={handleNavigateToAddPlace}
               className="  text-white  bg-primary    font-semibold  uppercase
-            
-            
              h-[30px] text-xs px-[14px] leading-[30px]  rounded-[10px] hover:bg-[#be0129] transition-all duration-300 lg:h-[40px] lg:text-base lg:px-5 lg:leading-[40px]"
             >
               Đóng góp địa điểm

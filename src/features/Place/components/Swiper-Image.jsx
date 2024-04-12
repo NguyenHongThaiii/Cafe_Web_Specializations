@@ -8,6 +8,8 @@ SwiperImage.propTypes = {
 };
 
 function SwiperImage({ data = {} }) {
+  console.log(data?.listImage);
+  const arr = data?.listImage;
   const [show, setShow] = useState(false);
   const [indexCurr, setIndexCurr] = useState(0);
   const [indexModal, setIndexModal] = useState(0);
