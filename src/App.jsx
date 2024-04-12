@@ -8,6 +8,8 @@ import BlogSavedPage from "./features/BlogSaved/pages/Blog-Saved-Page";
 import CreateBlog from "./features/CreateBlog/pages/Create-Blog";
 import HomePage from "./features/Home/pages/Home-Page";
 import ProfilePage from "./features/Profile/pages/Profile-Page";
+import PhotoPage from "./features/Place/pages/Photo-Page";
+import ExplorePage from "./features/Explore/pages/Explore-Page";
 
 // const HomePage = lazy(() => import("./features/Home/pages/Home-Page"));
 
@@ -30,9 +32,11 @@ function App() {
       <Route path="/verify" element={<VerifyCodePage />} />
       <Route path="/add-place" element={<CreateBlog />} />
       <Route path="/saved" element={<BlogSavedPage />} />
+      <Route path="/explore" element={<ExplorePage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/place/:name" element={<PlacePage />}></Route>
       <Route path="/profile/:name" element={<ProfilePage />} />
+      <Route path="/place/:name/photo" element={<PhotoPage />}></Route>
     </Routes>
   );
 }

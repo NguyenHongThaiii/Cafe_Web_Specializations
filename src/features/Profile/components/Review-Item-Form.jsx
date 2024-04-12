@@ -34,7 +34,6 @@ function ReviewItemForm({ user = {}, onSubmit = null }) {
           onChange={handleOnChange}
           onKeyPress={handleOnSubmit}
           placeholder="Viết bình luận..."
-          isFocus
           className="bg-[#eee] rounded-xl text-sm focus:border-primary transition-all focus:shadow-[0_0_0_2px_rgb(238,0,51,0.2)] "
         />
       </form>

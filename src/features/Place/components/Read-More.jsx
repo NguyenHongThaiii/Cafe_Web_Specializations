@@ -12,7 +12,7 @@ function ReadMore({ range = 280, children }) {
     setIsReadMore(false);
   };
   return (
-    <p className="text">
+    <p className="text whitespace-pre-wrap">
       {isReadMore && text?.length > range ? text.slice(0, range) : text}
       <span
         onClick={toggleReadMore}

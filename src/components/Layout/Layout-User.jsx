@@ -8,7 +8,7 @@ function LayoutUser({ children }) {
   return (
     <>
       <Header />
-      {children}
+      <div className="min-h-screen">{children}</div>
       <Nav />
       <BackArrow />
       <Footer />

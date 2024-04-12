@@ -67,10 +67,13 @@ function Header() {
         <NavMenu />
         {focus || (
           <>
-            <div className="py-[10px] text-[18px] mr-3 hidden xl:block lg:hover:text-primary transition-all duration-300 cursor-pointer ">
+            <Link
+              to="/explore"
+              className="py-[10px] text-[18px] mr-3 hidden xl:block lg:hover:text-primary transition-all duration-300 cursor-pointer "
+            >
               <i className="fa-regular fa-hashtag "></i>
               <span className=" ml-1 font-medium ">Khám phá</span>
-            </div>
+            </Link>
             <div className="py-[10px] text-[18px] hidden xl:block lg:hover:text-primary transition-all duration-300 cursor-pointer">
               <i className="fa-solid fa-certificate"></i>
               <span className=" ml-1 font-medium">Khuyến mãi</span>

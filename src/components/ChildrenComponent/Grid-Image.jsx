@@ -52,8 +52,8 @@ function GridImage({ length = 1, imageList = [], data = {} }) {
           `}
         >
           <img
-            src={`${import.meta.env.VITE_URL_REVIEWS}${image}`}
-            alt={`${image}`}
+            src={image?.url}
+            alt={image?.url}
             className="w-full h-full cursor-pointer"
           />
           {imageList?.length > 5 && (
