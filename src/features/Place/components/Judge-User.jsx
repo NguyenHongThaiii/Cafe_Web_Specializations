@@ -37,6 +37,12 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   const handleClickFavor = (reviewId) => {
+    if (!user?.id) {
+      dispatch(showLoginPage());
+      return;
+    }
+    handleShowReply();
+    setShow(true);
     if (!onClick) return null;
     setIsSubmitting(true);
     if (isSubmitting) return;

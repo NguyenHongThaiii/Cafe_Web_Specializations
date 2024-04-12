@@ -54,7 +54,7 @@ function HeaderUser({ user = {} }) {
         <img
           src={`${
             user.image != null
-              ? user?.photo
+              ? user?.image?.url
               : "/img/72273536_138453484190292_758641522559156224_n.jpg"
           }`}
           alt={user.name}
@@ -74,7 +74,7 @@ function HeaderUser({ user = {} }) {
               <img
                 src={`${
                   user.image != null
-                    ? user?.photo
+                    ? user?.image?.url
                     : "/img/72273536_138453484190292_758641522559156224_n.jpg"
                 }`}
                 alt={user.name}
