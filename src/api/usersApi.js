@@ -45,6 +45,10 @@ const usersApi = {
       },
     });
   },
+  updateUser(slug, data) {
+    const url = `/auth/update/${slug}`;
+    return axiosClient.patch(url, data);
+  },
 };
 
 export default usersApi;

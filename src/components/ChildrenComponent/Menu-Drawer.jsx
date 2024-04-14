@@ -207,7 +207,10 @@ function MenuDrawer({ show, onClick = null, onShow = null }) {
               </div>
             </Link>
 
-            <Link to="/" className="animation-origin block py-[10px] px-5">
+            <Link
+              to="/setting"
+              className="animation-origin block py-[10px] px-5"
+            >
               <i className={`fa-solid fa-house-chimney text-[18px]  pr-3 `}></i>
               <span className="text-[16px] capitalize  font-medium">
                 Chỉnh sửa hồ sơ

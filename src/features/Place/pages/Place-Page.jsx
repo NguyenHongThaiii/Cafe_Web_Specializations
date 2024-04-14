@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from "react";
 import { FaHandPointRight, FaStreetView, FaUserCheck } from "react-icons/fa";
 import { MdLocationPin, MdSaveAlt } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import blogsApi from "../../../../src/api/blogsApi";
 import LayoutUser from "../../../components/Layout/Layout-User";
 import { GlobalProvider, useHide } from "../../../context/Global-Provider";
@@ -18,6 +18,7 @@ import ParticularLocation from "../components/Particular-Location";
 import SlideImage from "../components/Slide-Image";
 import SwiperImage from "../components/Swiper-Image";
 import Details from "./../components/Details";
+import NotFoundPage from "../../NotFound/Not-Found-Page";
 
 PlacePage.propTypes = {};
 
@@ -25,6 +26,7 @@ function PlacePage(props) {
   const location = useLocation();
   const user = useSelector((state) => state.auth.current);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const slug = location.pathname.split("/")[2];
   const [show, setShow] = useState(false);
   const [isMap, setIsMap] = useState(false);
@@ -42,6 +44,10 @@ function PlacePage(props) {
     (async () => {
       try {
         const blog = await blogsApi.getBySlug(slug);
+        if (blog?.id) {
+          navigate("/not-found");
+          return;
+        }
         const concernBlog = await blogsApi.getAll({
           limit: 4,
           page: 1,
