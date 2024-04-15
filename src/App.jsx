@@ -18,13 +18,13 @@ import NotFoundPage from "./features/NotFound/Not-Found-Page";
 function App() {
   const [hide, setHide] = useHide();
   useEffect(() => {
-    if (hide) {
-      document.getElementById("root").style.maxHeight = "100vh";
-      document.getElementById("root").style.overflow = "hidden";
-    } else {
-      document.getElementById("root").style.maxHeight = "fit-content";
-      document.getElementById("root").style.overflow = "unset";
-    }
+    // if (hide) {
+    //   document.getElementById("root").style.maxHeight = "100vh";
+    //   document.getElementById("root").style.overflow = "hidden";
+    // } else {
+    //   document.getElementById("root").style.maxHeight = "fit-content";
+    //   document.getElementById("root").style.overflow = "unset";
+    // }
   }, [hide]);
   document.getElementById("root").style.overflow = "unset";
 

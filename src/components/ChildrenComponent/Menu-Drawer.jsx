@@ -7,12 +7,14 @@ import { MdOutlineSave } from "react-icons/md";
 import { FaUserEdit } from "react-icons/fa";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import usersApi from "../../api/usersApi";
+import { logout } from "../../features/Auth/authSlice";
 const MENU_LIST = [
   {
     title: "Tôi Đi Cafe",
     elementList: [
       {
-        pathname: "",
+        pathname: "/",
         element: (
           <>
             <i className={`fa-solid fa-house-chimney text-[18px]  pr-3 `}></i>
@@ -23,7 +25,7 @@ const MENU_LIST = [
         ),
       },
       {
-        pathname: "",
+        pathname: "/explore",
         element: (
           <>
             <i className="fa-solid fa-fire-flame-curved  text-[18px]  pr-3"></i>
@@ -155,8 +157,10 @@ function MenuDrawer({ show, onClick = null, onShow = null }) {
   };
   const handleLogout = async () => {
     try {
+      await usersApi.logout();
+      const action = logout();
+      dispatch(action);
       navigate("/");
-      onClick();
     } catch (error) {
       console.log("Error", error);
     }
@@ -217,7 +221,7 @@ function MenuDrawer({ show, onClick = null, onShow = null }) {
               </span>
             </Link>
             <Link
-              to="/"
+              to="/saved"
               className="animation-origin flex items-center gap-x-3 py-[10px] px-5"
             >
               <MdOutlineSave className="text-[20px] object-cover" />
@@ -236,7 +240,7 @@ function MenuDrawer({ show, onClick = null, onShow = null }) {
               </h3>
               {item.elementList.map((element, indx) => (
                 <Link
-                  to={item}
+                  to={element?.pathname}
                   key={indx}
                   className="animation-origin block py-[10px] px-5"
                 >

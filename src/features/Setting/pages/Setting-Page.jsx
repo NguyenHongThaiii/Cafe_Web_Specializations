@@ -15,7 +15,7 @@ function SettingPage(props) {
   return (
     <LayoutAuthenUser>
       <LayoutUser>
-        <div className="max-w-[1200px] mx-auto lg:flex block px-4 gap-5">
+        <div className="max-w-[1200px] mx-auto lg:flex block px-4 gap-5 lg:pb-0 pb-12">
           {/* left */}
           <div className="md:w-[340px] w-full bg-white shadow-[0_2px_8px_rgba(0,0,0,.15)] my-5 p-4 rounded-md">
             <ActionUser />

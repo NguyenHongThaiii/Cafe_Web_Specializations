@@ -89,7 +89,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
     <>
       <div className="mt-1 pt-4 border-t-[1px] border-t-[#ddd] lg:pt-5 lg:mt-5">
         <div className="py-[5px] px-[10px] bg-[#eee] lg:bg-white  rounded-[12px] ">
-          <div className="flex items-center justify-between border-b-[1px] border-b-[#e0e0e0] py-1  ">
+          <div className="flex  justify-between border-b-[1px] border-b-[#e0e0e0] py-1  ">
             <div className="flex items-center">
               <Link
                 to={`/profile/${item?.userDto?.slug}`}
@@ -108,7 +108,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                 >
                   {item?.userDto?.name}
                 </Link>
-                <div className="pt-[2px] flex items-center text-[14px]">
+                <div className="pt-[2px] flex items-center text-[14px] lg:mr-0 xs:mr-[-40px]">
                   {item?.rating?.averageRating > 0 && (
                     <span className="mr-[6px] font-bold">
                       {item?.rating?.averageRating?.toFixed(1)}

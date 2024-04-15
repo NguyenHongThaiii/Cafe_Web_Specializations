@@ -14,9 +14,12 @@ function ContactInfor({ control = null, formState = null }) {
         Thông tin liên hệ
       </p>
       <div>
-        <div className="py-5 px-4 flex flex-col gap-5">
+        <div className="py-5 px-4 flex flex-col gap-5 xs:px-0">
           <div className="flex items-center ">
-            <label htmlFor="email" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="email"
+              className="min-w-20 text-[14px] mr-16 xs:mr-5"
+            >
               Email:
             </label>
             <InputControlCommon
@@ -28,7 +31,10 @@ function ContactInfor({ control = null, formState = null }) {
             />
           </div>
           <div className="flex items-center ">
-            <label htmlFor="facebook" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="facebook"
+              className="min-w-20 text-[14px] mr-16 xs:mr-5"
+            >
               Facebook:
             </label>
             <InputControlCommon
@@ -40,7 +46,10 @@ function ContactInfor({ control = null, formState = null }) {
             />
           </div>
           <div className="flex items-center ">
-            <label htmlFor="phone" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="phone"
+              className="min-w-20 text-[14px] mr-16 xs:mr-5"
+            >
               Điện thoại:
             </label>
             <InputControlCommon

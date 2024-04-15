@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import SearchControl from "../../../components/Form-Control/Search-Control";
 import { Link, useNavigate } from "react-router-dom";
 import { getLocalStorage, setLocalStorage } from "../../../utils";
-import blogsApi from "../../../api/blogsApi";
 import debounce from "lodash.debounce";
+import blogsApi from "../../../api/blogsApi";
 
 SearchModalMobile.propTypes = {
   show: PropTypes.bool,
@@ -29,8 +29,8 @@ function SearchModalMobile({ show, onShow }) {
   useEffect(() => {
     (async () => {
       try {
-        // const { data } = await blogsApi.getAll(filters);
-        // setState(data.data);
+        const data = await blogsApi.getAll(filters);
+        setState(data);
       } catch (error) {
         console.log("Error 💥", error.message);
       }
@@ -75,7 +75,7 @@ function SearchModalMobile({ show, onShow }) {
 
         <div className="px-3">
           <Link
-            to=""
+            to="/search"
             className="flex items-center py-[6px] hover:bg-[#eee] transition-all duration-200"
           >
             <div className=" border-[3px] border-black rounded-full w-[40px] h-[40px] flex items-center justify-center mr-[10px]">
@@ -90,18 +90,18 @@ function SearchModalMobile({ show, onShow }) {
             <h3 className="py-1 pb-1 text-base font-bold">Đã xem gần đây</h3>
 
             {state.map((item) => (
-              <div key={item.id} onClick={() => handleToPlacePage(item)}>
+              <div key={item?.id} onClick={() => handleToPlacePage(item)}>
                 <div className="px-[6px] py-[10px] flex relative hover:bg-[#eee] cursor-pointer transition-all duration-300">
                   <img
                     src={
-                      item?.listImage.src?.length > 0 && item?.listImage[0]?.url
+                      item?.listImage?.length > 0 ? item?.listImage[0]?.url : ""
                     }
                     alt=""
                     className="mr-[10px] w-[50px] h-[50px] object-cover rounded-[4px]"
                   />
                   <div className="pr-3 mr-[10px] flex-1">
                     <p className="text-base text-black font-semibold mb-[2px]">
-                      {item.name}
+                      {item?.name}
                     </p>
                     <p className="text-sm text-[#6b6b6b] ">{item?.location}</p>
                   </div>

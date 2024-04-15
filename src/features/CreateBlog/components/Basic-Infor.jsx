@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import InputControlCommon from "../../../components/Form-Control/Input-Control-Common";
 import TextareaCustomControl from "../../../components/Form-Control/Textarea-Custom-Control";
@@ -9,6 +9,7 @@ BasicInfor.propTypes = {
   areas: PropTypes.array,
   onChange: PropTypes.func,
   formState: PropTypes.object,
+  errorMessage: PropTypes.string,
 };
 
 function BasicInfor({
@@ -16,6 +17,7 @@ function BasicInfor({
   areas = [],
   onChange = null,
   formState = null,
+  errorMessage = "",
 }) {
   const options = areas.map((area) => ({
     id: area?.id,
@@ -28,9 +30,12 @@ function BasicInfor({
         Thông tin cơ bản
       </p>
       <div>
-        <div className="py-5 px-4 flex flex-col gap-5">
+        <div className="py-5 px-4 flex flex-col gap-5 xs:px-0">
           <div className="flex items-center ">
-            <label htmlFor="name" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="name"
+              className="min-w-20 text-[14px] mr-16 xs:mr-3"
+            >
               Tên quán
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
@@ -48,7 +53,10 @@ function BasicInfor({
             </span>
           )}
           <div className="flex items-center ">
-            <label htmlFor="area_id" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="area_id"
+              className="min-w-20 text-[14px] mr-16 xs:mr-3"
+            >
               Khu vực
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
@@ -66,7 +74,10 @@ function BasicInfor({
             </span>
           )}
           <div className="flex items-center ">
-            <label htmlFor="location" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="location"
+              className="min-w-20 text-[14px] mr-16 xs:mr-3"
+            >
               Địa chỉ
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
@@ -84,7 +95,10 @@ function BasicInfor({
             </span>
           )}
           <div className="flex items-center ">
-            <label htmlFor="description" className="min-w-20 text-[14px] mr-16">
+            <label
+              htmlFor="description"
+              className="min-w-20 text-[14px] mr-16 xs:mr-3"
+            >
               Giới thiệu
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
@@ -98,9 +112,9 @@ function BasicInfor({
               onKeyPress={() => undefined}
             />
           </div>
-          {formState?.errors["description"] && (
+          {errorMessage && (
             <span className="block font-medium text-sm text-primary transition-all duration-150">
-              {formState.errors["description"]?.message}
+              {errorMessage}
             </span>
           )}
         </div>

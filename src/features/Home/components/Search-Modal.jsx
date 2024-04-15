@@ -77,7 +77,7 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
 
       <div className="px-3">
         <Link
-          to=""
+          to="/search"
           className="flex items-center py-[6px] hover:bg-[#eee] transition-all duration-200"
         >
           <div className=" border-[3px] border-black rounded-full w-[40px] h-[40px] flex items-center justify-center mr-[10px]">

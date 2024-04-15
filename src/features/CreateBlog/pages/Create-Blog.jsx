@@ -54,7 +54,7 @@ const schema = yup.object({
     .number()
     .typeError("priceMax must be a number")
     .required("Vui lòng nhập giá tối đa")
-    .min(yup.ref("priceMin"), "Giá tối đa phải lớn hơn hoặc bằng giá tối thiểu")
+    .min(yup.ref("priceMin"), "Giá tối đa phải lớn hơn giá tối thiểu")
     .test(
       "is-greater",
       "Giá tối đa phải lớn hơn giá tối thiểu",
@@ -124,6 +124,10 @@ function CreateBlog(props) {
         setError({ menu: "Ít nhất 2 menus" });
         return;
       }
+      if (!values?.description) {
+        setError({ description: "Vui lòng nhập trường giới thiệu" });
+        return;
+      }
       setError(null);
       data.listScheduleDto = JSON.stringify([
         {
@@ -168,7 +172,7 @@ function CreateBlog(props) {
   return (
     <LayoutUser>
       <div className="flex justify-center ">
-        <div className=" shadow-[0_2px_8px_rgba(0,0,0,.15)] bg-white px-5 py-3 m-2 w-[928px] rounded-md mb-0 xs:mb-20">
+        <div className=" shadow-[0_2px_8px_rgba(0,0,0,.15)] bg-white px-5 py-3  xs:px-2 m-2 w-[928px] rounded-md mb-0 xs:mb-20">
           <p className="font-medium text-[28px]">Thêm địa điểm</p>
           <p className="text-[14px] mb-3">
             Những quán cafe yêu thích của bạn chưa có trên Toidicafe.vn? Chia sẻ
@@ -180,6 +184,7 @@ function CreateBlog(props) {
               onChange={handleOnChange}
               areas={state?.areas}
               formState={formState}
+              errorMessage={error?.description}
             />
             <OtherInfor
               control={control}

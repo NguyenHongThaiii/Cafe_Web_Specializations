@@ -41,10 +41,13 @@ function OtherInfor({
         Thông tin khác
       </p>
       <div>
-        <div className="py-5 px-4 flex  items-center">
-          <div className="flex items-center justify-between flex-1 gap-8">
+        <div className="py-5 px-4 flex  items-center xs:px-0">
+          <div className="flex items-center  flex-1 gap-8">
             <div className="flex items-center justify-between">
-              <label htmlFor="startTime" className="min-w-36 text-[14px]">
+              <label
+                htmlFor="startTime"
+                className="min-w-36 xs:min-w-[92px] text-[14px]"
+              >
                 Thời gian mở cửa
                 <span className="text-primary pl-1 font-bold">*</span>
               </label>
@@ -87,10 +90,13 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex  items-center">
+        <div className="py-5 px-4 flex  items-center xs:px-0">
           <div className="flex items-center justify-between flex-1 gap-8">
             <div className="flex items-center justify-between">
-              <label htmlFor="priceMin" className="min-w-36 text-[14px]">
+              <label
+                htmlFor="priceMin"
+                className="min-w-36 xs:min-w-[92px] text-[14px]"
+              >
                 Khoảng giá
                 <span className="text-primary pl-1 font-bold">*</span>
               </label>
@@ -132,10 +138,13 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex  items-center">
+        <div className="py-5 px-4 flex  items-center xs:px-0">
           <div className="flex items-center justify-between flex-1 gap-8">
             <div className="flex items-center justify-between">
-              <label htmlFor="latitude" className="min-w-36 text-[14px] ">
+              <label
+                htmlFor="latitude"
+                className="min-w-36 xs:min-w-[92px] text-[14px] "
+              >
                 Vĩ độ
                 <span className="text-primary pl-1 font-bold">*</span>
               </label>
@@ -177,9 +186,12 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex gap-5 items-center">
+        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
           <div className="flex items-center flex-1">
-            <label htmlFor="kind_id" className="min-w-36 text-[14px]">
+            <label
+              htmlFor="kind_id"
+              className="min-w-36 xs:min-w-[92px] text-[14px]"
+            >
               Kiểu quán
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
@@ -197,9 +209,12 @@ function OtherInfor({
             {formState.errors["kind_id"]?.message}
           </span>
         )}
-        <div className="py-5 px-4 flex gap-5 items-center">
+        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
           <div className="flex items-center flex-1">
-            <label htmlFor="convenience_id" className="min-w-36 text-[14px]">
+            <label
+              htmlFor="convenience_id"
+              className="min-w-36 xs:min-w-[92px] text-[14px]"
+            >
               Tiện ích
               <span className="text-primary pl-1 font-bold">*</span>
             </label>
@@ -217,9 +232,12 @@ function OtherInfor({
             {formState.errors["convenience_id"]?.message}
           </span>
         )}
-        <div className="py-5 px-4 flex gap-5 items-center">
+        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
           <div className="flex items-center flex-1">
-            <label htmlFor="purpose_id" className="min-w-36 text-[14px]">
+            <label
+              htmlFor="purpose_id"
+              className="min-w-36 xs:min-w-[92px] text-[14px]"
+            >
               Mục đích
               <span className="text-primary pl-1 font-bold">*</span>
             </label>

@@ -30,43 +30,32 @@ function CustomFilterMobile({
   if (typeof document === "undefined")
     return <div className="modal">Modal</div>;
 
-  const [filters, setFilers] = useState({});
-  const [hide, setHide] = useHide();
   const navigate = useNavigate();
+  const [hide, setHide] = useHide();
 
   const handleOnChange = (value) => {
-    // setFilers((prev) => ({ ...prev, ...value }));
-    onChange({ ...filters, ...value });
-    // onShow();
-    // setHide(false);
+    onChange(value);
   };
-  const handleOnClick = () => {
-    if (!onChange) return null;
-    onChange(filters);
-    onShow();
-    setHide(false);
-  };
+
   const handleReset = () => {
     if (!onChange) return null;
-    setFilers({});
 
     onChange({
-      topic: undefined,
-      area: undefined,
-      convenient: undefined,
-      type: undefined,
-      price: undefined,
-      timeStart: undefined,
       name: "",
+      slugArea: null,
+      slugPurpose: null,
+      slugKind: null,
+      slugConvenience: null,
     });
     onShow();
     setHide(false);
+
     removeLocalStorage("search_now");
     navigate("/search");
   };
   return createPortal(
     <div
-      className={`fixed inset-0 bg-white overflow-auto pb-[50px] transition-all duration-300 z-[1000] ${
+      className={`fixed lg:relative block lg:hidden inset-0 bg-white overflow-auto pb-[50px] transition-all duration-300 z-[1000]  ${
         show ? "translate-y-0 opacity-100 " : "translate-y-[100%] opacity-0"
       }`}
     >
@@ -83,44 +72,35 @@ function CustomFilterMobile({
         Bộ lộc
       </div>
 
-      <div className="mt-[65px]">
-        {/* <TimeStartFilter
-          title="Giờ mở cửa"
-          type="radio"
-          data={data?.timeStart || []}
-          name="timeStart"
-          onChange={handleOnChange}
-          className="flex-row"
-        /> */}
-
+      <div className="mt-[65px] ">
         <AreaFilter
           title="Khu vực"
           data={data?.areas || []}
           name="area"
           onChange={handleOnChange}
-          filters={filters}
+          filters={parentFilters}
           mobile={true}
         />
         <PurposeFilter
           title="Mục đích"
-          data={data?.topic?.map((item) => item.name) || []}
-          name="topic"
+          data={data?.purposes || []}
+          name="purpose"
           onChange={handleOnChange}
           mobile={true}
           filters={parentFilters}
         />
         <TypeFilter
           title="Kiểu quán"
-          data={data?.type || []}
-          name="type"
+          data={data?.kinds || []}
+          name="kind"
           onChange={handleOnChange}
           mobile={true}
           filters={parentFilters}
         />
         <ConvenientFilter
           title="Tiện ích"
-          data={data?.convenient || []}
-          name="convenient"
+          data={data?.conveniences || []}
+          name="convenience"
           onChange={handleOnChange}
           mobile={true}
           filters={parentFilters}
@@ -129,7 +109,7 @@ function CustomFilterMobile({
 
       {createPortal(
         <div
-          className={`fixed z-[100000] inset-x-0 bottom-0 flex bg-white p-[10px] gap-x-3 items-center transition-all duration-300  ${
+          className={`lg:hidden fixed z-[100000] inset-x-0 bottom-0 flex bg-white p-[10px] gap-x-3 items-center transition-all duration-300  ${
             show ? "translate-y-0 opacity-100 " : "translate-y-[100%] opacity-0"
           }`}
         >

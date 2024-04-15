@@ -38,7 +38,7 @@ function SwiperImage({ data = {} }) {
       </Swiper>
       <div className="absolute flex items-center justify-between bottom-0 inset-x-0 p-[10px] z-[1000]">
         <Link
-          to="/"
+          to={`/place/${data?.slug}/photo`}
           className="text-white text-sm bg-[#000] opacity-80 py-1 px-3 rounded-[10px]"
         >
           Xem tất cả

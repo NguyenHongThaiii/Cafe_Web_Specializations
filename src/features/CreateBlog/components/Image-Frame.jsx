@@ -38,11 +38,11 @@ function ImageFrame({ onChange = null, error = {} }) {
         Hình ảnh
       </p>
 
-      <div className="mt-4 grid grid-cols-7 gap-3">
+      <div className="mt-4 grid grid-cols-3 lg:grid-cols-7 gap-3">
         {fileImages.map((item, index) => (
           <div
             key={index}
-            className="w-[104px] h-[104px]  opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer relative"
+            className="w-[104px] h-[104px]   opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer relative"
           >
             <div className="absolute inset-0  bg-[rgba(0,0,0,0.3) hover:bg-[rgba(0,0,0,0.5)] rounded-[10px] transition-all duration-300 z-10"></div>
             <img
@@ -80,7 +80,7 @@ function ImageFrame({ onChange = null, error = {} }) {
       <p className="text-[21px] font-medium text-primary pb-2  border-b-[1px] mt-5">
         Menu
       </p>
-      <div className="mt-4 grid grid-cols-7 gap-3">
+      <div className="mt-4 grid grid-cols-3 lg:grid-cols-7 gap-3">
         {fileMenus.map((item, index) => (
           <div
             key={index}

@@ -154,7 +154,7 @@ function ProfilePage(props) {
                       borderBottom: isActive && "4px solid",
                       color: isActive && "#e03",
                     })}
-                    to="/"
+                    to="/saved"
                     end
                     className="inline-block py-1  text-base"
                   >

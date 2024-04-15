@@ -7,7 +7,8 @@ import { handleTransformStringToDate } from "../../../utils";
 import reviewsApi from "../../../api/reviewApi";
 import blogSavedApi from "../../../api/blog-savedApi";
 import { showLoginPage } from "../../Auth/authSlice";
-
+import "react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
 SearchPageItem.propTypes = {
   data: PropTypes.object,
 };
@@ -25,31 +26,51 @@ function SearchPageItem({ data = {} }) {
     data?.schedules.length > 0 &&
     data?.schedules[0]?.endTime;
   const user = useSelector((state) => state.auth.current);
+  const [filters, setFilters] = useState({
+    userId: user?.id,
+    productId: data?.id,
+  });
   useEffect(() => {
     (async () => {
       const review = await reviewsApi.getCountReviewByProduct({
         status: 1,
         productId: data?.id,
+        page: 0,
       });
-      const isSave = await blogSavedApi.checkBlogIsSavedByUserId({
-        userId: user?.id,
-        productId: data?.id,
-      });
-      setIsSaved(isSave);
       setCountReview(review?.length || 0);
     })();
-  }, []);
+  }, [data]);
+  useEffect(() => {
+    (async () => {
+      if (user?.id) {
+        const isSave = await blogSavedApi.checkBlogIsSavedByUserId({
+          ...filters,
+          userId: user?.id,
+          productId: data?.id,
+        });
+        setIsSaved(isSave);
+      }
+    })();
+  }, [data, filters]);
   const dispatch = useDispatch();
 
   const handleClickSaveBlog = async () => {
-    if (!user?.id) {
-      dispatch(showLoginPage);
-      return;
+    try {
+      if (!user?.id) {
+        dispatch(showLoginPage());
+        return;
+      }
+      await blogSavedApi.toggleBlogSaved({
+        productId: data?.id,
+        userId: user?.id,
+      });
+      setFilters((prev) => ({ ...filters }));
+      if (isSaved) toast(`Đã hủy lưu thành công cafe ${data?.name}`);
+      else toast(`Đã lưu thành công cafe ${data?.name}`);
+    } catch (error) {
+      if (isSaved) toast(`Có lỗi hủy lưu cafe ${data?.name}`);
+      else toast(`Có lỗi lưu cafe ${data?.name}`);
     }
-    await blogSavedApi.toggleBlogSaved({
-      productId: data?.id,
-      userId: user?.id,
-    });
   };
 
   return (
@@ -125,7 +146,8 @@ function SearchPageItem({ data = {} }) {
               ? "Đang mở cửa"
               : "Đang đóng cửa"}
           </span>
-          {data?.schedules?.length > 0 && data?.schedules[0]?.startTime}
+          {data?.schedules?.length > 0 && data?.schedules[0]?.startTime} {" - "}
+          {data?.schedules?.length > 0 && data?.schedules[0]?.endTime}
         </div>
       </div>
 
