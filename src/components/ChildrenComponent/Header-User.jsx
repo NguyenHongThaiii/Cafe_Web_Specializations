@@ -95,7 +95,7 @@ function HeaderUser({ user = {} }) {
             </div>
           </Link>
           <Link
-            to="/"
+            to="/setting"
             className="flex items-center gap-x-[6px] py-2 px-[14px] border-b-[#eee] border-b-[1px] text-black hover:bg-[#f6f6f6] hover:text-primary transition-all duration-150"
           >
             <FaUserEdit className="w-[28px] text-base" />

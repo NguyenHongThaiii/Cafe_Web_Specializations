@@ -18,17 +18,17 @@ function ProfileContent({ data = {} }) {
     (async () => {
       const reviews = await reviewsApi.getAll({
         ...filters,
-        useId: data?.id || 0,
+        userId: data?.id || 0,
       });
       const counted = await reviewsApi.getAll({
         page: 0,
-        useId: data?.id || 0,
+        userId: data?.id || 0,
       });
       setState(reviews);
       setCount(counted?.length);
     })();
   }, [data, filters]);
-  console.log(count);
+  console.log(data?.id);
   const handlePageChange = (page) => {
     setFilters((prev) => ({ ...prev, page }));
     window.scrollTo({ top: 0, behavior: "smooth" });

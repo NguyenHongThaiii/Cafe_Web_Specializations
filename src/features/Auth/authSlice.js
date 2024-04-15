@@ -97,6 +97,13 @@ const authSlice = createSlice({
       state.current = { ...userLocal };
       setLocalStorage(STORAGE_KEY.USER, JSON.stringify({ ...userLocal }));
     },
+    updateUserNotImage: (state, action) => {
+      const userLocal = JSON.parse(getLocalStorage(STORAGE_KEY.USER));
+      userLocal[action.payload.field] = action.payload[action.payload.field];
+
+      state.current = { ...userLocal };
+      setLocalStorage(STORAGE_KEY.USER, JSON.stringify({ ...userLocal }));
+    },
   },
   extraReducers: (builder) => {
     builder.addCase(login.fulfilled, (state, action) => {
@@ -119,5 +126,6 @@ export const {
   createReview,
   toggleFollower,
   updateUser,
+  updateUserNotImage,
 } = authSlice.actions;
 export default authSlice.reducer;

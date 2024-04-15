@@ -10,6 +10,8 @@ import HomePage from "./features/Home/pages/Home-Page";
 import ProfilePage from "./features/Profile/pages/Profile-Page";
 import PhotoPage from "./features/Place/pages/Photo-Page";
 import ExplorePage from "./features/Explore/pages/Explore-Page";
+import SettingPage from "./features/Setting/pages/Setting-Page";
+import NotFoundPage from "./features/NotFound/Not-Found-Page";
 
 // const HomePage = lazy(() => import("./features/Home/pages/Home-Page"));
 
@@ -34,6 +36,8 @@ function App() {
       <Route path="/saved" element={<BlogSavedPage />} />
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/search" element={<SearchPage />} />
+      <Route path="/setting" element={<SettingPage />} />
+      <Route path="/not-found" element={<NotFoundPage />} />
       <Route path="/place/:name" element={<PlacePage />}></Route>
       <Route path="/profile/:name" element={<ProfilePage />} />
       <Route path="/place/:name/photo" element={<PhotoPage />}></Route>
