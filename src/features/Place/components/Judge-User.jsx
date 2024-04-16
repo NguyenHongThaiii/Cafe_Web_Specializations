@@ -42,8 +42,8 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
       dispatch(showLoginPage());
       return;
     }
-    handleShowReply();
-    setShow(true);
+    // handleShowReply();
+    // setShow(true);
     if (!onClick) return null;
     setIsSubmitting(true);
     if (isSubmitting) return;

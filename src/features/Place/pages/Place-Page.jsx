@@ -113,27 +113,43 @@ function PlacePage(props) {
                   <FaStreetView className="ml-[-3px] lg:hidden" />
                   <span className="hidden lg:inline-block">{" —"}</span>
                 </span>
-                <span
-                  onClick={() => setIsMap(true)}
-                  className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
-                >
-                  Hiển thị bản đồ
-                </span>
-                {" —"}
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${state?.latitude},${state?.longitude}`}
-                  target="_blank"
-                  className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
-                >
-                  Xem đường đi
-                </a>
-                {" —"}
+                {state?.longitude && state?.latitude && (
+                  <>
+                    <span
+                      onClick={() => setIsMap(true)}
+                      className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
+                    >
+                      Hiển thị bản đồ
+                    </span>
+                    {" —"}
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${state?.latitude},${state?.longitude}`}
+                      target="_blank"
+                      className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
+                    >
+                      Xem đường đi
+                    </a>
+                    {" —"}
+                  </>
+                )}
+
                 <span
                   onClick={handleShowModalMenu}
                   className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
                 >
                   Xem menu
                 </span>
+                {user?.id === state?.owner?.id && (
+                  <>
+                    {" —"}
+                    <a
+                      href={`/edit-place/${state?.slug}`}
+                      className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
+                    >
+                      Chỉnh sửa địa điểm
+                    </a>
+                  </>
+                )}
               </div>
             </div>
 
@@ -158,9 +174,10 @@ function PlacePage(props) {
                 setShow(true);
               }}
             />
-
             <Details item={state} />
-            <ParticularLocation data={state} />
+            {state?.longitude && state?.latitude && (
+              <ParticularLocation data={state} />
+            )}
           </div>
 
           <div>

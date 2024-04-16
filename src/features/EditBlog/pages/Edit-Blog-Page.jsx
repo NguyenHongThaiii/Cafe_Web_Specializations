@@ -1,19 +1,22 @@
 import { yupResolver } from "@hookform/resolvers/yup";
 import React, { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import * as yup from "yup";
+import { useSelector } from "react-redux";
 import areasApi from "../../../api/areasApi";
+import blogsApi from "../../../api/blogsApi";
+import conveniencesApi from "../../../api/conveniencesApi";
+import kindsApi from "../../../api/kindsApi";
+import purposesApi from "../../../api/purposesApi";
 import LayoutUser from "../../../components/Layout/Layout-User";
+import { timeToNumber } from "../../../utils";
 import BasicInfor from "../components/Basic-Infor";
 import ContactInfor from "../components/Contact-Infor";
 import ImageFrame from "../components/Image-Frame";
 import OtherInfor from "../components/Other-Infor";
-import kindsApi from "../../../api/kindsApi";
-import conveniencesApi from "../../../api/conveniencesApi";
-import purposesApi from "../../../api/purposesApi";
-import blogsApi from "../../../api/blogsApi";
-import { timeToNumber } from "../../../utils";
-import { useDispatch, useSelector } from "react-redux";
+import * as yup from "yup";
+import { useLocation, useNavigate } from "react-router-dom";
+
+EditBlogPage.propTypes = {};
 
 const schema = yup.object({
   name: yup
@@ -75,40 +78,71 @@ const schema = yup.object({
     .string("Vui lòng chọn mục đích của quán")
     .trim()
     .required("Vui lòng chọn mục đích của quán"),
+  latitude: yup
+    .string("Vui lòng nhập vĩ độ")
+    .matches(/^\-?\d+(\.\d+)?$/, "Vĩ độ phải là số thực, ví dụ: 21.0336724"),
+  longitude: yup
+    .string("Vui lòng nhập kinh độ")
+    .matches(/^\-?\d+(\.\d+)?$/, "Kinh độ phải là số thực, ví dụ: 105.8109417"),
 });
-CreateBlog.propTypes = {};
-
-function CreateBlog(props) {
+function EditBlogPage(props) {
+  const location = useLocation();
+  const navigate = useNavigate();
   const user = useSelector((state) => state.auth.current);
-
+  const slug = location.pathname.split("/")[2];
   const [values, setValues] = useState();
   const [error, setError] = useState({});
   const [state, setState] = useState({});
   const { control, handleSubmit, setValue, formState } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
-    resolver: yupResolver(schema),
-    defaultValues: {
-      priceMin: 0,
-      priceMax: 0,
-      startTime: "07:00",
-      endTime: "22:00",
-    },
+    // resolver: yupResolver(schema),
   });
   useEffect(() => {
     (async () => {
-      const areas = await areasApi.getAll({ limit: 100 });
-      const kinds = await kindsApi.getAll({ limit: 100 });
-      const conveniences = await conveniencesApi.getAll({ limit: 100 });
-      const purposes = await purposesApi.getAll({ limit: 100 });
-      const data = { areas, kinds, conveniences, purposes };
-      setState(data);
+      try {
+        const blog = await blogsApi.getBySlug(slug || "");
+        if (!blog?.id) {
+          navigate("/not-found");
+          return;
+        }
+        const areas = await areasApi.getAll({ limit: 100 });
+        const kinds = await kindsApi.getAll({ limit: 100 });
+        const conveniences = await conveniencesApi.getAll({ limit: 100 });
+        const purposes = await purposesApi.getAll({ limit: 100 });
+        const data = { areas, kinds, conveniences, purposes, blog };
+        setState(data);
+        setValue("name", blog?.name);
+        setValue("location", blog?.location);
+        setValue(
+          "area_id",
+          blog?.areas?.length > 0 ? blog?.areas[0]?.id : null
+        );
+        setValue(
+          "startTime",
+          blog?.schedules?.length > 0 ? blog?.schedules[0].startTime : "07:00"
+        );
+        setValue(
+          "endTime",
+          blog?.schedules?.length > 0 ? blog?.schedules[0].endTime : "22:00"
+        );
+        setValue("priceMin", blog?.priceMin);
+        setValue("priceMax", blog?.priceMax);
+        setValue("latitude", blog?.latitude);
+        setValue("longitude", blog?.longitude);
+        setValue("email", blog?.owner?.email);
+        setValue("facebook", blog?.owner?.facebook);
+        setValue("phone", blog?.owner?.phone);
+      } catch (error) {
+        navigate("/not-found");
+      }
     })();
-  }, []);
+  }, [location, location.pathname]);
   const handleOnChange = (value) => {
     setValues((prev) => ({ ...prev, ...value }));
   };
   const handleOnSubmit = async (data) => {
+    console.log({ ...data, ...values });
     try {
       if (!values?.listImageFile || values?.listImageFile?.length < 5) {
         setError({ image: "Ít nhất 5 images" });
@@ -159,19 +193,14 @@ function CreateBlog(props) {
       formData.append("status", data.status);
       formData.append("priceMin", data.priceMin);
       formData.append("priceMax", data.priceMax);
-      await blogsApi.createProduct(formData);
+      await blogsApi.updateProduct(state?.blog?.id, formData);
     } catch (error) {}
   };
-
   return (
     <LayoutUser>
       <div className="flex justify-center ">
         <div className=" shadow-[0_2px_8px_rgba(0,0,0,.15)] bg-white px-5 py-3  xs:px-2 m-2 w-[928px] rounded-md mb-0 xs:mb-20">
-          <p className="font-medium text-[28px]">Thêm địa điểm</p>
-          <p className="text-[14px] mb-3">
-            Những quán cafe yêu thích của bạn chưa có trên Toidicafe.vn? Chia sẻ
-            với cộng đồng ngay!
-          </p>
+          <p className="font-medium text-[28px]">Chỉnh sửa địa điểm</p>
           <form onSubmit={handleSubmit(handleOnSubmit)}>
             <BasicInfor
               control={control}
@@ -179,6 +208,7 @@ function CreateBlog(props) {
               areas={state?.areas}
               formState={formState}
               errorMessage={error?.description}
+              blog={state?.blog}
             />
             <OtherInfor
               control={control}
@@ -187,15 +217,18 @@ function CreateBlog(props) {
               conveniences={state?.conveniences}
               purposes={state?.purposes}
               formState={formState}
+              blog={state?.blog}
             />
             <ContactInfor control={control} formState={formState} />
-            <ImageFrame onChange={handleOnChange} error={error} />
+            <ImageFrame
+              onChange={handleOnChange}
+              error={error}
+              blog={state?.blog}
+            />
             <button
               type="submit"
               className={`text-white text-xl mt-5 w-full h-10 px-5 rounded-lg bg-primary font-semibold  lg:hover:bg-[#be0129] transition-all duration-300
-                ${
-                  formState.isSubmitting ? "bg-gray-500" : "  "
-                }                `}
+            ${formState.isSubmitting ? "bg-gray-500" : "  "}                `}
               disabled={formState.isSubmitting}
             >
               + Thêm địa điểm
@@ -207,4 +240,4 @@ function CreateBlog(props) {
   );
 }
 
-export default CreateBlog;
+export default EditBlogPage;

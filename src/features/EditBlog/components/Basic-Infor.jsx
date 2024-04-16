@@ -10,6 +10,7 @@ BasicInfor.propTypes = {
   onChange: PropTypes.func,
   formState: PropTypes.object,
   errorMessage: PropTypes.string,
+  blog: PropTypes.object,
 };
 
 function BasicInfor({
@@ -18,6 +19,7 @@ function BasicInfor({
   onChange = null,
   formState = null,
   errorMessage = "",
+  blog = {},
 }) {
   const options = areas.map((area) => ({
     id: area?.id,
@@ -45,6 +47,7 @@ function BasicInfor({
               id="name"
               type="text"
               placeholder="Cafe Ha Noi"
+              data={blog?.name}
             />
           </div>
           {formState?.errors["name"] && (
@@ -66,6 +69,7 @@ function BasicInfor({
               id="area_id"
               options={options}
               className="w-full h-[38px]"
+              defaultValue={blog?.areas?.length > 0 ? blog?.areas[0]?.id : 0}
             />
           </div>
           {formState?.errors["area_id"] && (
@@ -109,7 +113,9 @@ function BasicInfor({
               placeholder="Quan cafe rat dep"
               className="w-full mt-0"
               onChange={onChange}
-              onKeyPress={() => undefined}
+              onKeyPress={null}
+              // defaultValue="12323"
+              dValue={blog?.description}
             />
           </div>
           {errorMessage && (

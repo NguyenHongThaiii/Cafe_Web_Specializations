@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import React, { useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 TextareaCustomControl.propTypes = {
   name: PropTypes.string,
@@ -8,6 +8,7 @@ TextareaCustomControl.propTypes = {
   className: PropTypes.string,
   onKeyPress: PropTypes.func,
   isFocus: PropTypes.bool,
+  dValue: PropTypes.string,
 };
 const MIN_TEXTAREA_HEIGHT = 40;
 
@@ -16,13 +17,16 @@ function TextareaCustomControl({
   className = "",
   onKeyPress = null,
   isFocus = false,
+  dValue = "",
   ...props
 }) {
-  const [textarea, setTextarea] = useState("");
+  const [textarea, setTextarea] = useState(dValue);
   const [height, setHeight] = useState("auto");
   const textareaRef = useRef(null);
   const timeoutRef = useRef(null);
-
+  useEffect(() => {
+    setTextarea(dValue);
+  }, [dValue]);
   const handleOnChange = (event) => {
     const value = event.target.value.trim();
     setHeight("auto");
@@ -48,7 +52,6 @@ function TextareaCustomControl({
       setTextarea("".trim());
     }
   };
-
   React.useLayoutEffect(() => {
     setHeight(`${textareaRef?.current?.scrollHeight}px`);
   }, [textarea]);
@@ -59,7 +62,7 @@ function TextareaCustomControl({
         ref={textareaRef}
         placeholder="Nhập tối thiểu 10 kí tự."
         value={textarea}
-        onKeyPress={handleOnKeyPress}
+        onKeyPress={onKeyPress ? handleOnKeyPress : null}
         onChange={handleOnChange}
         className={`resize-none overflow-hidden leading-normal w-full text-base border outline-none rounded-[10px] px-2 py-1 ${className}`}
         autoFocus={isFocus}

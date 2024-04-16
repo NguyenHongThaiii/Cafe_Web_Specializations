@@ -10,6 +10,7 @@ OtherInfor.propTypes = {
   purposes: PropTypes.array,
   onChange: PropTypes.func,
   formState: PropTypes.object,
+  blog: PropTypes.object,
 };
 
 function OtherInfor({
@@ -19,6 +20,7 @@ function OtherInfor({
   purposes = [],
   onChange = null,
   formState = null,
+  blog = {},
 }) {
   const kindOptions = kinds.map((kind) => ({
     id: kind?.id,
@@ -200,6 +202,7 @@ function OtherInfor({
               id="kind_id"
               options={kindOptions}
               className="w-full h-[38px]"
+              defaultValue={blog?.kinds?.length > 0 ? blog?.kinds[0]?.id : 0}
             />
           </div>
         </div>
@@ -223,6 +226,9 @@ function OtherInfor({
               id="convenience_id"
               options={conOptions}
               className="w-full h-[38px]"
+              defaultValue={
+                blog?.conveniences?.length > 0 ? blog?.conveniences[0]?.id : 0
+              }
             />
           </div>
         </div>
@@ -246,6 +252,9 @@ function OtherInfor({
               id="purpose_id"
               options={purposesOptions}
               className="w-full h-[38px]"
+              defaultValue={
+                blog?.purposes?.length > 0 ? blog?.purposes[0]?.id : 0
+              }
             />
           </div>
         </div>{" "}

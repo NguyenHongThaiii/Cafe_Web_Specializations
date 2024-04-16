@@ -7,13 +7,14 @@ InputControlCommon.propTypes = {
   control: PropTypes.object,
   name: PropTypes.string,
   focus: PropTypes.bool,
+  data: PropTypes.string || PropTypes.number,
 };
 
-function InputControlCommon({ control, focus = false, ...props }) {
+function InputControlCommon({ control, focus = false, data = "", ...props }) {
   const { field, fieldState } = useController({
     name: props.name,
     control,
-    defaultValue: "",
+    defaultValue: data,
   });
   const inputRef = useRef(null);
   useEffect(() => {
