@@ -86,6 +86,7 @@ function ModalEditPreview({
       </div>
       <div className=" py-[10px] px-4 border-t-[1px] border-t-[#f0f0f0] text-right">
         <button
+          disabled={isLoading}
           onClick={onClose}
           className=" hover:border-primary hover:text-primary transition-all duration-700 border border-[#d9d9d9] bg-white shadow-[0_2px_0_rgb(0,0,0,0.02)] font-normal rounded-[2px] h-[32px] text-sm py-1 px-[15px]"
         >
@@ -93,8 +94,8 @@ function ModalEditPreview({
         </button>
         <button
           onClick={showCroppedImage}
-          className={` hover:opacity-90 ml-2 bg-primary ${
-            isLoading ? "bg-gray-500" : ""
+          className={` hover:opacity-90 ml-2  ${
+            isLoading ? "bg-gray-500" : "bg-primary"
           } text-white  transition-all duration-700 border border-[#d9d9d9] shadow-[0_2px_0_rgb(0,0,0,0.02)] font-medium rounded-[2px] h-[32px] text-sm py-1 px-[15px]`}
           disabled={isLoading}
         >
@@ -106,4 +107,3 @@ function ModalEditPreview({
 }
 
 export default ModalEditPreview;
-('{"id":1,"email":"123123@gmail.com","name":"123123@","address":"","phone":"thai","slug":"0","roles":[],"image":{"id":83,"status":1,"createdAt":"2024-04-11 16:51:21","updatedAt":"2024-04-11 16:51:21"},"isWaitingDelete":false,"token":"eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiIxMjMxMjNAZ21haWwuY29tIiwiaWF0IjoxNzEyODM2Njc5LCJleHAiOjE3MTM0NDE0Nzl9.TUNTbqqH7Gn7dp_HHdtqZ9Zjowze043m3HJUoAR9SBbMxdc_TmtcDKOaxFr3aiPZ"}');
