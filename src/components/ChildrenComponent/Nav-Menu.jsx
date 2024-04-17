@@ -19,7 +19,7 @@ function NavMenu({}) {
       {submenu && (
         <div className="absolute z-[100] top-full left-0 w-[180px] bg-white rounded-[6px] shadow-2xl">
           <Link
-            to="/"
+            to="/explore"
             className="px-4 py-2 block hover:text-primary hover:bg-[#f6f6f6] transition-all duration-300"
           >
             <i className="fa-regular fa-hashtag "></i>

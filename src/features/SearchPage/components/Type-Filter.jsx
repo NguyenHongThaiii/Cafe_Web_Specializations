@@ -51,8 +51,8 @@ function TypeFilter({
             data.length > 0 &&
             `${
               !mobile
-                ? "p-[10px] flex overflow-y-auto flex-col gap-y-[10px] max-h-[242px] "
-                : "p-[10px] grid grid-cols-2 overflow-y-auto gap-y-0 "
+                ? "p-[10px] flex overflow-y-auto flex-col gap-y-[10px] max-h-[242px]  "
+                : "p-[10px] grid grid-cols-2 overflow-y-auto gap-3 "
             }`
           }`}
         >

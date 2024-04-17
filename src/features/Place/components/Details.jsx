@@ -29,7 +29,6 @@ function Details({ item = {} }) {
           <div>
             <span
               className={`${
-                item?.timeStart &&
                 handleTransformStringToDate(
                   item?.schedules?.length > 0 && item?.schedules[0]?.startTime,
                   item?.schedules?.length > 0 && item?.schedules[0]?.endTime
@@ -38,8 +37,7 @@ function Details({ item = {} }) {
                   : "text-primary"
               } font-medium`}
             >
-              {item?.timeStart &&
-              handleTransformStringToDate(
+              {handleTransformStringToDate(
                 item?.schedules?.length > 0 && item?.schedules[0]?.startTime,
                 item?.schedules?.length > 0 && item?.schedules[0]?.endTime
               )

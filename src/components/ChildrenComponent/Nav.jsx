@@ -1,8 +1,10 @@
 import React, { useRef } from "react";
 import { NavLink } from "react-router-dom";
+import { getLocalStorage } from "../../utils";
+import { STORAGE_KEY } from "../../constant";
 const NAV_LIST = [
   {
-    pathname: "",
+    pathname: "/",
     element: (
       <>
         <i className={`fa-solid fa-house-chimney   text-[20px] pt-[10px] `}></i>
@@ -13,7 +15,7 @@ const NAV_LIST = [
     ),
   },
   {
-    pathname: "explore",
+    pathname: "/explore",
     element: (
       <>
         <i className="fa-solid fa-fire-flame-curved  text-[20px] pt-[10px]"></i>
@@ -24,7 +26,7 @@ const NAV_LIST = [
     ),
   },
   {
-    pathname: "discount",
+    pathname: "",
     element: (
       <>
         <i className="fa-solid fa-certificate  text-[20px] pt-[10px]"></i>
@@ -35,7 +37,7 @@ const NAV_LIST = [
     ),
   },
   {
-    pathname: "saved",
+    pathname: "/saved",
     element: (
       <>
         <i className="fa-solid fa-bookmark  text-[20px] pt-[10px]"></i>
@@ -46,7 +48,7 @@ const NAV_LIST = [
     ),
   },
   {
-    pathname: "account",
+    pathname: `/profile/${JSON.parse(getLocalStorage(STORAGE_KEY.USER))?.slug}`,
     element: (
       <>
         <i className="fa-solid fa-user-astronaut  text-[20px] pt-[10px]"></i>
@@ -59,8 +61,6 @@ const NAV_LIST = [
 ];
 
 function Nav() {
-  const radioRef = useRef(null);
-  const handleOnClick = () => {};
   return (
     <nav className="fixed inset-x-0 bottom-0 h-[60px] bg-white border-t border-[#ddd] z-[1000] block lg:hidden">
       <div className="max-w-[400px]  min-h-[60px] mx-auto grid grid-cols-5">

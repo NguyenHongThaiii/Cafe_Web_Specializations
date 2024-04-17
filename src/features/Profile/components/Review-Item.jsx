@@ -8,7 +8,7 @@ import {
   FaRegShareSquare,
 } from "react-icons/fa";
 import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import blogsApi from "../../../api/blogsApi";
 import commentsApi from "../../../api/commentsApi";
@@ -18,6 +18,7 @@ import { handleCalculateDateFromNow } from "../../../utils";
 import ReadMore from "../../Place/components/Read-More";
 import ReviewItemForm from "./Review-Item-Form";
 import ReviewItemReply from "./Review-Item-Reply";
+import { showLoginPage } from "../../Auth/authSlice";
 
 ReviewItem.propTypes = {
   data: PropTypes.object,
@@ -32,6 +33,7 @@ function ReviewItem({ data = {} }) {
   const [loadingFavor, setLoadingFavor] = useState(false);
   const [loadingComment, setLoadingComment] = useState(false);
   const user = useSelector((state) => state.auth.current);
+  const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
       try {
@@ -55,6 +57,10 @@ function ReviewItem({ data = {} }) {
 
   const handleClickFavor = async () => {
     try {
+      if (!user?.id) {
+        dispatch(showLoginPage());
+        return;
+      }
       if (loadingFavor) return;
       setLoadingFavor(true);
       await favoritesApi.toggleFavoriteReview({
@@ -96,7 +102,7 @@ function ReviewItem({ data = {} }) {
           />
         </div>
 
-        <div className="ml-2 mr-[30px] grow flex flex-col justify-center">
+        <div className="ml-2 mr-[30px] xs:mr-[-20px] grow flex flex-col justify-center">
           <div className="flex items-center">
             <Link
               to={`/profile/${state?.userDto?.slug || "thainguyen"}`}

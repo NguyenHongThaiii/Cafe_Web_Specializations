@@ -44,7 +44,7 @@ function ModalEditPreview({
     } catch (error) {
       console.log(error);
     }
-    setTimeout(setIsLoading(false), 5000);
+    setIsLoading(false);
   }, [croppedAreaPixels]);
 
   const onClose = useCallback(() => {

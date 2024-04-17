@@ -10,6 +10,7 @@ OtherInfor.propTypes = {
   purposes: PropTypes.array,
   onChange: PropTypes.func,
   formState: PropTypes.object,
+  blog: PropTypes.object,
 };
 
 function OtherInfor({
@@ -19,6 +20,7 @@ function OtherInfor({
   purposes = [],
   onChange = null,
   formState = null,
+  blog = {},
 }) {
   const kindOptions = kinds.map((kind) => ({
     id: kind?.id,
@@ -41,7 +43,7 @@ function OtherInfor({
         Thông tin khác
       </p>
       <div>
-        <div className="py-5 px-4 flex  items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center justify-between flex-1 gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -89,7 +91,7 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex  items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center justify-between flex-1 gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -137,7 +139,7 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex  items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center justify-between flex-1 gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -183,7 +185,7 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex gap-5 items-center px-0">
           <div className="flex items-center flex-1">
             <label
               htmlFor="kind_id"
@@ -198,6 +200,7 @@ function OtherInfor({
               id="kind_id"
               options={kindOptions}
               className="w-full h-[38px]"
+              defaultValue={blog?.kinds?.length > 0 ? blog?.kinds[0]?.id : 0}
             />
           </div>
         </div>
@@ -206,7 +209,7 @@ function OtherInfor({
             {formState.errors["kind_id"]?.message}
           </span>
         )}
-        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex gap-5 items-center px-0">
           <div className="flex items-center flex-1">
             <label
               htmlFor="convenience_id"
@@ -221,6 +224,9 @@ function OtherInfor({
               id="convenience_id"
               options={conOptions}
               className="w-full h-[38px]"
+              defaultValue={
+                blog?.conveniences?.length > 0 ? blog?.conveniences[0]?.id : 0
+              }
             />
           </div>
         </div>
@@ -229,7 +235,7 @@ function OtherInfor({
             {formState.errors["convenience_id"]?.message}
           </span>
         )}
-        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex gap-5 items-center px-0">
           <div className="flex items-center flex-1">
             <label
               htmlFor="purpose_id"
@@ -244,6 +250,9 @@ function OtherInfor({
               id="purpose_id"
               options={purposesOptions}
               className="w-full h-[38px]"
+              defaultValue={
+                blog?.purposes?.length > 0 ? blog?.purposes[0]?.id : 0
+              }
             />
           </div>
         </div>{" "}

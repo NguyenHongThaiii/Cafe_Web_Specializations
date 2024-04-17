@@ -33,8 +33,14 @@ function JudgePublic({
   const dispatch = useDispatch();
   useEffect(() => {
     (async () => {
-      const data = await reviewsApi.getAll({ ...filters, productId: item?.id });
-      const count = await reviewsApi.getAll({ page: 0, productId: item?.id });
+      const data = await reviewsApi.getAll({
+        ...filters,
+        productId: item?.id || 0,
+      });
+      const count = await reviewsApi.getAll({
+        page: 0,
+        productId: item?.id || 0,
+      });
       setReviews(data);
       setCount(count?.length);
     })();

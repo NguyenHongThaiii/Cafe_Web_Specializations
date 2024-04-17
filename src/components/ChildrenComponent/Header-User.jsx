@@ -103,7 +103,7 @@ function HeaderUser({ user = {} }) {
               Chỉnh sửa hồ sơ
             </p>
           </Link>
-          <Link
+          {/* <Link
             to="/"
             className="flex items-center gap-x-[6px] py-2 px-[14px] border-b-[#eee] border-b-[1px] text-black hover:bg-[#f6f6f6] hover:text-primary transition-all duration-150"
           >
@@ -111,7 +111,7 @@ function HeaderUser({ user = {} }) {
             <p className=" text-base  font-semibold overflow-ellipsis whitespace-normal overflow-hidden ">
               Điểm thưởng
             </p>
-          </Link>
+          </Link> */}
           <Link
             to="/"
             className="flex items-center gap-x-[6px] py-2 px-[14px] border-b-[#eee] border-b-[1px] text-black hover:bg-[#f6f6f6] hover:text-primary transition-all duration-150"

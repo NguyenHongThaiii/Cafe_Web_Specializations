@@ -32,7 +32,6 @@ function CustomFieldEdit({
   const [isShow, setIsShow] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
-
   const handleUpdateUser = async (userData) => {
     if (!userData[name] || userData[name].trim().length === 0) {
       setError(errorMessage);
@@ -102,7 +101,7 @@ function CustomFieldEdit({
           <div>
             <p className="flex items-center gap-2 text-[21px] font-semibold">
               <span>{children}</span>
-              {title ? title : user[name]}
+              {user?.id ? (title ? title : user[name]) : ""}
             </p>
             {content ? <p>{content}</p> : null}
           </div>

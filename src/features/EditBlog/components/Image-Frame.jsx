@@ -5,9 +5,10 @@ import { FaCamera } from "react-icons/fa";
 ImageFrame.propTypes = {
   onChange: PropTypes.func,
   error: PropTypes.object,
+  blog: PropTypes.object,
 };
 
-function ImageFrame({ onChange = null, error = {} }) {
+function ImageFrame({ onChange = null, error = {}, blog = {} }) {
   const [fileImages, setFileImages] = useState([]);
   const [fileMenus, setFileMenus] = useState([]);
   const handleOnChangeImage = (e) => {
@@ -38,7 +39,7 @@ function ImageFrame({ onChange = null, error = {} }) {
         Hình ảnh
       </p>
 
-      <div className="mt-4 grid grid-cols-3 lg:grid-cols-7 gap-3">
+      <div className="mt-4 grid grid-cols-3 lg:grid-cols-7 gap-3 lg:px-4 px-0">
         {fileImages.map((item, index) => (
           <div
             key={index}
@@ -52,6 +53,20 @@ function ImageFrame({ onChange = null, error = {} }) {
             />
           </div>
         ))}
+        {fileImages?.length === 0 &&
+          blog?.listImage?.map((item, index) => (
+            <div
+              key={index}
+              className="w-[104px] h-[104px]   opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer relative"
+            >
+              <div className="absolute inset-0  bg-[rgba(0,0,0,0.3) hover:bg-[rgba(0,0,0,0.5)] rounded-[10px] transition-all duration-300 z-10"></div>
+              <img
+                src={item?.url}
+                alt={item}
+                className="w-full h-full object-cover rounded-[10px]"
+              />
+            </div>
+          ))}
         <div className="mb-2 mr-2 text-sm rounded-[10px] w-[104px] h-[104px] border flex items-center justify-center">
           <label
             htmlFor="listImageFile"
@@ -94,6 +109,20 @@ function ImageFrame({ onChange = null, error = {} }) {
             />
           </div>
         ))}
+        {fileMenus?.length === 0 &&
+          blog?.listMenu?.map((item, index) => (
+            <div
+              key={index}
+              className="w-[104px] h-[104px]   opacity-80 hover:opacity-100 transition-all duration-300 cursor-pointer relative"
+            >
+              <div className="absolute inset-0  bg-[rgba(0,0,0,0.3) hover:bg-[rgba(0,0,0,0.5)] rounded-[10px] transition-all duration-300 z-10"></div>
+              <img
+                src={item?.url}
+                alt={item}
+                className="w-full h-full object-cover rounded-[10px]"
+              />
+            </div>
+          ))}
         <div className="mb-2 mr-2 text-sm rounded-[10px] w-[104px] h-[104px] border flex items-center justify-center">
           <label
             htmlFor="listMenuFile"

@@ -1,12 +1,13 @@
 import React, { useEffect, useRef, useState } from "react";
 import { FaHandPointRight, FaStreetView, FaUserCheck } from "react-icons/fa";
-import { MdLocationPin, MdSaveAlt } from "react-icons/md";
+import { MdLocationPin } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import blogsApi from "../../../../src/api/blogsApi";
 import LayoutUser from "../../../components/Layout/Layout-User";
 import { GlobalProvider, useHide } from "../../../context/Global-Provider";
 import { showLoginPage } from "../../Auth/authSlice";
+import ComponentIsSaved from "../components/Component-Is-Saved";
 import ConcernSlide from "../components/Concern-Slide";
 import ConvenientSlider from "../components/Convenient-Slider";
 import Judge from "../components/Judge";
@@ -18,8 +19,6 @@ import ParticularLocation from "../components/Particular-Location";
 import SlideImage from "../components/Slide-Image";
 import SwiperImage from "../components/Swiper-Image";
 import Details from "./../components/Details";
-import NotFoundPage from "../../NotFound/Not-Found-Page";
-
 PlacePage.propTypes = {};
 
 function PlacePage(props) {
@@ -44,7 +43,7 @@ function PlacePage(props) {
     (async () => {
       try {
         const blog = await blogsApi.getBySlug(slug);
-        if (blog?.id) {
+        if (!blog?.id) {
           navigate("/not-found");
           return;
         }
@@ -75,8 +74,6 @@ function PlacePage(props) {
     };
   }, [location, location.pathname]);
 
-  const handleSaveBlogs = async () => {};
-
   const handleShowModalImage = (index) => {
     setShowModalImage((prev) => ({ ...prev, index, show: true }));
   };
@@ -101,20 +98,7 @@ function PlacePage(props) {
               <h1 className="lg:text-[28px] text-[22px] font-semibold ">
                 {state.name}
               </h1>
-              <div
-                onClick={handleSaveBlogs}
-                className="w-9 h-8 flex items-center justify-center"
-              >
-                <MdSaveAlt
-                  className={`w-[100%] h-[26px] text-sm m-0 cursor-pointer
-                ${
-                  user?.blogSaved?.includes(state.id)
-                    ? "text-primary"
-                    : "text-secondary"
-                }
-                `}
-                />
-              </div>
+              <ComponentIsSaved data={state} user={user} />
             </div>
             <div className="pl-2 text-sm lg:flex items-center gap-x-1 flex-wrap">
               {state?.description}
@@ -129,27 +113,43 @@ function PlacePage(props) {
                   <FaStreetView className="ml-[-3px] lg:hidden" />
                   <span className="hidden lg:inline-block">{" —"}</span>
                 </span>
-                <span
-                  onClick={() => setIsMap(true)}
-                  className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
-                >
-                  Hiển thị bản đồ
-                </span>
-                {" —"}
-                <a
-                  href={`https://www.google.com/maps/dir/?api=1&destination=${state?.latitude},${state?.longitude}`}
-                  target="_blank"
-                  className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
-                >
-                  Xem đường đi
-                </a>
-                {" —"}
+                {state?.longitude && state?.latitude && (
+                  <>
+                    <span
+                      onClick={() => setIsMap(true)}
+                      className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
+                    >
+                      Hiển thị bản đồ
+                    </span>
+                    {" —"}
+                    <a
+                      href={`https://www.google.com/maps/dir/?api=1&destination=${state?.latitude},${state?.longitude}`}
+                      target="_blank"
+                      className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
+                    >
+                      Xem đường đi
+                    </a>
+                    {" —"}
+                  </>
+                )}
+
                 <span
                   onClick={handleShowModalMenu}
                   className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
                 >
                   Xem menu
                 </span>
+                {user?.id === state?.owner?.id && (
+                  <>
+                    {" —"}
+                    <a
+                      href={`/edit-place/${state?.slug}`}
+                      className="lg:text-[16px] text-primary hover:underline cursor-pointer font-medium"
+                    >
+                      Chỉnh sửa địa điểm
+                    </a>
+                  </>
+                )}
               </div>
             </div>
 
@@ -174,9 +174,10 @@ function PlacePage(props) {
                 setShow(true);
               }}
             />
-
             <Details item={state} />
-            <ParticularLocation data={state} />
+            {state?.longitude && state?.latitude && (
+              <ParticularLocation data={state} />
+            )}
           </div>
 
           <div>

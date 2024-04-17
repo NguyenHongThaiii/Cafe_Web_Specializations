@@ -15,14 +15,13 @@ function FormEditUser(props) {
         user={user}
         errorMessage="Tên không được để trống"
         title={user?.name}
-
       >
         <FaRegUser />
       </CustomFieldEdit>
       <CustomFieldEdit
         name="password"
         user={user}
-        errorMessage="Tên không được để trống"
+        errorMessage="Mật khẩu không được để trống"
         title="Mật khẩu"
         content="********"
       >
@@ -31,7 +30,7 @@ function FormEditUser(props) {
       <CustomFieldEdit
         name="email"
         user={user}
-        errorMessage="Tên không được để trống"
+        errorMessage="Email không được để trống"
         title="Email"
         content={user?.email}
         isChange={false}
@@ -41,7 +40,7 @@ function FormEditUser(props) {
       <CustomFieldEdit
         name="phone"
         user={user}
-        errorMessage="Tên không được để trống"
+        errorMessage="Số điện thoại không được để trống"
         title="Điện thoại"
         content={user?.phone}
       >

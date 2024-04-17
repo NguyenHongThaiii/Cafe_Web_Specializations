@@ -26,12 +26,10 @@ function AreaFilter({
   filters = {},
 }) {
   const [show, setShow] = useState(true);
-
   const handleOnChange = (value, event) => {
     if (!onChange) return null;
     onChange(value);
   };
-
   return (
     <>
       <Collapse isOpened={true}>
@@ -48,13 +46,13 @@ function AreaFilter({
         </div>
       </Collapse>
       <UnmountClosed isOpened={show}>
-        <div
+        <form
           className={`scroll-bar ${
             data.length > 0 &&
             `${
               !mobile
-                ? "p-[10px] flex overflow-y-auto flex-col gap-y-[10px] max-h-[242px]"
-                : "p-[10px] grid grid-cols-2 overflow-y-auto gap-y-0 "
+                ? "p-[10px] flex overflow-y-auto flex-col gap-y-[10px] max-h-[242px] "
+                : "p-[10px] grid grid-cols-2 overflow-y-auto gap-y-3 "
             }`
           }`}
         >
@@ -65,12 +63,12 @@ function AreaFilter({
               name={"slugArea"}
               id={item?.name}
               value={item?.slug}
-              checked={item?.slug === filters?.slugArea}
               type={type}
+              checked={item?.slug === filters?.slugArea}
               onChange={handleOnChange}
             />
           ))}
-        </div>
+        </form>
       </UnmountClosed>
     </>
   );

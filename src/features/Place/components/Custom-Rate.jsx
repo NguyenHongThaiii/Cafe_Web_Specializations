@@ -78,21 +78,21 @@ function CustomRate({ name = "", title = "", onChange = null }) {
   };
   return (
     <div className="pl-[10px] pr-5 flex items-center justify-between mb-1">
-      <span className="flex-1">{title}</span>
+      <span className="flex-1  min-w-24">{title}</span>
 
       <div className="flex  grow" ref={nodeRef}>
         {Array.from(new Array(5)).map((item, index) => (
           <div
             onClick={() => handleClick(index + 1)}
             key={index}
-            className="relative w-10 h-10 pl-[36px] "
+            className="relative lg:w-10 lg:h-10 w-5 h-5 pl-[36px] xs:pl-[20px] "
           >
             <div
               className={`cursor-pointer absolute inset-0 z-20 transition-all  duration-300 mouseover_${name} ${
                 index + 1 > count ? "text-[#d8d8d8]" : "text-primary"
               }`}
             >
-              <FaStar className="w-8 h-8 m-0 " />
+              <FaStar className="lg:w-8 lg:h-8 m-0 w-4 h-4 " />
             </div>
           </div>
         ))}

@@ -28,6 +28,14 @@ const blogsApi = {
       },
     });
   },
+  updateProduct(id, body) {
+    const url = `/products/id/${id}`;
+    return axiosClient.patch(url, body, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+  },
   getCountReviewProduct(product) {},
 };
 

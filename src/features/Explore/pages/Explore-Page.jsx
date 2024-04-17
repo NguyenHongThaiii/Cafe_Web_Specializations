@@ -16,7 +16,7 @@ function ExplorePage(props) {
       <div className="bg-[linear-gradient(180deg,#ffb8b8,#fbfbfb)] bg-[-webkit-linear-gradient(top,#ffb8b8,#fbfbfb)]">
         <div className="max-w-[1200px] mx-auto md:flex block ">
           {/* left */}
-          <div className="px-4 lg:w-2/3 w-full">
+          <div className="lg:p-0 pt-5 pb-14 px-4 lg:w-2/3 w-full">
             <PostReview />
           </div>
           {/* right */}

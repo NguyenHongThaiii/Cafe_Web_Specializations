@@ -5,6 +5,7 @@ import ConvenientFilter from "./Convenient-Filter";
 import PriceFilter from "./Price-Filter";
 import PurposeFilter from "./Purpose-Filter";
 import TypeFilter from "./Type-Filter";
+import TimeStartFilter from "./Time-Start-Filter";
 
 CustomLayoutFilter.propTypes = {
   data: PropTypes.object,
@@ -37,14 +38,14 @@ function CustomLayoutFilter({ data = {}, onChange = null, filters = {} }) {
           </h2>
         </div>
         <div>
-          {/* <TimeStartFilter
+          <TimeStartFilter
             title="Giờ mở cửa"
             type="radio"
             data={data?.timeStart || []}
             name="timeStart"
             onChange={handleOnChange}
             col={true}
-          /> */}
+          />
           <AreaFilter
             title="Khu vực"
             data={data?.areas || []}
@@ -55,7 +56,7 @@ function CustomLayoutFilter({ data = {}, onChange = null, filters = {} }) {
           <PurposeFilter
             title="Mục đích"
             data={data?.purposes || []}
-            name="topic"
+            name="purpose"
             onChange={handleOnChange}
             filters={filters}
           />
@@ -69,14 +70,14 @@ function CustomLayoutFilter({ data = {}, onChange = null, filters = {} }) {
           <TypeFilter
             title="Kiểu quán"
             data={data?.kinds || []}
-            name="type"
+            name="kind"
             onChange={handleOnChange}
             filters={filters}
           />
           <ConvenientFilter
             title="Tiện ích"
             data={data?.conveniences || []}
-            name="convenient"
+            name="convenience"
             onChange={handleOnChange}
             filters={filters}
           />

@@ -28,7 +28,6 @@ function ProfileContent({ data = {} }) {
       setCount(counted?.length);
     })();
   }, [data, filters]);
-  console.log(data?.id);
   const handlePageChange = (page) => {
     setFilters((prev) => ({ ...prev, page }));
     window.scrollTo({ top: 0, behavior: "smooth" });

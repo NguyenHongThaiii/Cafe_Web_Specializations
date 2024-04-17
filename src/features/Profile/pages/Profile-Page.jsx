@@ -32,6 +32,7 @@ function ProfilePage(props) {
     (async () => {
       try {
         const data = await usersApi.getAll({ slug: slug });
+        console.log(data);
         if (data?.length > 0) setState(data[0]);
         else navigate("/not-found");
       } catch (error) {
@@ -40,7 +41,6 @@ function ProfilePage(props) {
     })();
   }, [location, user]);
   const handleToggleFollow = async () => {};
-
   return (
     <LayoutAuthenUser>
       <LayoutUser>
@@ -147,29 +147,31 @@ function ProfilePage(props) {
                     </button>
                   </NavLink>
                 </li>
-                <li>
-                  <NavLink
-                    style={({ isActive }) => ({
-                      borderBottomColor: isActive && "#e03",
-                      borderBottom: isActive && "4px solid",
-                      color: isActive && "#e03",
-                    })}
-                    to="/"
-                    end
-                    className="inline-block py-1  text-base"
-                  >
-                    <button
-                      className={`text-base font-medium  transition-all rounded-[10px] mt-[2px] py-[10px] px-[14px]  ${
-                        location.pathname !== "/profile/saved"
-                          ? "hover:bg-[#f0f2f5]"
-                          : ""
-                      }`}
+                {state?.id === user.id && (
+                  <li>
+                    <NavLink
+                      style={({ isActive }) => ({
+                        borderBottomColor: isActive && "#e03",
+                        borderBottom: isActive && "4px solid",
+                        color: isActive && "#e03",
+                      })}
+                      to="/saved"
+                      end
+                      className="inline-block py-1  text-base"
                     >
-                      {" "}
-                      Đã lưu{" "}
-                    </button>
-                  </NavLink>
-                </li>
+                      <button
+                        className={`text-base font-medium  transition-all rounded-[10px] mt-[2px] py-[10px] px-[14px]  ${
+                          location.pathname !== "/profile/saved"
+                            ? "hover:bg-[#f0f2f5]"
+                            : ""
+                        }`}
+                      >
+                        {" "}
+                        Đã lưu{" "}
+                      </button>
+                    </NavLink>
+                  </li>
+                )}
                 <li>
                   <NavLink
                     style={({ isActive }) => ({

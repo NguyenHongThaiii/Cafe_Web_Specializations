@@ -40,7 +40,6 @@ function BlogSavedContent(props) {
       });
     }
   }, [filters]);
-  console.log(filters);
   const handleOnChange = (value) => {
     setFilters((prev) => {
       return { ...prev, ...value };

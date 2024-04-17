@@ -8,9 +8,10 @@ SelectControl.propTypes = {
   label: PropTypes.string,
   id: PropTypes.string,
   options: PropTypes.array,
+  defaultValue: PropTypes.number, // Thêm PropTypes cho defaultValue
 };
 
-function SelectControl({ control, options = [], ...props }) {
+function SelectControl({ control, options = [], defaultValue = 0, ...props }) {
   const { field } = useController({
     defaultValue: "",
     name: props.name,
@@ -22,18 +23,22 @@ function SelectControl({ control, options = [], ...props }) {
       {...props}
       className={`custom-select ${props?.className}`}
     >
-      <option value={0}>None</option>
+      {!defaultValue && <option value={0}>None</option>}
       {options.map((option, index) =>
         index === 0 ? (
           <option
             value={option.value}
             key={option.id}
-            defaultValue={option.value}
+            defaultValue={option.value === defaultValue ? option.value : "0"}
           >
             {option.label}
           </option>
         ) : (
-          <option value={option.value} key={option.id}>
+          <option
+            value={option.value}
+            key={option.id}
+            defaultValue={option.value === defaultValue ? option.value : "0"}
+          >
             {option.label}
           </option>
         )
