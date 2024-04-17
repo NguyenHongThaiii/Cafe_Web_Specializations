@@ -14,7 +14,7 @@ OtherInfor.propTypes = {
 };
 
 function OtherInfor({
-  control = [],
+  control = null,
   kinds = [],
   conveniences = [],
   purposes = [],
@@ -43,7 +43,7 @@ function OtherInfor({
         Thông tin khác
       </p>
       <div>
-        <div className="py-5 px-4 flex  items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center justify-between flex-1 gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -91,7 +91,7 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex  items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center justify-between flex-1 gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -139,7 +139,7 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex  items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center justify-between flex-1 gap-2">
             <div className="flex items-center justify-between">
               <label
@@ -147,7 +147,6 @@ function OtherInfor({
                 className="lg:min-w-40 min-w-[92px] text-[14px] "
               >
                 Vĩ độ
-                <span className="text-primary pl-1 font-bold">*</span>
               </label>
               <InputControlCommon
                 control={control}
@@ -163,7 +162,6 @@ function OtherInfor({
                 className="min-w-[60px] text-[14px] mr-4"
               >
                 Kinh độ
-                <span className="text-primary pl-1 font-bold">*</span>
               </label>
               <InputControlCommon
                 control={control}
@@ -187,7 +185,7 @@ function OtherInfor({
             </span>
           )}
         </div>
-        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex gap-5 items-center px-0">
           <div className="flex items-center flex-1">
             <label
               htmlFor="kind_id"
@@ -211,7 +209,7 @@ function OtherInfor({
             {formState.errors["kind_id"]?.message}
           </span>
         )}
-        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex gap-5 items-center px-0">
           <div className="flex items-center flex-1">
             <label
               htmlFor="convenience_id"
@@ -237,7 +235,7 @@ function OtherInfor({
             {formState.errors["convenience_id"]?.message}
           </span>
         )}
-        <div className="py-5 px-4 flex gap-5 items-center xs:px-0">
+        <div className="py-5 lg:px-4 flex gap-5 items-center px-0">
           <div className="flex items-center flex-1">
             <label
               htmlFor="purpose_id"

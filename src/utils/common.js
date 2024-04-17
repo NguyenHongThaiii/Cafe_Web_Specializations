@@ -135,7 +135,15 @@ export function formatToVND(number) {
 }
 export function timeToNumber(timeString) {
   if (!timeString) return;
+
   const [hours, minutes] = timeString.split(":").map(Number);
 
-  return hours * 100 + minutes * (100 / 60);
+  return hours * 3600 + minutes * 60;
+}
+export function convertToTimeString(seconds) {
+  let hours = Math.floor(seconds / 3600);
+  let minutes = Math.floor((seconds % 3600) / 60);
+  hours = hours < 10 ? "0" + hours : hours;
+  minutes = minutes < 10 ? "0" + minutes : minutes;
+  return hours + ":" + minutes;
 }

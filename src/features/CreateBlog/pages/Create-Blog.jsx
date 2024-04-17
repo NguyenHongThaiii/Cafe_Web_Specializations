@@ -14,7 +14,9 @@ import purposesApi from "../../../api/purposesApi";
 import blogsApi from "../../../api/blogsApi";
 import { timeToNumber } from "../../../utils";
 import { useDispatch, useSelector } from "react-redux";
-
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import { useNavigate } from "react-router-dom";
 const schema = yup.object({
   name: yup
     .string("Vui lòng nhập tên quán.")
@@ -80,7 +82,7 @@ CreateBlog.propTypes = {};
 
 function CreateBlog(props) {
   const user = useSelector((state) => state.auth.current);
-
+  const navigate = useNavigate();
   const [values, setValues] = useState();
   const [error, setError] = useState({});
   const [state, setState] = useState({});
@@ -138,29 +140,36 @@ function CreateBlog(props) {
       data.purpose_id = +data.purpose_id;
       data.longitude = data?.longitude ? parseFloat(data.longitude) : null;
       data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
-      data.status = 0;
+      data.status = 1;
       const formData = new FormData();
-      values?.listImageFile.forEach((file, index) => {
+      values?.listImageFile?.forEach((file, index) => {
         formData.append(`listImageFile[${index}]`, file);
       });
-      values?.listMenuFile.forEach((file, index) => {
+      values?.listMenuFile?.forEach((file, index) => {
         formData.append(`listMenuFile[${index}]`, file);
       });
-      formData.append("name", data.name);
-      formData.append("listScheduleDto", data.listScheduleDto);
-      formData.append("phone", data.phone);
-      formData.append("area_id", data.area_id);
-      formData.append("description", data.description);
-      formData.append("location", data.location);
+      formData.append("name", data?.name);
+      formData.append("listScheduleDto", data?.listScheduleDto);
+      formData.append("phone", data?.phone);
+      formData.append("area_id", data?.area_id);
+      formData.append("purpose_id", data?.purpose_id);
+      formData.append("convenience_id", data?.convenience_id);
+      formData.append("description", data?.description);
+      formData.append("location", data?.location);
       formData.append("userId", user.id);
-      formData.append("kind_id", data.kind_id);
-      formData.append("latitude", data.latitude);
-      formData.append("longitude", data.longitude);
-      formData.append("status", data.status);
-      formData.append("priceMin", data.priceMin);
-      formData.append("priceMax", data.priceMax);
+      formData.append("kind_id", data?.kind_id);
+      formData.append("latitude", data?.latitude);
+      formData.append("longitude", data?.longitude);
+      formData.append("status", data?.status);
+      formData.append("priceMin", data?.priceMin);
+      formData.append("priceMax", data?.priceMax);
       await blogsApi.createProduct(formData);
-    } catch (error) {}
+      toast("Tạo thành công");
+    } catch (error) {
+      console.log(error);
+      toast("Có lỗi xảy ra xin hãy thử lại sau.");
+    }
+    navigate("/");
   };
 
   return (

@@ -32,7 +32,7 @@ function BasicInfor({
         Thông tin cơ bản
       </p>
       <div>
-        <div className="py-5 px-4 flex flex-col gap-5 xs:px-0">
+        <div className="py-5 lg:px-4 flex flex-col gap-5 px-0">
           <div className="flex items-center ">
             <label
               htmlFor="name"

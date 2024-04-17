@@ -13,7 +13,7 @@ OtherInfor.propTypes = {
 };
 
 function OtherInfor({
-  control = [],
+  control = null,
   kinds = [],
   conveniences = [],
   purposes = [],
@@ -145,7 +145,6 @@ function OtherInfor({
                 className="lg:min-w-40 min-w-[92px] text-[14px] "
               >
                 Vĩ độ
-                <span className="text-primary pl-1 font-bold">*</span>
               </label>
               <InputControlCommon
                 control={control}
@@ -161,7 +160,6 @@ function OtherInfor({
                 className="min-w-[60px] text-[14px] mr-4"
               >
                 Kinh độ
-                <span className="text-primary pl-1 font-bold">*</span>
               </label>
               <InputControlCommon
                 control={control}

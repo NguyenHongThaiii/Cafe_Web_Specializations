@@ -8,13 +8,15 @@ import conveniencesApi from "../../../api/conveniencesApi";
 import kindsApi from "../../../api/kindsApi";
 import purposesApi from "../../../api/purposesApi";
 import LayoutUser from "../../../components/Layout/Layout-User";
-import { timeToNumber } from "../../../utils";
+import { convertToTimeString, timeToNumber } from "../../../utils";
 import BasicInfor from "../components/Basic-Infor";
 import ContactInfor from "../components/Contact-Infor";
 import ImageFrame from "../components/Image-Frame";
 import OtherInfor from "../components/Other-Infor";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
 
 EditBlogPage.propTypes = {};
 
@@ -78,12 +80,12 @@ const schema = yup.object({
     .string("Vui lòng chọn mục đích của quán")
     .trim()
     .required("Vui lòng chọn mục đích của quán"),
-  latitude: yup
-    .string("Vui lòng nhập vĩ độ")
-    .matches(/^\-?\d+(\.\d+)?$/, "Vĩ độ phải là số thực, ví dụ: 21.0336724"),
-  longitude: yup
-    .string("Vui lòng nhập kinh độ")
-    .matches(/^\-?\d+(\.\d+)?$/, "Kinh độ phải là số thực, ví dụ: 105.8109417"),
+  // latitude: yup
+  //   .string("Vui lòng nhập vĩ độ")
+  //   .matches(/^\-?\d+(\.\d+)?$/, "Vĩ độ phải là số thực, ví dụ: 21.0336724"),
+  // longitude: yup
+  //   .string("Vui lòng nhập kinh độ")
+  //   .matches(/^\-?\d+(\.\d+)?$/, "Kinh độ phải là số thực, ví dụ: 105.8109417"),
 });
 function EditBlogPage(props) {
   const location = useLocation();
@@ -96,12 +98,13 @@ function EditBlogPage(props) {
   const { control, handleSubmit, setValue, formState } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
-    // resolver: yupResolver(schema),
+    resolver: yupResolver(schema),
   });
   useEffect(() => {
     (async () => {
       try {
         const blog = await blogsApi.getBySlug(slug || "");
+        console.log(blog);
         if (!blog?.id) {
           navigate("/not-found");
           return;
@@ -116,20 +119,36 @@ function EditBlogPage(props) {
         setValue("location", blog?.location);
         setValue(
           "area_id",
-          blog?.areas?.length > 0 ? blog?.areas[0]?.id : null
+          blog?.areas?.length > 0 ? blog?.areas[0]?.id : undefined
+        );
+        setValue(
+          "kind_id",
+          blog?.kinds?.length > 0 ? blog?.kinds[0]?.id : undefined
+        );
+        setValue(
+          "purpose_id",
+          blog?.purposes?.length > 0 ? blog?.purposes[0]?.id : undefined
+        );
+        setValue(
+          "convenience_id",
+          blog?.conveniences?.length > 0 ? blog?.conveniences[0]?.id : undefined
         );
         setValue(
           "startTime",
-          blog?.schedules?.length > 0 ? blog?.schedules[0].startTime : "07:00"
+          blog?.schedules?.length > 0
+            ? convertToTimeString(blog?.schedules[0].startTime)
+            : "07:00"
         );
         setValue(
           "endTime",
-          blog?.schedules?.length > 0 ? blog?.schedules[0].endTime : "22:00"
+          blog?.schedules?.length > 0
+            ? convertToTimeString(blog?.schedules[0].endTime)
+            : "22:00"
         );
         setValue("priceMin", blog?.priceMin);
         setValue("priceMax", blog?.priceMax);
-        setValue("latitude", blog?.latitude);
-        setValue("longitude", blog?.longitude);
+        setValue("latitude", blog?.latitude || "");
+        setValue("longitude", blog?.longitude || "");
         setValue("email", blog?.owner?.email);
         setValue("facebook", blog?.owner?.facebook);
         setValue("phone", blog?.owner?.phone);
@@ -142,17 +161,25 @@ function EditBlogPage(props) {
     setValues((prev) => ({ ...prev, ...value }));
   };
   const handleOnSubmit = async (data) => {
-    console.log({ ...data, ...values });
+    data = { ...data, ...values };
+    if (!data?.description) data.description = state?.blog?.description;
+    console.log(data);
     try {
-      if (!values?.listImageFile || values?.listImageFile?.length < 5) {
+      if (
+        values?.listImageFile?.length > 0 &&
+        values?.listImageFile?.length < 5
+      ) {
         setError({ image: "Ít nhất 5 images" });
         return;
       }
-      if (!values?.listMenuFile || values?.listMenuFile?.length < 2) {
+      if (
+        values?.listMenuFile?.length > 0 &&
+        values?.listMenuFile?.length < 2
+      ) {
         setError({ menu: "Ít nhất 2 menus" });
         return;
       }
-      if (!values?.description) {
+      if (!data?.description && !state?.blog?.description) {
         setError({ description: "Vui lòng nhập trường giới thiệu" });
         return;
       }
@@ -164,37 +191,46 @@ function EditBlogPage(props) {
           endTime: timeToNumber(data?.endTime),
         },
       ]);
-      data.startTime = null;
-      data.endTime = null;
+      // data.startTime = null;
+      // data.endTime = null;
       data.area_id = +data.area_id;
       data.convenience_id = +data.convenience_id;
       data.kind_id = +data.kind_id;
       data.purpose_id = +data.purpose_id;
       data.longitude = data?.longitude ? parseFloat(data.longitude) : null;
       data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
-      data.status = 0;
+      data.status = 1;
       const formData = new FormData();
-      values?.listImageFile.forEach((file, index) => {
+      values?.listImageFile?.forEach((file, index) => {
         formData.append(`listImageFile[${index}]`, file);
       });
-      values?.listMenuFile.forEach((file, index) => {
+      values?.listMenuFile?.forEach((file, index) => {
         formData.append(`listMenuFile[${index}]`, file);
       });
-      formData.append("name", data.name);
-      formData.append("listScheduleDto", data.listScheduleDto);
-      formData.append("phone", data.phone);
-      formData.append("area_id", data.area_id);
-      formData.append("description", data.description);
-      formData.append("location", data.location);
+      formData.append("name", data?.name);
+      formData.append("listScheduleDto", data?.listScheduleDto);
+      formData.append("phone", data?.phone);
+      formData.append("area_id", data?.area_id);
+      formData.append("convenience_id", data?.convenience_id);
+      formData.append("description", data?.description);
+      formData.append("location", data?.location);
       formData.append("userId", user.id);
-      formData.append("kind_id", data.kind_id);
-      formData.append("latitude", data.latitude);
-      formData.append("longitude", data.longitude);
-      formData.append("status", data.status);
-      formData.append("priceMin", data.priceMin);
-      formData.append("priceMax", data.priceMax);
+      formData.append("kind_id", data?.kind_id);
+      formData.append("purpose_id", data?.purpose_id);
+      if (data?.latitude && data?.longitude) {
+        formData.append("latitude", data?.latitude);
+        formData.append("longitude", data?.longitude);
+      }
+      formData.append("status", data?.status);
+      formData.append("priceMin", data?.priceMin);
+      formData.append("priceMax", data?.priceMax);
       await blogsApi.updateProduct(state?.blog?.id, formData);
-    } catch (error) {}
+      toast("Chỉnh sửa thành công");
+    } catch (error) {
+      console.log(error);
+      toast("Có lỗi xảy ra xin hãy thử lại sau.");
+    }
+    navigate("/");
   };
   return (
     <LayoutUser>

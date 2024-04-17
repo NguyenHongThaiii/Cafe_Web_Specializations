@@ -39,7 +39,7 @@ function ImageFrame({ onChange = null, error = {}, blog = {} }) {
         Hình ảnh
       </p>
 
-      <div className="mt-4 grid grid-cols-3 lg:grid-cols-7 gap-3">
+      <div className="mt-4 grid grid-cols-3 lg:grid-cols-7 gap-3 lg:px-4 px-0">
         {fileImages.map((item, index) => (
           <div
             key={index}
