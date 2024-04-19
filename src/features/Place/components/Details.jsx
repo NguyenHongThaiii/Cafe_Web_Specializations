@@ -9,7 +9,11 @@ import {
   FaTags,
 } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { formatToVND, handleTransformStringToDate } from "../../../utils";
+import {
+  convertToTimeString,
+  formatToVND,
+  handleTransformStringToDate,
+} from "../../../utils";
 
 Details.propTypes = {
   item: PropTypes.object,
@@ -47,8 +51,11 @@ function Details({ item = {} }) {
             <span className="ml-1">
               {" "}
               <span className="pb-0.5 inline-block">
-                {" "}
-                {item?.schedules?.length > 0 && item?.schedules[0]?.startTime}
+                {item?.schedules?.length > 0 &&
+                  convertToTimeString(item?.schedules[0]?.startTime)}{" "}
+                {" - "}
+                {item?.schedules?.length > 0 &&
+                  convertToTimeString(item?.schedules[0]?.endTime)}{" "}
               </span>
             </span>
           </div>

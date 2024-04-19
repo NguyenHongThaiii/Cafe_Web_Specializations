@@ -50,7 +50,7 @@ function CustomFilterMobile({
     onShow();
     setHide(false);
 
-    removeLocalStorage("search_now");
+    // removeLocalStorage("search_now");
     navigate("/search");
   };
   return createPortal(

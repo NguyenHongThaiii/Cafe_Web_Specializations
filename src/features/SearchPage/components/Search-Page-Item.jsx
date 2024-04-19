@@ -3,7 +3,10 @@ import React, { useEffect, useState } from "react";
 import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { handleTransformStringToDate } from "../../../utils";
+import {
+  convertToTimeString,
+  handleTransformStringToDate,
+} from "../../../utils";
 import reviewsApi from "../../../api/reviewApi";
 import blogSavedApi from "../../../api/blog-savedApi";
 import { showLoginPage } from "../../Auth/authSlice";
@@ -146,8 +149,11 @@ function SearchPageItem({ data = {} }) {
               ? "Đang mở cửa"
               : "Đang đóng cửa"}
           </span>
-          {data?.schedules?.length > 0 && data?.schedules[0]?.startTime} {" - "}
-          {data?.schedules?.length > 0 && data?.schedules[0]?.endTime}
+          {data?.schedules?.length > 0 &&
+            convertToTimeString(data?.schedules[0]?.startTime)}{" "}
+          {" - "}
+          {data?.schedules?.length > 0 &&
+            convertToTimeString(data?.schedules[0]?.endTime)}
         </div>
       </div>
 

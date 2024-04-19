@@ -32,7 +32,6 @@ function ProfilePage(props) {
     (async () => {
       try {
         const data = await usersApi.getAll({ slug: slug });
-        console.log(data);
         if (data?.length > 0) setState(data[0]);
         else navigate("/not-found");
       } catch (error) {
@@ -147,7 +146,7 @@ function ProfilePage(props) {
                     </button>
                   </NavLink>
                 </li>
-                {state?.id === user.id && (
+                {state?.id === user?.id && (
                   <li>
                     <NavLink
                       style={({ isActive }) => ({

@@ -44,7 +44,7 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
       return { ...prev, ...value };
     });
     onSearch(value);
-    setLocalStorage("search_now", value?.name);
+    // setLocalStorage("search_now", value?.name);
   };
 
   const handlePlacePace = (value) => {
