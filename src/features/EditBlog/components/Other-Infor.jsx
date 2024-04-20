@@ -11,6 +11,7 @@ OtherInfor.propTypes = {
   onChange: PropTypes.func,
   formState: PropTypes.object,
   blog: PropTypes.object,
+  error: PropTypes.object,
 };
 
 function OtherInfor({
@@ -21,6 +22,7 @@ function OtherInfor({
   onChange = null,
   formState = null,
   blog = {},
+  error,
 }) {
   const kindOptions = kinds.map((kind) => ({
     id: kind?.id,
@@ -174,14 +176,14 @@ function OtherInfor({
           </div>
         </div>
         <div className="flex items-center justify-between gap-10 px-4">
-          {formState?.errors["latitude"] && (
+          {error?.latitude && (
             <span className="block font-medium text-sm text-primary transition-all duration-150">
-              {formState.errors["latitude"]?.message}
+              {error?.latitude}
             </span>
           )}
-          {formState?.errors["longitude"] && (
+          {error?.longitude && (
             <span className="block font-medium text-sm text-primary transition-all duration-150">
-              {formState.errors["longitude"]?.message}
+              {error?.longitude}
             </span>
           )}
         </div>

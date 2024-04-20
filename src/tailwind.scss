@@ -337,3 +337,9 @@
     background: #e1e1e1;
   }
 }
+.truncate-text {
+  width: 200px; /* Độ rộng của phần hiển thị */
+  white-space: nowrap; /* Ngăn chữ xuống dòng */
+  overflow: hidden; /* Ẩn nội dung vượt quá kích thước */
+  text-overflow: ellipsis; /* Thêm dấu chấm ở cuối khi nội dung bị cắt */
+}

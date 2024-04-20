@@ -3,16 +3,21 @@ import PropTypes from "prop-types";
 import reviewsApi from "../../../api/reviewApi";
 Judge.propTypes = {
   item: PropTypes.object,
+  filterReview: PropTypes.object,
   onShow: PropTypes.func,
 };
 
-function Judge({ item = {}, onShow = null }) {
+function Judge({ item = {}, onShow = null, filterReview = {} }) {
   const [state, setState] = useState([]);
   const [judges, setJudges] = useState({});
   useEffect(() => {
     (async () => {
       try {
-        const data = await reviewsApi.getAll({ productId: item.id, page: 0 });
+        const data = await reviewsApi.getAll({
+          ...filterReview,
+          productId: item.id,
+          page: 0,
+        });
         const judge = {};
         data?.forEach((review, index) => {
           judge["food"] = judge["food"]
@@ -45,7 +50,7 @@ function Judge({ item = {}, onShow = null }) {
         console.log("Error", error);
       }
     })();
-  }, [item]);
+  }, [item, filterReview]);
   return (
     <div className="pt-1 px-[14px] pb-[10px] mb-[6px] shadow-[0_1px_4px_rgb(0,0,0,0.3)] rounded-[10px] flex-1">
       <h2 className="text-[21px] font-semibold">Đánh giá</h2>

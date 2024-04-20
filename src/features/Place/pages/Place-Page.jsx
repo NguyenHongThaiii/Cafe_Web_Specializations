@@ -38,7 +38,11 @@ function PlacePage(props) {
     index: 0,
   });
   const [isShowModalMenu, setIsShowModalMenu] = useState(false);
-
+  const [filterReview, setFilterReview] = useState({
+    productId: state?.id,
+    page: 0,
+    sortBy: "createdAtDesc",
+  });
   useEffect(() => {
     (async () => {
       try {
@@ -85,6 +89,9 @@ function PlacePage(props) {
   const handleHideModalMenu = () => {
     setIsShowModalMenu(false);
     setHide(false);
+  };
+  const handleRefetch = () => {
+    setFilterReview((prev) => ({ ...prev }));
   };
   return (
     <GlobalProvider>
@@ -173,6 +180,7 @@ function PlacePage(props) {
                 }
                 setShow(true);
               }}
+              filterReview={filterReview}
             />
             <Details item={state} />
             {state?.longitude && state?.latitude && (
@@ -196,6 +204,7 @@ function PlacePage(props) {
                 setShow(true);
               }}
               hideShow={() => setShow(false)}
+              handleRefetch={handleRefetch}
             />
 
             <div className="w-[calc(33.33%_-_20px)] lg:block hidden sticky top-[20px]  position-[-webkit-sticky] h-fit mb-[6px]   ">
@@ -209,6 +218,7 @@ function PlacePage(props) {
                   }
                   setShow(true);
                 }}
+                filterReview={filterReview}
               />
 
               <div className="p-4 shadow-[0_2px_8px_rgb(0,0,0,0.15)] bg-white rounded-[10px] ">

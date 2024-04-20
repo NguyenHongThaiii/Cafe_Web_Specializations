@@ -61,7 +61,7 @@ const schema = yup.object({
       "is-greater",
       "Giá tối đa phải lớn hơn giá tối thiểu",
       function (value) {
-        return value >= this.parent.priceMin;
+        return value > this.parent.priceMin;
       }
     )
     .max(1000000, "Giá tối đa không được vượt quá 1,000,000"),
@@ -142,6 +142,22 @@ function CreateBlog(props) {
       data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
       data.status = 1;
       const formData = new FormData();
+      if (data?.latitude || data?.longitude) {
+        const regex = /^-?\d+(\.\d+)?$/;
+        if (!regex.test(data?.latitude)) {
+          setError({ latitude: "Vĩ độ phải là số thực, ví dụ: 21.0336724" });
+          toast.error("Vĩ độ phải là số thực, ví dụ: 21.0336724");
+
+          return;
+        } else if (!regex.test(data?.longitude)) {
+          setError({
+            longitude: "Kinh độ phải là số thực, ví dụ: 105.8109417",
+          });
+          toast.error("Kinh độ phải là số thực, ví dụ: 21.0336724");
+
+          return;
+        }
+      }
       values?.listImageFile?.forEach((file, index) => {
         formData.append(`listImageFile[${index}]`, file);
       });
@@ -158,8 +174,7 @@ function CreateBlog(props) {
       formData.append("location", data?.location);
       formData.append("userId", user.id);
       formData.append("kind_id", data?.kind_id);
-      formData.append("latitude", data?.latitude);
-      formData.append("longitude", data?.longitude);
+
       formData.append("status", data?.status);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
@@ -167,7 +182,7 @@ function CreateBlog(props) {
       toast("Tạo thành công");
     } catch (error) {
       console.log(error);
-      toast("Có lỗi xảy ra xin hãy thử lại sau.");
+      toast.error(error?.message || "Có lỗi xảy ra xin hãy thử lại sau.");
     }
     navigate("/");
   };

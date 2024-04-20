@@ -32,7 +32,7 @@ function ActionUser(props) {
           />
         </div>
         <div>
-          <p className="text-lg font-bold">{user?.name}</p>
+          <p className="text-lg font-bold truncate-text">{user?.name}</p>
           <p className="text[16px] text-[#474747] font-medium">User</p>
         </div>
       </div>

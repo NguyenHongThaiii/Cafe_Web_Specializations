@@ -39,10 +39,11 @@ function App() {
       <Route path="/explore" element={<ExplorePage />} />
       <Route path="/search" element={<SearchPage />} />
       <Route path="/setting" element={<SettingPage />} />
-      <Route path="/not-found" element={<NotFoundPage />} />
+      {/* <Route path="/not-found" element={<NotFoundPage />} /> */}
       <Route path="/place/:name" element={<PlacePage />}></Route>
       <Route path="/profile/:name" element={<ProfilePage />} />
       <Route path="/place/:name/photo" element={<PhotoPage />}></Route>
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 }

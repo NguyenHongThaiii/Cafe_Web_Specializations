@@ -182,6 +182,7 @@ function EditBlogPage(props) {
         return;
       }
       setError(null);
+
       data.listScheduleDto = JSON.stringify([
         {
           dayOfWeek: 1,
@@ -195,10 +196,29 @@ function EditBlogPage(props) {
       data.convenience_id = +data.convenience_id;
       data.kind_id = +data.kind_id;
       data.purpose_id = +data.purpose_id;
-      data.longitude = data?.longitude ? parseFloat(data.longitude) : null;
-      data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
+
       data.status = 1;
       const formData = new FormData();
+      if (data?.latitude || data?.longitude) {
+        const regex = /^-?\d+(\.\d+)?$/;
+        if (!regex.test(data?.latitude)) {
+          setError({ latitude: "Vĩ độ phải là số thực, ví dụ: 21.0336724" });
+          toast.error("Vĩ độ phải là số thực, ví dụ: 21.0336724");
+
+          return;
+        } else if (!regex.test(data?.longitude)) {
+          setError({
+            longitude: "Kinh độ phải là số thực, ví dụ: 105.8109417",
+          });
+          toast.error("Kinh độ phải là số thực, ví dụ: 21.0336724");
+
+          return;
+        }
+        data.longitude = data?.longitude ? parseFloat(data.longitude) : null;
+        data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
+        formData.append("latitude", data?.latitude);
+        formData.append("longitude", data?.longitude);
+      }
       values?.listImageFile?.forEach((file, index) => {
         formData.append(`listImageFile[${index}]`, file);
       });
@@ -215,20 +235,17 @@ function EditBlogPage(props) {
       formData.append("userId", user.id);
       formData.append("kind_id", data?.kind_id);
       formData.append("purpose_id", data?.purpose_id);
-      if (data?.latitude && data?.longitude) {
-        formData.append("latitude", data?.latitude);
-        formData.append("longitude", data?.longitude);
-      }
+
       formData.append("status", data?.status);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
       await blogsApi.updateProduct(state?.blog?.id, formData);
       toast("Chỉnh sửa thành công");
+      navigate(`/place/${state?.blog?.slug}`);
     } catch (error) {
       console.log(error);
-      toast("Có lỗi xảy ra xin hãy thử lại sau.");
+      toast.error(error?.message || "Có lỗi xảy ra xin hãy thử lại sau.");
     }
-    navigate("/");
   };
   return (
     <LayoutUser>
@@ -252,6 +269,7 @@ function EditBlogPage(props) {
               purposes={state?.purposes}
               formState={formState}
               blog={state?.blog}
+              error={error}
             />
             <ContactInfor control={control} formState={formState} />
             <ImageFrame

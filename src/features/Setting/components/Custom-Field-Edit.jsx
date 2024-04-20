@@ -6,7 +6,9 @@ import { useForm } from "react-hook-form";
 import usersApi from "../../../api/usersApi";
 import { useDispatch } from "react-redux";
 import { updateUserNotImage } from "../../Auth/authSlice";
-
+import "react-toastify/dist/ReactToastify.min.css";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 CustomFieldEdit.propTypes = {
   name: PropTypes.string,
   user: PropTypes.object,
@@ -29,6 +31,7 @@ function CustomFieldEdit({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
   });
+  const navigate = useNavigate();
   const [isShow, setIsShow] = useState(false);
   const [error, setError] = useState("");
   const dispatch = useDispatch();
@@ -37,10 +40,24 @@ function CustomFieldEdit({
       setError(errorMessage);
       return;
     }
+    const regex = /^\+?[0-9]{1,3}\s?[0-9]{3,}$/;
+    if (userData?.phone && !regex.test(userData.phone)) {
+      toast.error("Vui lòng nhập đúng định dạng số điện thoại.");
+      return;
+    }
+    if (userData?.name && userData?.name?.length > 10) {
+      toast.error("Tối đa 10 kí tự.");
+      return;
+    }
     try {
       const userUpdate = await usersApi.updateUser(user?.slug, userData);
       dispatch(updateUserNotImage({ ...userData, field: name }));
-    } catch (error) {}
+      toast("Cập nhật thông tin thành công");
+    } catch (error) {
+      console.log(error?.message);
+      toast.error(error.message || "Có lỗi xảy ra vui lòng thử lại sau.");
+      navigate("/");
+    }
     setIsShow(false);
   };
   return (
@@ -105,9 +122,13 @@ function CustomFieldEdit({
             </p>
             {content ? <p>{content}</p> : null}
           </div>
-          <p className="w-9 h-9 rounded-full bg-[#eee] hover:bg-[#ccc] hover:text-primary transition-all  flex items-center justify-center">
-            <FaPencilAlt />
-          </p>
+          {name === "email" ? (
+            ""
+          ) : (
+            <p className="w-9 h-9 rounded-full bg-[#eee] hover:bg-[#ccc] hover:text-primary transition-all  flex items-center justify-center">
+              <FaPencilAlt />
+            </p>
+          )}
         </div>
       )}
     </form>
