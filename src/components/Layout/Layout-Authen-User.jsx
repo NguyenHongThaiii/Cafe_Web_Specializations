@@ -8,7 +8,6 @@ LayoutAuthenUser.propTypes = {};
 function LayoutAuthenUser({ children }) {
   const user = useSelector((state) => state.auth.user);
   const navigate = useNavigate();
-  console.log(user);
   if (!user?.id) {
     // navigate("/");
     // return;

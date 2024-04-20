@@ -30,10 +30,10 @@ function Slider(props) {
   };
 
   const handleSubmit = () => {
-    if (getLocalStorage("search_now")) {
-      navigate(`/search?name=${getLocalStorage("search_now")}`);
-      return;
-    }
+    // if (getLocalStorage("search_now")) {
+    //   navigate(`/search?name=${getLocalStorage("search_now")}`);
+    //   return;
+    // }
     navigate(`/search?name=`);
   };
   return (

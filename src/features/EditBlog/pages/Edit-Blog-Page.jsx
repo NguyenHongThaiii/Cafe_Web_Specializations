@@ -104,7 +104,6 @@ function EditBlogPage(props) {
     (async () => {
       try {
         const blog = await blogsApi.getBySlug(slug || "");
-        console.log(blog);
         if (!blog?.id) {
           navigate("/not-found");
           return;
@@ -163,7 +162,6 @@ function EditBlogPage(props) {
   const handleOnSubmit = async (data) => {
     data = { ...data, ...values };
     if (!data?.description) data.description = state?.blog?.description;
-    console.log(data);
     try {
       if (
         values?.listImageFile?.length > 0 &&

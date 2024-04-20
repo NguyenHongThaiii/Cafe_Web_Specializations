@@ -203,7 +203,6 @@ function PlacePage(props) {
                 item={state}
                 show={show}
                 onShow={() => {
-                  console.log(user?.id);
                   if (!user?.id) {
                     dispatch(showLoginPage());
                     return;
