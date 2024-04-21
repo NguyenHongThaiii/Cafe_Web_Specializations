@@ -202,7 +202,9 @@ function MenuDrawer({ show, onClick = null, onShow = null }) {
                 className="w-[60px] h-[60px] object-cover rounded-full "
               />
               <div>
-                <p className="text-lg font-bold text-white mb-1">{user.name}</p>
+                <p className="text-lg font-bold text-white mb-1 truncate-text">
+                  {user.name}
+                </p>
                 <img
                   src="/img/ranked.png"
                   alt="ranked"

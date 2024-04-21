@@ -12,7 +12,7 @@ SearchPageFilter.propTypes = {
   onShow: PropTypes.func,
   filters: PropTypes.object,
 };
-
+const LIMIT = 30;
 function SearchPageFilter({
   onChange = null,
   show = false,
@@ -24,10 +24,10 @@ function SearchPageFilter({
   useEffect(() => {
     (async () => {
       try {
-        const areas = await areasApi.getAll();
-        const purposes = await purposesApi.getAll();
-        const kinds = await kindsApi.getAll();
-        const conveniences = await conveniencesApi.getAll();
+        const areas = await areasApi.getAll({ limit: LIMIT });
+        const purposes = await purposesApi.getAll({ limit: LIMIT });
+        const kinds = await kindsApi.getAll({ limit: LIMIT });
+        const conveniences = await conveniencesApi.getAll({ limit: LIMIT });
         const data = {
           areas,
           purposes,

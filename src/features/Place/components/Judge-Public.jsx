@@ -14,6 +14,7 @@ JudgePublic.propTypes = {
   show: PropTypes.bool,
   onShow: PropTypes.func,
   hideShow: PropTypes.func,
+  handleRefetch: PropTypes.func,
 };
 
 function JudgePublic({
@@ -21,6 +22,7 @@ function JudgePublic({
   show = false,
   onShow = null,
   hideShow = null,
+  handleRefetch = null,
 }) {
   const [reviews, setReviews] = useState([]);
   const [count, setCount] = useState(1);
@@ -132,6 +134,7 @@ function JudgePublic({
           onShow={hideShow}
           onSubmit={(values) => setReviews((prev) => [...prev, values])}
           onReFetch={setFilers}
+          handleRefetch={handleRefetch}
         />
       )}
     </div>

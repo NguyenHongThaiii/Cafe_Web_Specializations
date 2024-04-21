@@ -38,7 +38,7 @@ function ModalImage({
   };
   return createPortal(
     <div
-      className={`fixed inset-0 bg-[rgba(0,0,0,.85)] modal-image ${styled.modalImage} z-[1000000]`}
+      className={`fixed  inset-0 bg-[rgba(0,0,0,.85)] modal-image ${styled.modalImage} z-[100000011111111]`}
     >
       <Swiper
         modules={[Navigation]}
@@ -84,7 +84,7 @@ function ModalImage({
               <img
                 src={image?.url}
                 alt={`${image}`}
-                className="h-[100vh]  w-full object-cover "
+                className="h-[100vh]  w-full "
               />
             </div>
           </SwiperSlide>

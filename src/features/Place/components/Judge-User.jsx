@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
-import { FaEllipsisH, FaHeart, FaReplyAll } from "react-icons/fa";
+import { FaEllipsisH, FaHeart, FaRegHeart, FaReplyAll } from "react-icons/fa";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import commentsApi from "../../../api/commentsApi";
@@ -11,6 +11,7 @@ import ReplyUser from "./Reply-User";
 import favoritesApi from "../../../api/favoritesApi";
 import { showLoginPage } from "../../Auth/authSlice";
 import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
+import CommentItem from "../../Profile/components/Comment-Item";
 
 JudgeUser.propTypes = {
   item: PropTypes.object,
@@ -160,13 +161,13 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                     <div
                       onClick={() => handleShowModalImage(index)}
                       className={`rounded-[6px] overflow-hidden relative lg:w-[116px] lg:h-[116px] w-[100px] h-[100px]  ${
-                        index < 3 ? "block" : "hidden"
+                        index < 6 ? "block" : "hidden"
                       }`}
                       key={index}
                     >
-                      {index === 2 && item?.listImage?.length > 3 && (
+                      {index === 5 && item?.listImage?.length > 6 && (
                         <div className="absolute inset-0 bg-[rgba(0,0,0,.4)] transition-all text-white flex items-center justify-center font-semibold cursor-pointer text-base">
-                          +{item?.listImage?.length - 2} ảnh
+                          +{item?.listImage?.length - 5} ảnh
                         </div>
                       )}
 
@@ -192,10 +193,14 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
           <button
             onClick={() => handleClickFavor(item.id)}
             className={`flex items-center lg:text-sm  ${
-              amountFavoriteReviews > 0 ? "text-primary" : ""
+              amountFavoriteReviews > 0 ? "text-primary  " : ""
             }`}
           >
-            <FaHeart className={`w-3 h-3 mr-1 `} />
+            {amountFavoriteReviews > 0 ? (
+              <FaHeart className={`w-3 h-3 mr-1 `} />
+            ) : (
+              <FaRegHeart className={`w-3 h-3 mr-1 `} />
+            )}
             {amountFavoriteReviews > 0 && (
               <span className="mx-[2px] ">{amountFavoriteReviews}</span>
             )}
@@ -280,6 +285,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                 </div>
               </div>
             </div>
+            <CommentItem user={user} item={reply} />
           </div>
         ))}
       {isShowModalImage.show && (

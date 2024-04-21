@@ -15,7 +15,7 @@ BlogSavedFilter.propTypes = {
   show: PropTypes.bool,
   onShow: PropTypes.func,
 };
-
+const LIMIT = 30;
 function BlogSavedFilter({
   onChange = null,
   filters = {},
@@ -27,10 +27,10 @@ function BlogSavedFilter({
 
   useEffect(() => {
     (async () => {
-      const areas = await areasApi.getAll();
-      const purposes = await purposesApi.getAll();
-      const kinds = await kindsApi.getAll();
-      const conveniences = await conveniencesApi.getAll();
+      const areas = await areasApi.getAll({ limit: LIMIT });
+      const purposes = await purposesApi.getAll({ limit: LIMIT });
+      const kinds = await kindsApi.getAll({ limit: LIMIT });
+      const conveniences = await conveniencesApi.getAll({ limit: LIMIT });
       const data = {
         areas,
         purposes,

@@ -14,6 +14,7 @@ ModalReviewMobile.propTypes = {
   onShow: PropTypes.func,
   onSubmit: PropTypes.func,
   onReFetch: PropTypes.func,
+  handleRefetch: PropTypes.func,
 };
 
 function ModalReviewMobile({
@@ -21,6 +22,7 @@ function ModalReviewMobile({
   onShow = null,
   onSubmit = null,
   onReFetch = null,
+  handleRefetch = null,
 }) {
   const user = useSelector((state) => state.auth.current);
   const dispatch = useDispatch();
@@ -58,12 +60,14 @@ function ModalReviewMobile({
       formData.append("space", values?.space);
       formData.append("productId", item?.id);
       formData.append("userId", user?.id);
-      const data = await reviewsApi.createReview(formData);
+      await reviewsApi.createReview(formData);
       onReFetch((prev) => ({ ...prev }));
       onShow(false);
+      handleRefetch();
+      toast("Đánh giá thành công.");
     } catch (error) {
       console.log("Error", error.message);
-      toast(error?.message);
+      toast.error(error?.message || "Có lỗi xảy ra xin hãy thử lại sau.");
     }
     setLoading(false);
   };
