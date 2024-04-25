@@ -7,6 +7,7 @@ import { useHide } from "../../../context/Global-Provider";
 import SearchPageContent from "../components/Search-Page-Content";
 import SearchPageFilter from "../components/Search-Page-Filter";
 import blogsApi from "../../../api/blogsApi";
+import NotFoundItem from "../components/Not-Found-Item";
 
 SearchPage.propTypes = {};
 export const FiltersContext = createContext([]);
@@ -54,10 +55,16 @@ function SearchPage(props) {
     })();
   }, [filters]);
   const handleOnChange = (value) => {
-    setFilters((prev) => {
-      return { ...prev, ...value };
-    });
+    if (value?.rating === 0)
+      setFilters((prev) => {
+        return { ...prev, ...value, rating: null };
+      });
+    else
+      setFilters((prev) => {
+        return { ...prev, ...value };
+      });
   };
+  console.log(filters);
   return (
     <LayoutUser>
       <FiltersContext.Provider value={[filters, setFilters]}>

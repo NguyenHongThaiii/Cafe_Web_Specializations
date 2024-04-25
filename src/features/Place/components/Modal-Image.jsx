@@ -50,8 +50,7 @@ function ModalImage({
           className={`absolute bg-[rgba(0,0,0,.5)] top-0 w-full flex items-center justify-between h-[50px] z-[100] overflow-hidden`}
         >
           <div className="pl-5 leading-[50px] text-sm text-white ">
-            {indexCurr + 1} /{" "}
-            {data?.listImage?.length > 0 ? data?.listImage?.length : 0}
+            {indexCurr + 1} / {imageList?.length > 0 ? imageList?.length : 0}
           </div>
           <div className="h-full flex items-center justify-center">
             <button
@@ -75,7 +74,7 @@ function ModalImage({
           </div>
         </div>
 
-        {data?.listImage?.map((image, index) => (
+        {imageList?.map((image, index) => (
           <SwiperSlide className="flex " key={image}>
             <div
               className="flex justify-center items-center m-auto w-[590px]"

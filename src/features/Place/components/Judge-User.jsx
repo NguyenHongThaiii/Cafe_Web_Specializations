@@ -292,8 +292,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
         <ModalImage
           imageList={item?.listImage}
           data={item}
-          url={import.meta.env.VITE_URL_REVIEWS}
-          length={item?.photo?.length}
+          length={item?.listImage?.length}
           index={isShowModalImage?.index}
           hideModalImage={() =>
             setIsShowModalImage((prev) => ({ ...prev, show: false, index: 0 }))

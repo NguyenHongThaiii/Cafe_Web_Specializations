@@ -6,6 +6,7 @@ import { useHide } from "../../../context/Global-Provider";
 import SearchPageItem from "../../SearchPage/components/Search-Page-Item";
 import BlogSavedFilter from "./Blog-Saved-Filter";
 import blogSavedApi from "../../../api/blog-savedApi";
+import BlogSaveEmpty from "./Blog-Save-Empty";
 
 BlogSavedContent.propTypes = {};
 const itemsPerPage = 5;
@@ -51,6 +52,7 @@ function BlogSavedContent(props) {
       return { ...prev, page };
     });
   };
+  if (count <= 0) return <BlogSaveEmpty />;
   return (
     <div className=" max-w-[1200px] mx-auto px-4  flex flex-col lg:flex-row pb-[70px]">
       <BlogSavedFilter

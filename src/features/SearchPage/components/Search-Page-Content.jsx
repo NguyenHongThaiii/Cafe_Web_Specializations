@@ -9,6 +9,7 @@ import { FiltersContext } from "../pages/Search-Page";
 import CardFilter from "./Card-Filter";
 import SearchPageItem from "./Search-Page-Item";
 import queryString from "query-string";
+import NotFoundItem from "./Not-Found-Item";
 SearchPageContent.propTypes = {
   data: PropTypes.array,
   onChange: PropTypes.func,
@@ -19,18 +20,13 @@ const itemsPerPage = 5;
 const OPTIONS_LIST = [
   {
     id: 1,
-    label: "Đúng nhất",
-    value: "",
+    label: "Đánh giá cao nhất",
+    value: "desc",
   },
   {
     id: 2,
-    label: "Điểm đánh giá",
-    value: "-ratingsAverage",
-  },
-  {
-    id: 3,
-    label: "Gần tôi nhất",
-    value: "",
+    label: "Đánh giá thấp nhất",
+    value: "asc",
   },
 ];
 
@@ -42,7 +38,6 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
   const [page, setPage] = useState(1);
   const handleOnChange = (value) => {
     if (!onChange) return null;
-
     onChange(value);
   };
   const handlePageChange = (page) => {
@@ -75,7 +70,7 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
             queryString.parse(location.search)?.name?.length > 0) && (
             <span
               onClick={handleReset}
-              className="mx-2 font-bold text-sm text-black cursor-pointer"
+              className="mx-2 font-bold text-sm text-black cursor-pointer hover:underline"
             >
               Xóa tất cả bộ loc
             </span>
@@ -86,17 +81,23 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
           onChange={handleSubmit(handleOnChange)}
           className="items-center gap-x-1 hidden lg:flex"
         >
-          <span className="text-base">Sắp xếp theo:</span>
-          <SelectControl control={control} options={OPTIONS_LIST} name="sort" />
+          <span className="text-base min-w-[107px]">Sắp xếp theo:</span>
+          <SelectControl
+            control={control}
+            options={OPTIONS_LIST}
+            name="rating"
+          />
         </form>
       </div>
 
       <CardFilter />
 
       <div>
-        {data.map((item) => (
-          <SearchPageItem data={item} key={item.id} />
-        ))}
+        {data?.length > 0 ? (
+          data.map((item) => <SearchPageItem data={item} key={item.id} />)
+        ) : (
+          <NotFoundItem keyParams={filters?.name} />
+        )}
       </div>
       <div>
         <Pagination

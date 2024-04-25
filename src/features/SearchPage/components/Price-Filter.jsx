@@ -28,7 +28,7 @@ function PriceFilter({ title = "", data = [], name = "", onChange = null }) {
 
   const handleOnChange = (value, event) => {
     if (!onChange) return null;
-    onChange(res);
+    onChange(value);
   };
   return (
     <>

@@ -169,7 +169,7 @@ function SearchPageItem({ data = {} }) {
           ></i>
         </div>
         <div className="lg:block hidden  invisible opacity-0 group-hover:visible group-hover:opacity-100 transition-all duration-300 bg-black text-white absolute text-center w-[120px] py-1 rounded-full bottom-[-35px] right-[-40px] text-sm before:absolute before:top-[-5px]  before:right-[52px] before:border-b-[5px] before:border-b-black before:border-r-transparent before:border-r-[5px] before:border-l-transparent before:border-l-[5px] ">
-          {user?.blogSaved?.includes(data?.id) ? "Đã lưu" : "Lưu địa điểm này"}
+          {isSaved ? "Đã lưu" : "Lưu địa điểm này"}
         </div>
       </div>
     </div>
