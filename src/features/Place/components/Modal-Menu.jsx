@@ -68,10 +68,10 @@ function ModalMenu({ data = {}, hideModalMenu }) {
       {show && (
         <ModalImage
           data={data}
-          imageList={data?.menu}
+          imageList={data?.listMenu}
           index={indexCurr}
           hideModalImage={() => setShow(false)}
-          length={data?.menu?.length}
+          length={data?.listMenu?.length}
         />
       )}
     </div>,

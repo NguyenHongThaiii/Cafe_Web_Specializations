@@ -28,13 +28,9 @@ function Slider(props) {
   const handleOnClick = () => {
     setShow((prev) => !prev);
   };
-
   const handleSubmit = () => {
-    // if (getLocalStorage("search_now")) {
-    //   navigate(`/search?name=${getLocalStorage("search_now")}`);
-    //   return;
-    // }
-    navigate(`/search?name=`);
+    if (search?.name) navigate(`/search?name=${search?.name}`);
+    else navigate(`/search`);
   };
   return (
     <section className="relative  flex items-center justify-center h-[240px] lg:h-[500px] z-10 ">

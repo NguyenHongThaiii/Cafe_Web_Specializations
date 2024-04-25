@@ -43,7 +43,7 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
     setFilters((prev) => {
       return { ...prev, ...value };
     });
-    onSearch(value);
+    if (onSearch != null) onSearch(value);
     // setLocalStorage("search_now", value?.name);
   };
 
@@ -59,7 +59,7 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
       <form
         className="p-3 flex"
         onChange={handleSubmit(debounce(handleSearchChange, 300))}
-        onSubmit={(e) => e.preventDefault()}
+        // onSubmit={(e) => e.preventDefault()}
       >
         <SearchControl
           control={control}

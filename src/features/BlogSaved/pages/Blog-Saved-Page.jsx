@@ -5,6 +5,7 @@ import { Navigate } from "react-router-dom";
 import BlogSavedContent from "../components/Blog-Saved-Content";
 import LayoutUser from "../../../components/Layout/Layout-User";
 import LayoutAuthenUser from "../../../components/Layout/Layout-Authen-User";
+import BlogSaveEmpty from "../components/Blog-Save-Empty";
 
 BlogSavedPage.propTypes = {};
 

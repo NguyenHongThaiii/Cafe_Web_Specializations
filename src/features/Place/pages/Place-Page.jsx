@@ -76,7 +76,7 @@ function PlacePage(props) {
         document.getElementById("root").style.overflow = "auto";
       }
     };
-  }, [location, location.pathname]);
+  }, [location, location.pathname, filterReview]);
 
   const handleShowModalImage = (index) => {
     setShowModalImage((prev) => ({ ...prev, index, show: true }));
@@ -286,8 +286,8 @@ function PlacePage(props) {
             <ModalImage
               data={state || {}}
               index={showModalImage?.index || 0}
-              imageList={state?.imgPreview}
-              length={state?.imgPreview?.length}
+              imageList={state?.listImage}
+              length={state?.listImage?.length}
               hideModalImage={() =>
                 setShowModalImage((prev) => ({ ...prev, show: false }))
               }

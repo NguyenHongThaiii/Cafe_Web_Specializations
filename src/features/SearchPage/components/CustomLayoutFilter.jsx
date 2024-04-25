@@ -63,7 +63,7 @@ function CustomLayoutFilter({ data = {}, onChange = null, filters = {} }) {
           <PriceFilter
             title="Khoảng giá"
             data={data?.price || []}
-            name="price"
+            name="priceMax"
             onChange={handleOnChange}
             filters={filters}
           />
