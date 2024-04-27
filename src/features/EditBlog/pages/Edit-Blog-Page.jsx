@@ -283,7 +283,7 @@ function EditBlogPage(props) {
             ${formState.isSubmitting ? "bg-gray-500" : "  "}                `}
               disabled={formState.isSubmitting}
             >
-              + Thêm địa điểm
+              + Chỉnh sửa địa điểm
             </button>
           </form>
         </div>

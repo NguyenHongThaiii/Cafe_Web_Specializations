@@ -69,11 +69,13 @@ function TimeStartFilter({
           {data.map((item, index) => (
             <RadioControl
               key={index}
-              control={control}
-              label={item}
-              name={name}
-              id={item}
-              value={item}
+              label={item?.label}
+              name={item?.name}
+              value={item?.value}
+              type={type}
+              id={item?.label}
+              checked={item?.value === filters?.timeStatus}
+              onChange={handleOnChange}
             />
           ))}
         </form>

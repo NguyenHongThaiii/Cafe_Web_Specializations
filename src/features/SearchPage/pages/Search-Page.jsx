@@ -2,12 +2,11 @@ import queryString from "query-string";
 import React, { createContext, useEffect, useRef, useState } from "react";
 import { BsPinMap, BsSliders } from "react-icons/bs";
 import { useLocation } from "react-router-dom";
+import blogsApi from "../../../api/blogsApi";
 import LayoutUser from "../../../components/Layout/Layout-User";
 import { useHide } from "../../../context/Global-Provider";
 import SearchPageContent from "../components/Search-Page-Content";
 import SearchPageFilter from "../components/Search-Page-Filter";
-import blogsApi from "../../../api/blogsApi";
-import NotFoundItem from "../components/Not-Found-Item";
 
 SearchPage.propTypes = {};
 export const FiltersContext = createContext([]);
@@ -26,6 +25,8 @@ function SearchPage(props) {
 
     return {
       limit: 5,
+      page: 1,
+      timeStatus: null,
       name: queryParams.name ? queryParams.name : undefined,
       slugArea: queryParams.areas ? queryParams.areas : undefined,
       slugPurpose: queryParams.purposes ? queryParams.purposes : undefined,
@@ -57,14 +58,13 @@ function SearchPage(props) {
   const handleOnChange = (value) => {
     if (value?.rating === 0)
       setFilters((prev) => {
-        return { ...prev, ...value, rating: null };
+        return { ...prev, ...value, rating: null, page: 1 };
       });
     else
       setFilters((prev) => {
-        return { ...prev, ...value };
+        return { ...prev, ...value, page: 1 };
       });
   };
-  console.log(filters);
   return (
     <LayoutUser>
       <FiltersContext.Provider value={[filters, setFilters]}>
@@ -78,6 +78,7 @@ function SearchPage(props) {
                 show={show}
                 onShow={() => setShow(false)}
                 filters={filters}
+                listBlogs={state}
               />
 
               {/* right */}

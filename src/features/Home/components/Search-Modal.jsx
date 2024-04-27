@@ -59,7 +59,7 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
       <form
         className="p-3 flex"
         onChange={handleSubmit(debounce(handleSearchChange, 300))}
-        // onSubmit={(e) => e.preventDefault()}
+        onSubmit={(e) => e.preventDefault()}
       >
         <SearchControl
           control={control}

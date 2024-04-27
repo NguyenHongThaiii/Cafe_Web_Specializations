@@ -11,6 +11,7 @@ SearchPageFilter.propTypes = {
   show: PropTypes.bool,
   onShow: PropTypes.func,
   filters: PropTypes.object,
+  listBlogs: PropTypes.array,
 };
 const LIMIT = 30;
 function SearchPageFilter({
@@ -18,6 +19,7 @@ function SearchPageFilter({
   show = false,
   onShow = null,
   filters = {},
+  listBlogs = [],
 }) {
   const [state, setState] = useState({});
 
@@ -52,6 +54,7 @@ function SearchPageFilter({
         data={state}
         onChange={handleOnChange}
         filters={filters}
+        listBlogs={listBlogs}
       />
       <CustomFilterMobile
         parentFilters={filters}

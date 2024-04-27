@@ -4,7 +4,13 @@ import { FiltersContext } from "./../pages/Search-Page";
 
 CardFilter.propTypes = {};
 
-const NAME_LIST = ["slugPurpose", "slugArea", "slugConvenience", "slugKind"];
+const NAME_LIST = [
+  "slugPurpose",
+  "slugArea",
+  "slugConvenience",
+  "slugKind",
+  "timeStatus",
+];
 
 function CardFilter(props) {
   const [filters, setFilters] = useContext(FiltersContext);
@@ -38,6 +44,12 @@ function CardFilter(props) {
       case "slugKind": {
         setFilters((prev) => {
           return { ...prev, slugKind: null };
+        });
+        break;
+      }
+      case "timeStatus": {
+        setFilters((prev) => {
+          return { ...prev, timeStatus: null, page: 1 };
         });
         break;
       }
@@ -83,6 +95,17 @@ function CardFilter(props) {
           <span className="grow">{newFilters[3]?.slugKind}</span>
           <AiOutlineClose
             onClick={() => handleOnRemove(NAME_LIST[3])}
+            className="ml-2 text-[rgba(0,0,0,.25)] text-xl cursor-pointer"
+          />
+        </div>
+      )}
+      {newFilters[4]?.timeStatus && (
+        <div className="text-primary relative flex items-center justify-center bg-white border text-center font-bold border-primary rounded-full py-1 px-2 text-base">
+          <span className="grow">
+            {newFilters[4]?.timeStatus === "close" ? "Đóng cửa" : "Mở cửa"}
+          </span>
+          <AiOutlineClose
+            onClick={() => handleOnRemove(NAME_LIST[4])}
             className="ml-2 text-[rgba(0,0,0,.25)] text-xl cursor-pointer"
           />
         </div>

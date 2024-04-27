@@ -60,7 +60,7 @@ function BlogSaveFilterMobile({
 
           <AreaFilter
             title="Khu vực"
-            data={data?.area || []}
+            data={data?.areas || []}
             name="area"
             onChange={handleOnChange}
             mobile={true}

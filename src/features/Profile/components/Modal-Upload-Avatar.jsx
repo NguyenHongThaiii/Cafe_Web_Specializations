@@ -23,7 +23,7 @@ function ModalUploadAvatar({ hideModal = null }) {
     setFile(file);
   };
   return createPortal(
-    <div className="fixed inset-0 z-[100000000000000000] bg-[rgba(0,0,0,.65)] ">
+    <div className="fixed inset-0 z-[1000] bg-[rgba(0,0,0,.65)] ">
       <div className="absolute inset-0 flex items-center justify-center">
         <div className="text-black w-[600px] bg-white rounded-[10px] shadow-[0_2px_8px_rgb(0,0,0,0.15)] overflow-hidden">
           <div className="px-[60px] shrink-0 h-[60px] border-b-[1px] border-b-[rgba(0,0,0,.1)] text-center relative">
