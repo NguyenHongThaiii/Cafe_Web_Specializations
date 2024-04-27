@@ -13,7 +13,7 @@ function BlogSaveEmpty(props) {
           alt="not-found-saved"
         />
         <p className="text-center mt-4 font-bold text-md">
-          Bạn chưa lưu địa điểm nào
+          Không có địa điểm nào
         </p>
       </div>
     </div>

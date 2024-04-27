@@ -6,9 +6,10 @@ Pagination.propTypes = {
   itemsPerPage: PropTypes.number,
   total_pages: PropTypes.number,
   onChange: PropTypes.func,
+  page: PropTypes.number,
 };
 
-function Pagination({ itemsPerPage, data, onChange, count }) {
+function Pagination({ itemsPerPage, data, onChange, count, page = 1 }) {
   const [pageCount, setPageCount] = useState(0);
   useEffect(() => {
     setPageCount(() => {
@@ -22,6 +23,7 @@ function Pagination({ itemsPerPage, data, onChange, count }) {
   };
   return (
     <ReactPaginate
+      forcePage={page - 1}
       className="pagination"
       breakLabel="..."
       nextLabel=">"

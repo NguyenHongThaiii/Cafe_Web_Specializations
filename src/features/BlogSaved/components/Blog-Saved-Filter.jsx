@@ -8,6 +8,7 @@ import areasApi from "../../../api/areasApi";
 import purposesApi from "../../../api/purposesApi";
 import kindsApi from "../../../api/kindsApi";
 import conveniencesApi from "../../../api/conveniencesApi";
+import { TIME_DATA } from "../../../constant";
 
 BlogSavedFilter.propTypes = {
   onChange: PropTypes.func,
@@ -42,7 +43,6 @@ function BlogSavedFilter({
   }, []);
   const handleOnChange = (value) => {
     if (!onChange) return null;
-
     onChange(value);
   };
   const handleReset = () => {
@@ -72,7 +72,7 @@ function BlogSavedFilter({
               filters={filters}
               title="Giờ mở cửa"
               type="radio"
-              data={state?.timeStart || []}
+              data={TIME_DATA || []}
               name="timeStart"
               onChange={handleOnChange}
               col={true}

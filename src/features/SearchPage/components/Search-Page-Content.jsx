@@ -34,16 +34,18 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
   const { handleSubmit, control } = useForm({});
   const navigate = useNavigate();
   const location = useLocation();
-  const [filters] = useContext(FiltersContext);
-  const [page, setPage] = useState(1);
+  const [filters, setFilters] = useContext(FiltersContext);
+  // const [page, setPage] = useState(filters?.page || 1);
   const handleOnChange = (value) => {
     if (!onChange) return null;
     onChange(value);
   };
   const handlePageChange = (page) => {
-    setPage(page);
     if (!onChange) return null;
-    onChange({ page: page });
+    // setPage(page);
+    setFilters((prev) => {
+      return { ...prev, page: page };
+    });
   };
   const handleReset = () => {
     if (!onChange) return null;
@@ -54,6 +56,7 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
       slugPurpose: null,
       slugKind: null,
       slugConvenience: null,
+      timeStatus: null,
     });
     navigate(`/search`);
   };
@@ -105,7 +108,7 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
           onChange={(page) => handlePageChange(page)}
           itemsPerPage={itemsPerPage}
           count={count}
-          page={page}
+          page={filters?.page}
         />
       </div>
     </div>

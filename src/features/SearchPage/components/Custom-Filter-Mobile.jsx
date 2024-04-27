@@ -11,6 +11,7 @@ import ConvenientFilter from "./Convenient-Filter";
 import PurposeFilter from "./Purpose-Filter";
 import TimeStartFilter from "./Time-Start-Filter";
 import TypeFilter from "./Type-Filter";
+import { TIME_DATA } from "../../../constant";
 
 CustomFilterMobile.propTypes = {
   data: PropTypes.object,
@@ -73,6 +74,15 @@ function CustomFilterMobile({
       </div>
 
       <div className="mt-[65px] ">
+        <TimeStartFilter
+          title="Giờ mở cửa"
+          type="radio"
+          data={TIME_DATA || []}
+          name="timeStart"
+          onChange={handleOnChange}
+          col={true}
+          filters={parentFilters}
+        />
         <AreaFilter
           title="Khu vực"
           data={data?.areas || []}

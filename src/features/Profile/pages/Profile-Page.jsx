@@ -120,7 +120,7 @@ function ProfilePage(props) {
               </div>
             </div>
           </div>
-          <div className="bg-white shadow-[0_2px_2px_0_rgb(189,171,171,0.2)]  sticky z-[1111111111] top-[-1px] whitespace-nowrap  ">
+          <div className="bg-white shadow-[0_2px_2px_0_rgb(189,171,171,0.2)]  sticky z-[100] top-[-1px] whitespace-nowrap  ">
             <div className="max-w-[1060px] m-auto flex items-center justify-between border-t-[1px] border-t-[#ddd]">
               <ul className="list-none flex">
                 <li>

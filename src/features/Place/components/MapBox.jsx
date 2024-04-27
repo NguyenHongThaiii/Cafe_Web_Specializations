@@ -48,7 +48,6 @@ function MapBox({ data = {}, hideMap = null }) {
 </div>`;
     const bounds = new mapboxgl.LngLatBounds();
     const popup = new mapboxgl.Popup({ offset: 25 }).setHTML(HTML);
-
     const el = document.createElement("div");
     el.className = "marker";
 

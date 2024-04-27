@@ -19,6 +19,7 @@ function BlogSavedContent(props) {
   const [filters, setFilters] = useState({
     limit: itemsPerPage,
     userId: user?.id,
+    page: 1,
   });
   const scrollRef = useRef(null);
   const [show, setShow] = useState(false);
@@ -43,7 +44,7 @@ function BlogSavedContent(props) {
   }, [filters]);
   const handleOnChange = (value) => {
     setFilters((prev) => {
-      return { ...prev, ...value };
+      return { ...prev, ...value, page: 1 };
     });
   };
   const handlePageChange = (page) => {
@@ -52,7 +53,6 @@ function BlogSavedContent(props) {
       return { ...prev, page };
     });
   };
-  if (count <= 0) return <BlogSaveEmpty />;
   return (
     <div className=" max-w-[1200px] mx-auto px-4  flex flex-col lg:flex-row pb-[70px]">
       <BlogSavedFilter
@@ -79,21 +79,29 @@ function BlogSavedContent(props) {
         </div>
       </div>
 
-      <div className="lg:w-3/4 lg:p-3 w-full pb-[120px]" ref={scrollRef}>
-        <div>
-          {state?.length > 0 &&
-            state?.map((item) => <SearchPageItem data={item} key={item.id} />)}
+      {count > 0 ? (
+        <div className="lg:w-3/4 lg:p-3 w-full pb-[120px]" ref={scrollRef}>
+          <div>
+            {state?.length > 0 &&
+              state?.map((item) => (
+                <SearchPageItem data={item} key={item.id} />
+              ))}
+          </div>
+          <div>
+            <Pagination
+              data={state}
+              onChange={(page) => handlePageChange(page)}
+              itemsPerPage={itemsPerPage}
+              count={count}
+              page={filters?.page}
+            />
+          </div>
         </div>
-        <div>
-          <Pagination
-            data={state}
-            onChange={(page) => handlePageChange(page)}
-            itemsPerPage={itemsPerPage}
-            count={count}
-            page={page}
-          />
+      ) : (
+        <div className="w-full mt-10">
+          <BlogSaveEmpty />
         </div>
-      </div>
+      )}
     </div>
   );
 }
