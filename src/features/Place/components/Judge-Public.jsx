@@ -70,7 +70,7 @@ function JudgePublic({
   return (
     <div className="pt-1 px-[14px] pb-[10px] mb-[6px] lg:px-4 lg:py-2 shadow-[0_1px_4px_rgb(0,0,0,0.3)] rounded-[10px] flex-1 h-fit">
       <div className="flex items-center justify-between pb-[6px]">
-        <h2 className="text-xl lg:text-[28px] font-semibold">
+        <h2 className="lg:text-xl text-lg lg:text-[28px] font-semibold">
           Đánh giá từ cộng đồng{" "}
           <span className=" text-[#8a8a8a]">({count})</span>
         </h2>

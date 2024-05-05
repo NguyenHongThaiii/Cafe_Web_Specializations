@@ -29,7 +29,7 @@ function PurposeItem({ item, index = 0 }) {
         <span>{item?.name}</span>
       </div>
       <div
-        className={`absolute inset-0  z-[10] ${handleStyleGradient(
+        className={`absolute inset-0  ${handleStyleGradient(
           index
         )} rounded-[10px] lg:max-w-[372px] overflow-hidden`}
       ></div>

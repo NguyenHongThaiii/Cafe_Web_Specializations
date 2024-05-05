@@ -11,7 +11,7 @@ function SuggestArea() {
   const dispatch = useDispatch();
   const handleNavigateToAddPlace = () => {
     if (!user?.id) {
-      dispatch(showLoginPage);
+      dispatch(showLoginPage());
       return;
     }
     navigation("/add-place");

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaCoins, FaUserEdit } from "react-icons/fa";
 import { MdMailOutline, MdPowerSettingsNew } from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
@@ -9,8 +9,10 @@ ActionUser.propTypes = {};
 
 function ActionUser(props) {
   const user = useSelector((state) => state.auth.current);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
       await usersApi.logout();

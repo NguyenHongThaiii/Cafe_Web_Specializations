@@ -24,6 +24,7 @@ const schema = yup.object({
   name: yup
     .string("Vui lòng nhập tên quán.")
     .trim()
+    .max(50, "Tên quán không được vượt quá 50 ký tự")
     .required("Vui lòng nhập tên quán"),
   area_id: yup
     .string("Vui lòng chọn khu vực")
@@ -32,6 +33,7 @@ const schema = yup.object({
   location: yup
     .string("Vui lòng nhập địa chỉ")
     .trim()
+    .max(255, "Địa chỉ quán không được vượt quá 255 ký tự")
     .required("Vui lòng nhập địa chỉ"),
   startTime: yup
     .string("Vui lòng nhập giờ mở cửa")
@@ -64,7 +66,7 @@ const schema = yup.object({
       "is-greater",
       "Giá tối đa phải lớn hơn giá tối thiểu",
       function (value) {
-        return value >= this.parent.priceMin;
+        return value > this.parent.priceMin;
       }
     )
     .max(1000000, "Giá tối đa không được vượt quá 1,000,000"),
@@ -80,13 +82,13 @@ const schema = yup.object({
     .string("Vui lòng chọn mục đích của quán")
     .trim()
     .required("Vui lòng chọn mục đích của quán"),
-  // latitude: yup
-  //   .string("Vui lòng nhập vĩ độ")
-  //   .matches(/^\-?\d+(\.\d+)?$/, "Vĩ độ phải là số thực, ví dụ: 21.0336724"),
-  // longitude: yup
-  //   .string("Vui lòng nhập kinh độ")
-  //   .matches(/^\-?\d+(\.\d+)?$/, "Kinh độ phải là số thực, ví dụ: 105.8109417"),
 });
+// latitude: yup
+//   .string("Vui lòng nhập vĩ độ")
+//   .matches(/^\-?\d+(\.\d+)?$/, "Vĩ độ phải là số thực, ví dụ: 21.0336724"),
+// longitude: yup
+//   .string("Vui lòng nhập kinh độ")
+//   .matches(/^\-?\d+(\.\d+)?$/, "Kinh độ phải là số thực, ví dụ: 105.8109417"),
 function EditBlogPage(props) {
   const location = useLocation();
   const navigate = useNavigate();

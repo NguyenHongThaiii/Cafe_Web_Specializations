@@ -72,7 +72,7 @@ function ProfilePage(props) {
                     }`}
                   >
                     <Link
-                      to="/"
+                      to="/setting"
                       className="hover:bg-[#e0e0e0]  flex items-center gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                     >
                       <FaPencilAlt />

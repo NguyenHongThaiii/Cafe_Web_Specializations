@@ -105,22 +105,22 @@ function ReviewItem({ data = {} }) {
         <div className="ml-2 mr-[30px] xs:mr-[-20px] grow flex flex-col justify-center">
           <div className="flex items-center">
             <Link
-              to={`/profile/${state?.userDto?.slug || "thainguyen"}`}
-              className="mr-[5px] text-lg text-black font-semibold tracking-[0.4px] hover:underline transition-all"
+              to={`/profile/${data?.userDto?.slug || "thainguyen"}`}
+              className="mr-[5px] lg:text-lg text-sm text-black font-semibold tracking-[0.4px] hover:underline transition-all truncate-text-auto"
             >
               {data?.userDto?.name}
             </Link>
             <FaCaretRight className="m-0 w-3 text-[#cbcbcb]" />
             <Link
               to={`/place/${state?.blog?.slug}`}
-              className="text-lg text-black font-semibold tracking-[0.4px] hover:underline transition-all "
+              className="lg:text-lg text-sm text-black font-semibold tracking-[0.4px] hover:underline transition-all truncate-text-auto"
             >
               {state?.blog?.name}
             </Link>
           </div>
           <div className="pt-[2px] flex items-center text-[14px]">
             {data?.rating?.averageRating > 0 && (
-              <span className="mr-[6px] font-bold">
+              <span className="mr-[6px] font-bold lg:text-sm text-xs">
                 {data?.rating?.averageRating?.toFixed(1)}
               </span>
             )}
@@ -143,7 +143,7 @@ function ReviewItem({ data = {} }) {
               )
             )}
             <span className="mx-2 text-gray-400">●</span>{" "}
-            <span className=" text-sm text-[#898c95] block">
+            <span className=" lg:text-sm text-xs text-[#898c95] block">
               Đã đánh giá{" "}
               {handleCalculateDateFromNow(
                 new Date(state?.createdAt).toLocaleDateString("en-US")

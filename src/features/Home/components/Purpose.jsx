@@ -12,7 +12,6 @@ function Purpose() {
       try {
         const data = await purposesApi.getAll();
         setState(data);
-        // setState(data.data[0].topic);
         window.addEventListener("resize", handleResize);
       } catch (error) {
         console.log("Error 💥", error.message);

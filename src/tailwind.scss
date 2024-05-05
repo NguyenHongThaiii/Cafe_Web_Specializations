@@ -343,3 +343,10 @@
   overflow: hidden; /* Ẩn nội dung vượt quá kích thước */
   text-overflow: ellipsis; /* Thêm dấu chấm ở cuối khi nội dung bị cắt */
 }
+.truncate-text-auto {
+  display: inline-block;
+  max-width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
