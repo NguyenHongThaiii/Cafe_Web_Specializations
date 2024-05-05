@@ -11,6 +11,7 @@ function NearAreaItem({ item }) {
   const navigate = useNavigate();
   const filters = {
     slugArea: `${item?.slug}`,
+    page: 0,
   };
   useEffect(() => {
     (async () => {

@@ -33,7 +33,7 @@ function Slider(props) {
     else navigate(`/search`);
   };
   return (
-    <section className="relative  flex items-center justify-center h-[240px] lg:h-[500px] z-10 ">
+    <section className="relative  flex items-center justify-center h-[240px] lg:h-[500px] z-[1001] ">
       <div
         className={`absolute inset-0  ${
           show

@@ -105,13 +105,13 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
               <div className="flex flex-col gap-y-1  ">
                 <Link
                   to={`/profile/${item?.userDto?.slug}`}
-                  className="text-base font-semibold hover:underline cursor-pointer lg:text-[18px]"
+                  className="text-base font-semibold hover:underline cursor-pointer lg:text-[18px] truncate-text-auto"
                 >
                   {item?.userDto?.name}
                 </Link>
                 <div className="pt-[2px] flex items-center text-[14px] lg:mr-0 xs:mr-[-40px]">
                   {item?.rating?.averageRating > 0 && (
-                    <span className="mr-[6px] font-bold">
+                    <span className="mr-[6px] font-bold lg:text-sm text-xs">
                       {item?.rating?.averageRating?.toFixed(1)}
                     </span>
                   )}
@@ -134,7 +134,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                     )
                   )}
                   <span className="mx-2 text-gray-400">●</span>{" "}
-                  <span className=" text-sm text-[#898c95] block">
+                  <span className=" lg:text-sm text-xs text-[#898c95] block">
                     Đã đánh giá{" "}
                     {handleCalculateDateFromNow(
                       new Date(item?.createdAt).toLocaleDateString("en-US")

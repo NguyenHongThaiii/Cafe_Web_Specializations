@@ -1,17 +1,31 @@
-import React from "react";
+import React, { useEffect } from "react";
 import PropTypes from "prop-types";
 import LayoutUser from "../../../components/Layout/Layout-User";
 import { useSelector } from "react-redux";
 import { FaCoins, FaUserEdit } from "react-icons/fa";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { MdMailOutline, MdPowerSettingsNew } from "react-icons/md";
 import ActionUser from "../components/Action-User";
 import FormEditUser from "../components/Form-Edit-User";
 import LayoutAuthenUser from "../../../components/Layout/Layout-Authen-User";
+import usersApi from "../../../api/usersApi";
 
 SettingPage.propTypes = {};
 
 function SettingPage(props) {
+  const user = useSelector((state) => state.auth.current);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const data = await usersApi.getBySlug(user?.slug);
+        if (!data?.id) navigate("/not-found");
+      } catch (error) {
+        navigate("/not-found");
+      }
+    })();
+  }, [user]);
   return (
     <LayoutAuthenUser>
       <LayoutUser>

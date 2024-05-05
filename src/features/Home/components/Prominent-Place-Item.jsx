@@ -29,10 +29,12 @@ function ProminentPlaceItem({ item }) {
         />
       </div>
       <div className="px-[15px] py-[2px] ">
-        <p className="text-text font-bold text-[18px] pt-[6px] pb-[2px]">
+        <p className="text-text font-bold lg:text-[18px] text-sm pt-[6px] pb-[2px]">
           {item?.name}
         </p>
-        <p className="text-black text-[14px] pb-[6px]">{item?.location}</p>
+        <p className="text-black lg:text-[14px] text-xs pb-[6px]">
+          {item?.location}
+        </p>
       </div>
     </Link>
   );

@@ -21,6 +21,7 @@ const schema = yup.object({
   name: yup
     .string("Vui lòng nhập tên quán.")
     .trim()
+    .max(50, "Tên quán không được vượt quá 50 ký tự")
     .required("Vui lòng nhập tên quán"),
   area_id: yup
     .string("Vui lòng chọn khu vực")
@@ -29,6 +30,7 @@ const schema = yup.object({
   location: yup
     .string("Vui lòng nhập địa chỉ")
     .trim()
+    .max(255, "Địa chỉ quán không được vượt quá 255 ký tự")
     .required("Vui lòng nhập địa chỉ"),
   startTime: yup
     .string("Vui lòng nhập giờ mở cửa")
@@ -122,6 +124,10 @@ function CreateBlog(props) {
       }
       if (!values?.description) {
         setError({ description: "Vui lòng nhập trường giới thiệu" });
+        return;
+      }
+      if (values?.description?.length > 500) {
+        setError({ description: "Tối đa 500 kí tự cho phần giới thiệu" });
         return;
       }
       setError(null);

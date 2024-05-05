@@ -100,15 +100,17 @@ function SearchModalMobile({ show, onShow }) {
                     className="mr-[10px] w-[50px] h-[50px] object-cover rounded-[4px]"
                   />
                   <div className="pr-3 mr-[10px] flex-1">
-                    <p className="text-base text-black font-semibold mb-[2px]">
+                    <p className="lg:text-base text-sm text-black font-semibold mb-[2px]">
                       {item?.name}
                     </p>
-                    <p className="text-sm text-[#6b6b6b] ">{item?.location}</p>
+                    <p className="lg:text-sm text-xs text-[#6b6b6b] truncate">
+                      {item?.location}
+                    </p>
                   </div>
 
-                  <div className="absolute top-0 bottom-0 right-0  flex items-center justify-center z-10 ">
+                  {/* <div className="absolute top-0 bottom-0 right-0  flex items-center justify-center z-10 ">
                     <i className="fa-solid fa-x cursor-pointer text-[#aaa] w-[30px] h-[30px] text-[20px] leading-[30px] text-center transition-all duration-300 hover:bg-[#ddd] hover:rounded-full"></i>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}

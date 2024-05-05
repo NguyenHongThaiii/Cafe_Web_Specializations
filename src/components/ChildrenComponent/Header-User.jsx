@@ -62,7 +62,7 @@ function HeaderUser({ user = {} }) {
         />
 
         <div
-          className={` absolute  z-[100] top-full right-0 w-[200px] bg-white rounded-[6px] overflow-hidden  ${
+          className={` absolute  z-[1002] top-full right-0 w-[200px] bg-white rounded-[6px] overflow-hidden  ${
             show ? " opacity-100 visible" : "opacity-0 invisible"
           } transition-all duration-200`}
         >

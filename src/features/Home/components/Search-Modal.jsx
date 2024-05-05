@@ -109,9 +109,9 @@ function SearchModal({ show, onShow = null, onSearch = null }) {
                   <p className="text-sm text-[#6b6b6b] ">{item?.description}</p>
                 </div>
 
-                <div className="absolute top-0 bottom-0 right-0  flex items-center justify-center z-10 ">
+                {/* <div className="absolute top-0 bottom-0 right-0  flex items-center justify-center z-10 ">
                   <i className="fa-solid fa-x cursor-pointer text-[#aaa] w-[30px] h-[30px] text-[20px] leading-[30px] text-center transition-all duration-300 hover:bg-[#ddd] hover:rounded-full"></i>
-                </div>
+                </div> */}
               </div>
             </div>
           ))}

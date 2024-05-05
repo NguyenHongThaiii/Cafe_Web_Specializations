@@ -70,6 +70,7 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
             filters?.slugPurpose ||
             filters?.slugConvenience ||
             filters?.slugKind ||
+            filters?.timeStatus ||
             queryString.parse(location.search)?.name?.length > 0) && (
             <span
               onClick={handleReset}

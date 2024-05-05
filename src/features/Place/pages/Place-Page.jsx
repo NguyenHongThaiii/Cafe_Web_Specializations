@@ -102,12 +102,12 @@ function PlacePage(props) {
         >
           <div className="p-2 mb-[6px] lg:mb-5 shadow-[0_1px_4px_rgb(0,0,0,0.3)] rounded-[10px] ">
             <div className="flex items-center justify-between pl-2">
-              <h1 className="lg:text-[28px] text-[22px] font-semibold ">
+              <h1 className="lg:text-[28px] text-[22px] font-semibold truncate-text-auto">
                 {state.name}
               </h1>
               <ComponentIsSaved data={state} user={user} />
             </div>
-            <div className="pl-2 text-sm lg:flex items-center gap-x-1 flex-wrap">
+            <div className="pl-2 text-sm lg:flex items-center gap-x-1 flex-wrap truncate">
               {state?.description}
             </div>
             <div className="pl-2 text-sm lg:flex items-center gap-x-1 flex-wrap">
@@ -115,7 +115,7 @@ function PlacePage(props) {
                 <MdLocationPin className="ml-[-3px] " />
                 {state?.location}
               </div>
-              <div className="flex items-center gap-x-1 ">
+              <div className="flex items-center gap-x-1 flex-wrap ">
                 <span className="lg:text-[16px]">
                   <FaStreetView className="ml-[-3px] lg:hidden" />
                   <span className="hidden lg:inline-block">{" —"}</span>
