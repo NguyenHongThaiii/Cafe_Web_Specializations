@@ -130,7 +130,9 @@ function ModalReviewMobile({
               onClick={handleClick}
               className={`px-[10px] py-[6px]  rounded-[6px] text-base font-medium outline-none
               ${
-                values.name.trim().length >= 10 && !loading
+                values.name.trim().length >= 10 &&
+                values.name.trim().length <= 2000 &&
+                !loading
                   ? "bg-primary text-white"
                   : "text-[#bcc0c4] bg-[#e4e6eb]"
               }

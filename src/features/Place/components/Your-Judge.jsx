@@ -44,11 +44,11 @@ function YourJudge({ item = {}, onChange = null }) {
         Đánh giá của bạn
       </h3>
       <div className="relative text-base rounded-[10px] mb-[10px]">
-        <input
+        {/* <input
           type="text"
           ref={inputRef}
           className=" transition-all w-full border-[1px] rounded-[10px] outline-none border-[#d9d9d9] bg-white py-1 px-3 focus:shadow-[0_0_0_2px_rgb(238,0,51,0.2)] focus:border-[#fa284e]"
-        />
+        /> */}
         <div
           onClick={handleResetValue}
           className="absolute right-[10px] top-[10px] cursor-pointer text-[rgba(0,0,0,.25)] hover:text-[rgba(0,0,0,.45)] transition-all"

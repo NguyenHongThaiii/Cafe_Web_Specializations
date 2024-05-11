@@ -49,7 +49,7 @@ function ProfilePage(props) {
               <div className="flex flex-col items-center absolute top-[34%] justify-center ">
                 <div className="w-[200px] h-[200px] p-[6px] rounded-full bg-white relative">
                   <img
-                    src={state?.image?.url}
+                    src={state?.image?.url || "/img/user-default.jpg"}
                     alt={`${state?.name}`}
                     className="rounded-full w-full h-full object-cover"
                   />

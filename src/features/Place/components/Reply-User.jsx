@@ -50,7 +50,7 @@ function ReplyUser({
                 className="mr-[11px] w-10 h-10 lg:w-[64px] lg:h-[64px]"
               >
                 <img
-                  src={user?.image?.url}
+                  src={user?.image?.url || "/img/user-default.jpg"}
                   alt={user?.name}
                   className="w-full h-full rounded-full"
                 />

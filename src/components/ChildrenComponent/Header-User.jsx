@@ -34,7 +34,7 @@ function HeaderUser({ user = {} }) {
       >
         <img
           src="/img/saved.svg"
-          alt={user.name}
+          alt="saved"
           className="w-1/2 h-1/2 object-cover"
         />
       </Link>
@@ -53,9 +53,7 @@ function HeaderUser({ user = {} }) {
       >
         <img
           src={`${
-            user.image != null
-              ? user?.image?.url
-              : "/img/72273536_138453484190292_758641522559156224_n.jpg"
+            user.image != null ? user?.image?.url : "/img/user-default.jpg"
           }`}
           alt={user.name}
           className="w-full h-full object-cover rounded-full "
@@ -75,7 +73,7 @@ function HeaderUser({ user = {} }) {
                 src={`${
                   user.image != null
                     ? user?.image?.url
-                    : "/img/72273536_138453484190292_758641522559156224_n.jpg"
+                    : "/img/user-default.jpg"
                 }`}
                 alt={user.name}
                 className="w-full h-full object-cover"

@@ -23,7 +23,7 @@ function ReviewItemForm({ user = {}, onSubmit = null }) {
     <div className="flex gap-x-2 pt-[10px] px-[6px] pb-[2px]  ">
       <div className="w-9 h-9 bg-[#eee] shrink rounded-full overflow-hidden border-none  ">
         <img
-          src={user?.image?.url}
+          src={user?.image?.url || "/img/user-default.jpg"}
           alt={user?.name}
           className="h-full w-full object-cover"
         />
