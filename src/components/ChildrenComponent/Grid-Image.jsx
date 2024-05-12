@@ -23,7 +23,7 @@ function GridImage({ length = 1, imageList = [], data = {} }) {
         length === 2 && "grid-cols-2  grid-rows-1"
       } ${length === 3 && "grid-cols-6 grid-rows-4"} ${
         length === 4 && "grid-cols-4 grid-rows-4 "
-      } ${length > 5 && "grid-cols-6 grid-rows-2"} `}
+      } ${length >= 5 && "grid-cols-6 grid-rows-2"} `}
     >
       {imageList?.slice(0, 5)?.map((image, i) => (
         <div
@@ -43,11 +43,11 @@ function GridImage({ length = 1, imageList = [], data = {} }) {
           ${i + 1 === 4 && imageList.length === 4 && "col-span-2 row-span-2"}
 
 
-          ${i + 1 === 1 && imageList.length > 5 && "col-span-3 row-span-1"}
-          ${i + 1 === 2 && imageList.length > 5 && "col-span-3 row-span-1"}
-          ${i + 1 === 3 && imageList.length > 5 && "col-span-2 row-span-1"}
-          ${i + 1 === 4 && imageList.length > 5 && "col-span-2 row-span-1"}
-          ${i + 1 === 5 && imageList.length > 5 && "col-span-2 row-span-1"}
+          ${i + 1 === 1 && imageList.length >= 5 && "col-span-3 row-span-1"}
+          ${i + 1 === 2 && imageList.length >= 5 && "col-span-3 row-span-1"}
+          ${i + 1 === 3 && imageList.length >= 5 && "col-span-2 row-span-1"}
+          ${i + 1 === 4 && imageList.length >= 5 && "col-span-2 row-span-1"}
+          ${i + 1 === 5 && imageList.length >= 5 && "col-span-2 row-span-1"}
 
           `}
         >
@@ -56,7 +56,7 @@ function GridImage({ length = 1, imageList = [], data = {} }) {
             alt={image?.url}
             className={`w-full h-full ${
               imageList?.length > 1 && imageList
-                ? length !== 3 && "max-w-[330px] max-h-[200px]"
+                ? length !== 3 && "max-w-[370px] max-h-[200px]"
                 : " max-h-[600px] max-w-[774px]"
             }  cursor-pointer`}
           />

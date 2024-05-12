@@ -39,7 +39,9 @@ function OutstandingArea(props) {
                 <p className="text-base text-black font-semibold mb-[2px]">
                   {item?.name}
                 </p>
-                <p className="text-sm text-[#6b6b6b] ">{item?.description}</p>
+                <p className="text-sm text-[#6b6b6b] truncate-text">
+                  {item?.description}
+                </p>
               </div>
             </div>
           </div>

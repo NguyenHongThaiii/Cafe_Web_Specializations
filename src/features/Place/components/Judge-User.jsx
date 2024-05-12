@@ -1,17 +1,29 @@
 import PropTypes from "prop-types";
 import React, { useEffect, useRef, useState } from "react";
-import { FaEllipsisH, FaHeart, FaRegHeart, FaReplyAll } from "react-icons/fa";
+import {
+  FaEllipsisH,
+  FaFlag,
+  FaHeart,
+  FaPencilAlt,
+  FaRegHeart,
+  FaReplyAll,
+} from "react-icons/fa";
+import {
+  MdOutlineClose,
+  MdStar,
+  MdStarHalf,
+  MdStarOutline,
+} from "react-icons/md";
 import { useDispatch, useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 import commentsApi from "../../../api/commentsApi";
+import favoritesApi from "../../../api/favoritesApi";
 import { handleCalculateDateFromNow } from "../../../utils";
+import { showLoginPage } from "../../Auth/authSlice";
+import CommentItem from "../../Profile/components/Comment-Item";
 import ModalImage from "./Modal-Image";
 import ReadMore from "./Read-More";
 import ReplyUser from "./Reply-User";
-import favoritesApi from "../../../api/favoritesApi";
-import { showLoginPage } from "../../Auth/authSlice";
-import { MdStar, MdStarHalf, MdStarOutline } from "react-icons/md";
-import CommentItem from "../../Profile/components/Comment-Item";
 
 JudgeUser.propTypes = {
   item: PropTypes.object,
@@ -97,7 +109,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                 className="mr-[11px] w-10 h-10 lg:w-[64px] lg:h-[64px]"
               >
                 <img
-                  src={`${item?.userDto?.image?.url}`}
+                  src={item?.userDto?.image?.url || "/img/user-default.jpg"}
                   alt={item?.userDto?.name}
                   className="w-full h-full rounded-full"
                 />
@@ -220,7 +232,31 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
             Trả lời
           </button>
         </div>
-        <FaEllipsisH className="relative cursor-pointer" />
+
+        <div className="group relative min-w-[150px] flex justify-end">
+          <FaEllipsisH className="relative cursor-pointer" />
+          <div className="absolute hidden group-hover:block bg-white shadow-[0_2px_8px_rgb(0,0,0,0.15)] mt-3 rounded-md ">
+            {item?.userDto?.id === user.id ? (
+              <div>
+                <div className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2">
+                  <FaPencilAlt />
+                  Chỉnh sửa
+                </div>
+                <div className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2">
+                  <MdOutlineClose className="text-lg" />
+                  Xóa
+                </div>
+              </div>
+            ) : (
+              <div>
+                <div className="cursor-pointer transition-all hover:bg-gray-300 py-1 px-3 text-sm flex items-center gap-2">
+                  <FaFlag />
+                  Báo cáo
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
 
       {isReply && (
@@ -258,7 +294,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                       className="mr-[11px] w-10 h-10 lg:w-[64px] lg:h-[64px]"
                     >
                       <img
-                        src={reply?.user?.image?.url}
+                        src={reply?.user?.image?.url || "/img/user-default.jpg"}
                         alt={reply?.user?.name}
                         className="w-full h-full rounded-full"
                       />

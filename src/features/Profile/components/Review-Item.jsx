@@ -96,7 +96,7 @@ function ReviewItem({ data = {} }) {
       <div className="pb-1 flex items-center">
         <div className="bg-[#eee] shrink-0 w-[46px] h-[46px] rounded-full overflow-hidden">
           <img
-            src={data?.userDto?.image?.url}
+            src={data?.userDto?.image?.url || "/img/user-default.jpg"}
             alt="img-user"
             className="w-full h-full object-cover"
           />

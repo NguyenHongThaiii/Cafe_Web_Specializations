@@ -10,14 +10,14 @@ function PostReview() {
   const [itemHeight, setItemHeight] = useState(0);
   const [filters, setFilters] = useState({
     page: 1,
-    outstanding: 0,
+    outstanding: 1,
   });
   const [page, setPage] = useState(1);
 
-  const [hasMore, setHasMore] = useState(true);
   useEffect(() => {
     (async () => {
-      const reviews = await reviewsApi.getAll({ page: 0, outstanding: 0 });
+      const reviews = await reviewsApi.getAll({ page: 0, outstanding: 1 });
+      console.log(reviews.length);
       setItemHeight(reviews?.length);
     })();
   }, []);
@@ -25,18 +25,9 @@ function PostReview() {
     (async () => {
       const reviews = await reviewsApi.getAll(filters);
       setState(reviews);
-      if (
-        itemHeight <= reviews.length &&
-        itemHeight !== 0 &&
-        reviews.length !== 0
-      )
-        setHasMore(false);
     })();
   }, [filters]);
-  const fetchMore = () => {
-    const newFilters = { ...filters, limit: filters.limit + 2 };
-    setFilters(newFilters);
-  };
+
   const handlePageChange = (page) => {
     setFilters((prev) => ({ ...prev, page }));
     setPage(page);

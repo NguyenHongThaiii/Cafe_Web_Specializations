@@ -28,7 +28,7 @@ function ActionUser(props) {
       <div className="flex gap-6  border-b-2 pb-3">
         <div className="rounded-full overflow-hidden">
           <img
-            src={user?.image?.url}
+            src={user?.image?.url || "/img/user-default.jpg"}
             alt={user?.name}
             className="w-[60px] h-[60px]"
           />
