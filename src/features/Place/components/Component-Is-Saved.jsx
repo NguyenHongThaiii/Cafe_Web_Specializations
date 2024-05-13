@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { MdSaveAlt } from "react-icons/md";
 import blogSavedApi from "../../../api/blog-savedApi";
-import "react-toastify/dist/ReactToastify.min.css";
+
 import { toast } from "react-toastify";
 
 ComponentIsSaved.propTypes = {

@@ -40,7 +40,7 @@ function ReplyUser({
     setState(value);
   };
   return (
-    <div className="border-l-[1px] border-l-[#eee] ml-[6px] mt-[16px] pl-[10px]">
+    <div className="border-l-[1px] border-l-[#eee] ml-[60px] mt-[16px] pl-[10px]">
       <div className="mt-1 pt-4 border-t-[1px] border-t-[#ddd]">
         <div className="py-[5px] px-[10px] bg-[#eee] rounded-[12px] ">
           <div className="flex items-center justify-between border-b-[1px] border-b-[#e0e0e0] py-1 ">

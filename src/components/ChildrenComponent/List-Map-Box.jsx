@@ -15,7 +15,6 @@ ListMapBox.propTypes = {
 function ListMapBox({ data = [], hideMap = null }) {
   const mapContainer = useRef(null);
   const map = useRef(null);
-  console.log(data);
   useEffect(() => {
     map.current = new mapboxgl.Map({
       container: mapContainer.current,

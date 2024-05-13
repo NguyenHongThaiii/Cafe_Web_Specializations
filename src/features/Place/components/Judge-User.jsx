@@ -24,15 +24,24 @@ import CommentItem from "../../Profile/components/Comment-Item";
 import ModalImage from "./Modal-Image";
 import ReadMore from "./Read-More";
 import ReplyUser from "./Reply-User";
+import reviewsApi from "../../../api/reviewApi";
+import { toast } from "react-toastify";
 
 JudgeUser.propTypes = {
   item: PropTypes.object,
   onClick: PropTypes.func,
   onSubmit: PropTypes.func,
   blog: PropTypes.object,
+  handleRefetch: PropTypes.func,
 };
 
-function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
+function JudgeUser({
+  item = {},
+  onClick = null,
+  onSubmit = null,
+  blog = {},
+  handleRefetch = null,
+}) {
   const user = useSelector((state) => state.auth.current);
   const [show, setShow] = useState(false);
   const [replies, setReplies] = useState([]);
@@ -97,6 +106,16 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
   };
   const handleShowModalImage = (index) => {
     setIsShowModalImage((prev) => ({ ...prev, show: true, index }));
+  };
+  const handleDeleteReview = async (id) => {
+    try {
+      if (!handleRefetch) return;
+      await reviewsApi.deleteReview(id);
+      toast("Bạn đã xóa review thành công.");
+      handleRefetch();
+    } catch (error) {
+      toast.error("Có lỗi xảy ra vui lòng thử lại sau!");
+    }
   };
   return (
     <>
@@ -238,11 +257,14 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
           <div className="absolute hidden group-hover:block bg-white shadow-[0_2px_8px_rgb(0,0,0,0.15)] mt-3 rounded-md ">
             {item?.userDto?.id === user.id ? (
               <div>
-                <div className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2">
+                {/* <div className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2">
                   <FaPencilAlt />
                   Chỉnh sửa
-                </div>
-                <div className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2">
+                </div> */}
+                <div
+                  onClick={() => handleDeleteReview(item?.id)}
+                  className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2"
+                >
                   <MdOutlineClose className="text-lg" />
                   Xóa
                 </div>
@@ -283,7 +305,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
         replies.map((reply, index) => (
           <div
             key={index}
-            className="border-l-[1px] border-l-[#eee] ml-[6px] mt-[16px] pl-[10px]"
+            className="border-l-[1px] border-l-[#eee] ml-[60px] mt-[16px] pl-[10px] "
           >
             <div className="mt-1 pt-4 border-t-[1px] border-t-[#ddd]">
               <div className="py-[5px] px-[10px] bg-[#eee] rounded-[12px] ">
@@ -321,7 +343,7 @@ function JudgeUser({ item = {}, onClick = null, onSubmit = null, blog = {} }) {
                 </div>
               </div>
             </div>
-            <CommentItem user={user} item={reply} />
+            <CommentItem user={user} item={reply} onReFetch={setFilters} />
           </div>
         ))}
       {isShowModalImage.show && (

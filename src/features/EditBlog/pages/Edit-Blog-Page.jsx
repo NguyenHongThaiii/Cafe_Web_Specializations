@@ -16,7 +16,6 @@ import OtherInfor from "../components/Other-Infor";
 import * as yup from "yup";
 import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 
 EditBlogPage.propTypes = {};
 
@@ -150,9 +149,9 @@ function EditBlogPage(props) {
         setValue("priceMax", blog?.priceMax);
         setValue("latitude", blog?.latitude || "");
         setValue("longitude", blog?.longitude || "");
-        setValue("email", blog?.owner?.email);
-        setValue("facebook", blog?.owner?.facebook);
-        setValue("phone", blog?.owner?.phone);
+        setValue("email", blog?.email);
+        setValue("facebook", blog?.facebook);
+        setValue("phone", blog?.phone);
       } catch (error) {
         navigate("/not-found");
       }
@@ -229,7 +228,6 @@ function EditBlogPage(props) {
       });
       formData.append("name", data?.name);
       formData.append("listScheduleDto", data?.listScheduleDto);
-      formData.append("phone", data?.phone);
       formData.append("area_id", data?.area_id);
       formData.append("convenience_id", data?.convenience_id);
       formData.append("description", data?.description);
@@ -241,6 +239,34 @@ function EditBlogPage(props) {
       formData.append("status", data?.status);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
+      if (data?.email?.length > 0) {
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data?.email))
+          formData.append("email", data?.email);
+        else {
+          toast.error("Vui lòng nhập đúng định dạng email.");
+          return;
+        }
+      }
+      if (data?.facebook?.length > 0) {
+        if (
+          /^(?:http(s)?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/.test(
+            data?.facebook
+          )
+        )
+          formData.append("facebook", data?.facebook);
+        else {
+          toast.error("Vui lòng nhập đúng định dạng link facebook.");
+          return;
+        }
+      }
+      if (data?.phone?.length > 0) {
+        if (/^\+?[0-9]+$/.test(data?.phone))
+          formData.append("phone", data?.phone);
+        else {
+          toast.error("Vui lòng nhập đúng định dạng số điện thoại.");
+          return;
+        }
+      }
       await blogsApi.updateProduct(state?.blog?.id, formData);
       toast("Chỉnh sửa thành công");
       navigate(`/place/${state?.blog?.slug}`);

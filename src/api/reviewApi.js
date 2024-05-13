@@ -21,6 +21,10 @@ const reviewsApi = {
       },
     });
   },
+  deleteReview(id) {
+    const url = `/reviews/id/${id}`;
+    return axiosClient.delete(url);
+  },
 };
 
 export default reviewsApi;

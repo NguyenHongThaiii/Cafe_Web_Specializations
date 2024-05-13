@@ -112,6 +112,7 @@ function JudgePublic({
               item={review}
               blog={item}
               onClick={handleClickFavor}
+              handleRefetch={handleRefetch}
             />
           </div>
         ))}

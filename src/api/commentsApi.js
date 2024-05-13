@@ -15,6 +15,10 @@ const commentsApi = {
     const url = "/comments";
     return axiosClient.post(url, data);
   },
+  deleteComment(data) {
+    const url = "/comments";
+    return axiosClient.delete(url, { data });
+  },
 };
 
 export default commentsApi;

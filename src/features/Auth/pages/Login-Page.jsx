@@ -9,7 +9,6 @@ import { forgotPassword, login, signup } from "../authSlice";
 import LoginForm from "../components/Login-Form";
 import RegisterForm from "./../components/Register-Form";
 import ForgotPasswordForm from "../components/Forgot-Password-Form";
-import "react-toastify/dist/ReactToastify.min.css";
 import { toast } from "react-toastify";
 
 LoginPage.propTypes = {

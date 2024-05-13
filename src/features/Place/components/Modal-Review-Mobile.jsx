@@ -7,7 +7,7 @@ import { createReview } from "../../Auth/authSlice";
 import CustomRate from "./Custom-Rate";
 import YourJudge from "./Your-Judge";
 import reviewsApi from "../../../api/reviewApi";
-import "react-toastify/dist/ReactToastify.min.css";
+
 import { toast } from "react-toastify";
 ModalReviewMobile.propTypes = {
   item: PropTypes.object,
