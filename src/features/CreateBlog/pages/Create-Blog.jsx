@@ -15,7 +15,6 @@ import blogsApi from "../../../api/blogsApi";
 import { timeToNumber } from "../../../utils";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.min.css";
 import { useNavigate } from "react-router-dom";
 const schema = yup.object({
   name: yup
@@ -172,7 +171,6 @@ function CreateBlog(props) {
       });
       formData.append("name", data?.name);
       formData.append("listScheduleDto", data?.listScheduleDto);
-      formData.append("phone", data?.phone);
       formData.append("area_id", data?.area_id);
       formData.append("purpose_id", data?.purpose_id);
       formData.append("convenience_id", data?.convenience_id);
@@ -180,10 +178,37 @@ function CreateBlog(props) {
       formData.append("location", data?.location);
       formData.append("userId", user.id);
       formData.append("kind_id", data?.kind_id);
-
       formData.append("status", data?.status);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
+      if (data?.email?.length > 0) {
+        if (/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data?.email))
+          formData.append("email", data?.email);
+        else {
+          toast.error("Vui lòng nhập đúng định dạng email.");
+          return;
+        }
+      }
+      if (data?.facebook?.length > 0) {
+        if (
+          /^(?:http(s)?:\/\/)?(www\.)?facebook.com\/[a-zA-Z0-9(\.\?)?]/.test(
+            data?.facebook
+          )
+        )
+          formData.append("facebook", data?.facebook);
+        else {
+          toast.error("Vui lòng nhập đúng định dạng link facebook.");
+          return;
+        }
+      }
+      if (data?.phone?.length > 0) {
+        if (/^\+?[0-9]+$/.test(data?.phone))
+          formData.append("phone", data?.phone);
+        else {
+          toast.error("Vui lòng nhập đúng định dạng số điện thoại.");
+          return;
+        }
+      }
       await blogsApi.createProduct(formData);
       toast("Tạo thành công");
     } catch (error) {

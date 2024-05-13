@@ -83,14 +83,14 @@ function Header() {
       </div>
 
       <div className=" gap-x-[14px] hidden lg:flex">
-        <button
+        {/* <button
           className="rounded-full bg-primary text-white
         h-10 text-[16px] leading-[30px] font-semibold px-[14px] lg:hover:bg-[#be0129] transition-all duration-300 whitespace-nowrap
         "
         >
           <i className="fa-solid fa-pencil mr-[6px]"></i>
           Viết Review
-        </button>
+        </button> */}
         {!user ? (
           <button
             onClick={handleShowLoginPage}

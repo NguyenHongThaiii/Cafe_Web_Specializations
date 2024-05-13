@@ -38,7 +38,6 @@ axiosClient.interceptors.response.use(
   function (error) {
     // Any status codes that falls outside the range of 2xx cause this function to trigger
     // Do something with response error
-    console.log("axios ", error);
     const message = error?.response?.data?.message;
     // if (
     //   error.code === "ERR_BAD_REQUEST" &&
@@ -52,7 +51,6 @@ axiosClient.interceptors.response.use(
       error?.response?.status === 401 &&
       message === "Full authentication is required to access this resource"
     ) {
-      console.log("Runnnn");
       removeLocalStorage(STORAGE_KEY.USER);
       removeLocalStorage(STORAGE_KEY.TOKEN);
       window.location.href = "/";

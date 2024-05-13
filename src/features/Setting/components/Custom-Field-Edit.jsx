@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import usersApi from "../../../api/usersApi";
 import { useDispatch } from "react-redux";
 import { updateUserNotImage } from "../../Auth/authSlice";
-import "react-toastify/dist/ReactToastify.min.css";
+
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 CustomFieldEdit.propTypes = {

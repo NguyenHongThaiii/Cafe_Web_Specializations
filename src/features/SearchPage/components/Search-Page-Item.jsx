@@ -10,7 +10,7 @@ import {
 import reviewsApi from "../../../api/reviewApi";
 import blogSavedApi from "../../../api/blog-savedApi";
 import { showLoginPage } from "../../Auth/authSlice";
-import "react-toastify/dist/ReactToastify.min.css";
+
 import { toast } from "react-toastify";
 SearchPageItem.propTypes = {
   data: PropTypes.object,
