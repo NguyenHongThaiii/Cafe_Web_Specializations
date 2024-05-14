@@ -16,6 +16,7 @@ CustomFieldEdit.propTypes = {
   title: PropTypes.string,
   content: PropTypes.string,
   isChange: PropTypes.bool,
+  type: PropTypes.string,
 };
 
 function CustomFieldEdit({
@@ -25,9 +26,10 @@ function CustomFieldEdit({
   title = "",
   content = "",
   isChange = true,
+  type = "default",
   children,
 }) {
-  const { control, handleSubmit, setValue, formState } = useForm({
+  const { control, handleSubmit, setValue, formState, reset } = useForm({
     mode: "onSubmit",
     reValidateMode: "onSubmit",
   });
@@ -40,25 +42,55 @@ function CustomFieldEdit({
       setError(errorMessage);
       return;
     }
+    if (
+      !userData[name] ||
+      userData[name].trim().length > 20 ||
+      !userData[name] ||
+      userData[name].trim().length < 8
+    ) {
+      setError("Tối thiểu 8 kí tự và tối đa 20 kí tự");
+      return;
+    }
     const regex = /^\+?[0-9]{1,3}\s?[0-9]{3,}$/;
     if (userData?.phone && !regex.test(userData.phone)) {
-      toast.error("Vui lòng nhập đúng định dạng số điện thoại.");
+      // toast.error("Vui lòng nhập đúng định dạng số điện thoại.");
+      setError("Vui lòng nhập đúng định dạng số điện thoại.");
+
       return;
     }
-    if (userData?.name && userData?.name?.length > 10) {
-      toast.error("Tối đa 10 kí tự.");
+    if (userData?.name && userData?.name?.length > 20) {
+      // toast.error("Tối đa 10 kí tự.");
+      setError("Tối đa 20 kí tự.");
+
       return;
     }
+
     try {
+      if (type === "password") {
+        userData.email = user.email;
+        console.log(userData);
+        const userUpdate = await usersApi.changePassword(userData);
+        dispatch(updateUserNotImage({ ...userData, field: name }));
+        toast("Cập nhật thông tin thành công");
+        setIsShow(false);
+        setValue("password", null);
+        setValue("oldPassword", null);
+        setValue("retypePassword", null);
+
+        return;
+        return;
+        return;
+      }
       const userUpdate = await usersApi.updateUser(user?.slug, userData);
       dispatch(updateUserNotImage({ ...userData, field: name }));
       toast("Cập nhật thông tin thành công");
+      setValue(name, null);
+      setIsShow(false);
     } catch (error) {
-      console.log(error?.message);
       toast.error(error.message || "Có lỗi xảy ra vui lòng thử lại sau.");
-      navigate("/");
+      setIsShow(false);
+      navigate("/setting");
     }
-    setIsShow(false);
   };
   return (
     <form
@@ -74,13 +106,42 @@ function CustomFieldEdit({
             {title}
           </p>
           <div className="pl-8">
-            <div className="max-w-[240px] mt-2">
-              <InputControlCommon
-                control={control}
-                name={name}
-                placeholder={user[name] || "********"}
-              />
-            </div>
+            {type === "default" ? (
+              <div className="max-w-[240px] mt-2">
+                <InputControlCommon
+                  control={control}
+                  name={name}
+                  placeholder={user[name] || "********"}
+                />
+              </div>
+            ) : (
+              <div>
+                <div className="max-w-[240px] mt-2">
+                  <InputControlCommon
+                    control={control}
+                    name="oldPassword"
+                    placeholder={"Mật khẩu cũ"}
+                    type="password"
+                  />
+                </div>
+                <div className="max-w-[240px] mt-2">
+                  <InputControlCommon
+                    control={control}
+                    name="password"
+                    placeholder="Mật khẩu mới"
+                    type="password"
+                  />
+                </div>
+                <div className="max-w-[240px] mt-2">
+                  <InputControlCommon
+                    control={control}
+                    name="retypePassword"
+                    placeholder="Nhập lại mật khẩu mới"
+                    type="password"
+                  />
+                </div>
+              </div>
+            )}
             {error && (
               <span className="block font-medium text-sm text-primary transition-all duration-150">
                 {error}

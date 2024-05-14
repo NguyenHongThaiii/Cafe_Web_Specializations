@@ -24,6 +24,7 @@ function FormEditUser(props) {
         errorMessage="Mật khẩu không được để trống"
         title="Mật khẩu"
         content="********"
+        type="password"
       >
         <FaRegUser />
       </CustomFieldEdit>

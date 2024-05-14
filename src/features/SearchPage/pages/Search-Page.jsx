@@ -19,6 +19,7 @@ function SearchPage(props) {
   const [show, setShow] = useState(false);
   const [hide, setHide] = useHide();
   const location = useLocation();
+  const [isLoading, setIsLoading] = useState(false);
 
   const [filters, setFilters] = useState(() => {
     const queryParams = queryString.parse(location.search);
@@ -40,6 +41,7 @@ function SearchPage(props) {
   useEffect(() => {
     (async () => {
       try {
+        setIsLoading(true);
         const data = await blogsApi.getAll(filters);
         const filterShifts = { ...filters, page: 0 };
         const count = await blogsApi.getAll(filterShifts);
@@ -48,6 +50,7 @@ function SearchPage(props) {
       } catch (error) {
         console.log("Error 💥", error.message);
       }
+      setIsLoading(false);
       if (scrollRef && scrollRef.current) {
         scrollRef.current.scrollIntoView({
           behavior: "smooth",
@@ -56,15 +59,17 @@ function SearchPage(props) {
     })();
   }, [filters]);
   const handleOnChange = (value) => {
-    if (value?.rating === 0)
+    if (value?.rating === 0) {
       setFilters((prev) => {
         return { ...prev, ...value, rating: null, page: 1 };
       });
-    else
+    } else {
       setFilters((prev) => {
         return { ...prev, ...value, page: 1 };
       });
+    }
   };
+
   return (
     <LayoutUser>
       <FiltersContext.Provider value={[filters, setFilters]}>
@@ -87,6 +92,7 @@ function SearchPage(props) {
                 ref={scrollRef}
               >
                 <SearchPageContent
+                  isLoading={isLoading}
                   data={state || []}
                   count={count || 0}
                   onChange={handleOnChange}

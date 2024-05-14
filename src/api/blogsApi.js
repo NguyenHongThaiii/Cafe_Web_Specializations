@@ -8,6 +8,12 @@ const blogsApi = {
       params,
     });
   },
+  getCount(params) {
+    const url = "/products/count";
+    return axiosClient.get(url, {
+      params,
+    });
+  },
   getBySlug(slug) {
     const url = `/products/${slug}`;
     return axiosClient.get(url, {});
@@ -16,7 +22,7 @@ const blogsApi = {
     const url = `/products/id/${id}`;
     return axiosClient.get(url);
   },
-  getCount(count) {
+  getCountByStatus(count) {
     const url = `/products/count/${count}`;
     return axiosClient.get(url);
   },

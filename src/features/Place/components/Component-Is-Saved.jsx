@@ -5,6 +5,7 @@ import { MdSaveAlt } from "react-icons/md";
 import blogSavedApi from "../../../api/blog-savedApi";
 
 import { toast } from "react-toastify";
+import { showLoginPage } from "../../Auth/authSlice";
 
 ComponentIsSaved.propTypes = {
   user: PropTypes.object,
@@ -31,6 +32,11 @@ function ComponentIsSaved({ data = {}, user = {} }) {
     })();
   }, [filters, data]);
   const handleSaveBlogs = async () => {
+    console.log(user);
+    if (!user?.id) {
+      dispatch(showLoginPage());
+      return;
+    }
     try {
       if (!user?.id) {
         dispatch(showLoginPage());
