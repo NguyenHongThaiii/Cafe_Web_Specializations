@@ -98,7 +98,7 @@ function CommentItem({ item = {}, user = {}, onReFetch = null }) {
       <div className="group relative min-w-[150px] flex justify-end">
         <FaEllipsisH className="relative cursor-pointer" />
         <div className="absolute hidden group-hover:block bg-white shadow-[0_2px_8px_rgb(0,0,0,0.15)] mt-3 rounded-md ">
-          {item?.user?.id === user.id ? (
+          {user?.id && item?.user?.id === user?.id ? (
             <div>
               {/* <div className="cursor-pointer transition-all hover:bg-gray-300  py-1 px-3 text-sm flex items-center gap-2">
                 <FaPencilAlt />

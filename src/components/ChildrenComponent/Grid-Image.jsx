@@ -56,9 +56,9 @@ function GridImage({ length = 1, imageList = [], data = {} }) {
             alt={image?.url}
             className={`w-full h-full ${
               imageList?.length > 1 && imageList
-                ? length !== 3 && "max-w-[400px] max-h-[400px]"
+                ? length !== 3 && "max-w-[400px] max-h-[300px]"
                 : " max-h-[600px] max-w-[774px]"
-            }  cursor-pointer`}
+            }  cursor-pointer object-cover`}
           />
           {imageList?.length > 5 && i === 4 && (
             <div

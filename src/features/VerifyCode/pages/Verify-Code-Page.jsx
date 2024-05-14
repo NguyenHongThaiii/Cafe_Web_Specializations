@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import VerificationInput from "react-verification-input";
 import { useLocation, useNavigate, useNavigation } from "react-router-dom";
@@ -9,6 +9,7 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import styled from "../components//index.module.scss";
+import { toast } from "react-toastify";
 
 const schema = yup.object({
   password: yup
@@ -38,9 +39,21 @@ function VerifyCodePage(props) {
   const handleVerificationChange = (value) => {
     setVerificationCode(value);
   };
-  const type = queryString.parse(location.search)?.type;
-  const email =
-    queryString.parse(location.search)?.email || "example@example.com";
+  const type = location.state?.type || "none";
+  const email = location.state?.email || "example@example.com";
+
+  useEffect(() => {
+    if (type === "none") {
+      navigation("/");
+      return;
+    }
+    if (email === "example@example.com") {
+      toast.error("Có lỗi xảy ra vui lòng thử lại sau!");
+      navigation("/");
+      return;
+    }
+  }, []);
+
   const handleOnVerification = async () => {
     try {
       setLoading(true);
@@ -74,7 +87,11 @@ function VerifyCodePage(props) {
     }
   };
   return (
-    <div className="flex justify-center items-center">
+    <div
+      className={`${
+        type != "none" ? "flex" : "hidden"
+      } justify-center items-center`}
+    >
       {!isDone ? (
         <div>
           <h1 className="text-3xl font-medium text-center mb-3">Enter OTP</h1>

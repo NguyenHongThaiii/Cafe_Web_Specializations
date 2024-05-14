@@ -10,10 +10,12 @@ import CardFilter from "./Card-Filter";
 import SearchPageItem from "./Search-Page-Item";
 import queryString from "query-string";
 import NotFoundItem from "./Not-Found-Item";
+import SearchPageItemSkeleton from "./Search-Page-Item-Skeleton";
 SearchPageContent.propTypes = {
   data: PropTypes.array,
   onChange: PropTypes.func,
   count: PropTypes.number,
+  isLoading: PropTypes.bool,
 };
 const itemsPerPage = 5;
 
@@ -30,19 +32,22 @@ const OPTIONS_LIST = [
   },
 ];
 
-function SearchPageContent({ data = [], onChange = null, count = 1 }) {
+function SearchPageContent({
+  data = [],
+  onChange = null,
+  count = 1,
+  isLoading = false,
+}) {
   const { handleSubmit, control } = useForm({});
   const navigate = useNavigate();
   const location = useLocation();
   const [filters, setFilters] = useContext(FiltersContext);
-  // const [page, setPage] = useState(filters?.page || 1);
   const handleOnChange = (value) => {
     if (!onChange) return null;
     onChange(value);
   };
   const handlePageChange = (page) => {
     if (!onChange) return null;
-    // setPage(page);
     setFilters((prev) => {
       return { ...prev, page: page };
     });
@@ -97,10 +102,16 @@ function SearchPageContent({ data = [], onChange = null, count = 1 }) {
       <CardFilter />
 
       <div>
-        {data?.length > 0 ? (
-          data.map((item) => <SearchPageItem data={item} key={item.id} />)
+        {!isLoading ? (
+          data && data.length > 0 ? (
+            data.map((item) => <SearchPageItem data={item} key={item.id} />)
+          ) : (
+            <NotFoundItem keyParams={filters?.name} />
+          )
         ) : (
-          <NotFoundItem keyParams={filters?.name} />
+          Array.from({ length: 5 }).map((_, index) => (
+            <SearchPageItemSkeleton key={index} />
+          ))
         )}
       </div>
       <div>

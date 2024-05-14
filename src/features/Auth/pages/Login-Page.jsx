@@ -36,7 +36,8 @@ function LoginPage({ onClick }) {
       const action = forgotPassword(value);
       const resultAction = await dispatch(action);
       const user = unwrapResult(resultAction);
-      navigation(`verify?email=${value?.email}&type=forgot`);
+      // navigation(`verify?email=${value?.email}&type=forgot`);
+      navigation("/verify", { state: { email: value?.email, type: "forgot" } });
     }
   };
   const handleClickOnForgot = () => {

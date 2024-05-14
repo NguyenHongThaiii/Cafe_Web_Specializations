@@ -49,6 +49,10 @@ const usersApi = {
     const url = `/auth/update/${slug}`;
     return axiosClient.patch(url, data);
   },
+  changePassword(data) {
+    const url = `/auth/changePassword`;
+    return axiosClient.post(url, data);
+  },
 };
 
 export default usersApi;
