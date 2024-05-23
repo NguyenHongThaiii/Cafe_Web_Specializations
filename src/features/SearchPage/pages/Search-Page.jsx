@@ -7,6 +7,7 @@ import LayoutUser from "../../../components/Layout/Layout-User";
 import { useHide } from "../../../context/Global-Provider";
 import SearchPageContent from "../components/Search-Page-Content";
 import SearchPageFilter from "../components/Search-Page-Filter";
+import ListMapBox from "../../../components/ChildrenComponent/List-Map-Box";
 
 SearchPage.propTypes = {};
 export const FiltersContext = createContext([]);
@@ -20,6 +21,7 @@ function SearchPage(props) {
   const [hide, setHide] = useHide();
   const location = useLocation();
   const [isLoading, setIsLoading] = useState(false);
+  const [isMap, setIsMap] = useState(false);
 
   const [filters, setFilters] = useState(() => {
     const queryParams = queryString.parse(location.search);
@@ -111,11 +113,17 @@ function SearchPage(props) {
                 <span className="absolute top-[-2px] right-[-2px] w-[12px] h-[12px] rounded-full bg-primary"></span>
                 Bộ lọc
               </div>
-              <div className="relative cursor-pointer flex items-center gap-x-2 text-[#111] py-[2px] px-[12px] mx-1 rounded-full shadow-[0_0_8px_2px_rgb(0,0,0,0.3)] text-base bg-white font-normal">
+              <div
+                onClick={() => setIsMap(true)}
+                className="relative cursor-pointer flex items-center gap-x-2 text-[#111] py-[2px] px-[12px] mx-1 rounded-full shadow-[0_0_8px_2px_rgb(0,0,0,0.3)] text-base bg-white font-normal"
+              >
                 <BsPinMap className=" text-lg" />
                 Bản đồ
               </div>
             </div>
+            {isMap && (
+              <ListMapBox data={state} hideMap={() => setIsMap(false)} />
+            )}
           </div>
         </ResetContext.Provider>
       </FiltersContext.Provider>
