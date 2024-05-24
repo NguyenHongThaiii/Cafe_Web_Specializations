@@ -92,7 +92,7 @@ const authSlice = createSlice({
     },
     updateUser: (state, action) => {
       const userLocal = JSON.parse(getLocalStorage(STORAGE_KEY.USER));
-      userLocal.image.url = action.payload.avatar;
+      userLocal.image = action.payload.avatar;
 
       state.current = { ...userLocal };
       setLocalStorage(STORAGE_KEY.USER, JSON.stringify({ ...userLocal }));
