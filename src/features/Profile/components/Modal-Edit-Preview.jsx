@@ -39,7 +39,7 @@ function ModalEditPreview({
       formData.append("avatar", files);
       await usersApi.uploadAvatar(user?.slug, formData);
       const newUser = await usersApi.getAll({ slug: user?.slug });
-      dispatch(updateUser({ avatar: newUser[0]?.image?.url }));
+      dispatch(updateUser({ avatar: newUser[0]?.image }));
       hideModal();
     } catch (error) {
       console.log(error);
