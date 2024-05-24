@@ -46,9 +46,12 @@ function SearchPage(props) {
         setIsLoading(true);
         const data = await blogsApi.getAll(filters);
         const filterShifts = { ...filters, page: 0 };
-        const count = await blogsApi.getAll(filterShifts);
+        // const count = await blogsApi.getAll(filterShifts);
+        const count = await blogsApi.getCount(filterShifts);
         setState(data);
-        setCount(count?.length || 0);
+        // setCount(count?.length || 0);
+        console.log(count);
+        setCount(count || 0);
       } catch (error) {
         console.log("Error 💥", error.message);
       }
