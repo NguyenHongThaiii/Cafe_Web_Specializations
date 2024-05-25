@@ -247,9 +247,11 @@ function CreateBlog(props) {
             <ImageFrame onChange={handleOnChange} error={error} />
             <button
               type="submit"
-              className={`text-white text-xl mt-5 w-full h-10 px-5 rounded-lg bg-primary font-semibold  lg:hover:bg-[#be0129] transition-all duration-300
+              className={`text-white text-xl mt-5 w-full h-10 px-5 rounded-lg bg-primary font-semibold  hover:bg-[#be0129] transition-all duration-300
                 ${
-                  formState.isSubmitting ? "bg-gray-500" : "  "
+                  formState.isSubmitting
+                    ? "bg-gray-500 hover:bg-gray-500"
+                    : "  "
                 }                `}
               disabled={formState.isSubmitting}
             >
