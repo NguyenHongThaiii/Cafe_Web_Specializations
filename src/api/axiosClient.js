@@ -55,7 +55,7 @@ axiosClient.interceptors.response.use(
     ) {
       removeLocalStorage(STORAGE_KEY.USER);
       removeLocalStorage(STORAGE_KEY.TOKEN);
-      window.location.href = "/";
+      // window.location.href = "/";
       throw new Error(message);
     }
     if (message) error.message = message;
