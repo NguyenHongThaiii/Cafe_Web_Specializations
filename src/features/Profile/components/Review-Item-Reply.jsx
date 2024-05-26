@@ -11,9 +11,14 @@ import CommentItem from "./Comment-Item";
 ReviewItemReply.propTypes = {
   listReplies: PropTypes.array,
   onClick: PropTypes.func,
+  onRefetch: PropTypes.func,
 };
 
-function ReviewItemReply({ listReplies = [], onClick = null }) {
+function ReviewItemReply({
+  listReplies = [],
+  onClick = null,
+  onRefetch = null,
+}) {
   const [state, setState] = useState([]);
   const user = useSelector((state) => state.auth.current);
 
@@ -49,7 +54,7 @@ function ReviewItemReply({ listReplies = [], onClick = null }) {
                 <ReadMore range={200}>{item?.name}</ReadMore>
               </div>
             </div>
-            <CommentItem item={item} user={user} />
+            <CommentItem item={item} user={user} onReFetch={onRefetch} />
           </div>
         </div>
       ))}

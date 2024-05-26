@@ -91,6 +91,9 @@ function ReviewItem({ data = {} }) {
     setLoadingComment(false);
   };
   const handleClickFavorReply = (replyId) => {};
+  const handleRefetch = () => {
+    setFilterFavor((prev) => ({ ...prev }));
+  };
   return (
     <div className="bg-white lg:py-3 py-2 px-4 lg:mb-5 mb-2 rounded-[10px] shadow-[0_2px_8px_rgb(0,0,0,0.15)] ">
       <div className="pb-1 flex items-center">
@@ -203,6 +206,7 @@ function ReviewItem({ data = {} }) {
       )}
       {show && (
         <ReviewItemReply
+          onRefetch={handleRefetch}
           listReplies={state?.comments}
           onClick={handleClickFavorReply}
         />
