@@ -179,7 +179,7 @@ function CreateBlog(props) {
       formData.append("location", data?.location);
       formData.append("userId", user.id);
       formData.append("kind_id", data?.kind_id);
-      formData.append("status", 0);
+      formData.append("status", data?.status);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
       if (data?.email?.length > 0) {
