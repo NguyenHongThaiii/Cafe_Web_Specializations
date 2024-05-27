@@ -112,6 +112,7 @@ function CreateBlog(props) {
     setValues((prev) => ({ ...prev, ...value }));
   };
   const handleOnSubmit = async (data) => {
+    data = { ...data, ...values };
     try {
       if (!values?.listImageFile || values?.listImageFile?.length < 5) {
         setError({ image: "Ít nhất 5 images" });
@@ -178,7 +179,7 @@ function CreateBlog(props) {
       formData.append("location", data?.location);
       formData.append("userId", user.id);
       formData.append("kind_id", data?.kind_id);
-      formData.append("status", data?.status);
+      formData.append("status", 0);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
       if (data?.email?.length > 0) {
@@ -247,7 +248,7 @@ function CreateBlog(props) {
             <ImageFrame onChange={handleOnChange} error={error} />
             <button
               type="submit"
-              className={`text-white text-xl mt-5 w-full h-10 px-5 rounded-lg bg-primary font-semibold  hover:bg-[#be0129] transition-all duration-300
+              className={`text-white text-xl mt-5 w-full h-10 px-5 rounded-lg bg-primary font-semibold   transition-all duration-300
                 ${
                   formState.isSubmitting
                     ? "bg-gray-500 hover:bg-gray-500"

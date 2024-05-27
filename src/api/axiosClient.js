@@ -10,7 +10,7 @@ const axiosClient = axios.create({
   baseURL: "http://localhost:8080/api/v1",
   // baseURL:
   //   "http://be-cafe-env-1.eba-pb8qynrr.ap-southeast-1.elasticbeanstalk.com/api/v1",
-  headers: { "Content-type": "application/json" },
+  // headers: { "Content-type": "application/json" },
 });
 // Add a request interceptor
 axiosClient.interceptors.request.use(
@@ -55,7 +55,7 @@ axiosClient.interceptors.response.use(
     ) {
       removeLocalStorage(STORAGE_KEY.USER);
       removeLocalStorage(STORAGE_KEY.TOKEN);
-      // window.location.href = "/";
+      window.location.href = "/";
       throw new Error(message);
     }
     if (message) error.message = message;
