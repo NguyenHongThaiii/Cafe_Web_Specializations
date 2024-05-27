@@ -215,7 +215,7 @@ function EditBlogPage(props) {
 
           return;
         }
-        data.longitude = data?.longitude ? parseFloat(data.longitude) : null;
+        data.longitude = data?.longitude ? parseFloat(data?.longitude) : null;
         data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
         formData.append("latitude", data?.latitude);
         formData.append("longitude", data?.longitude);
