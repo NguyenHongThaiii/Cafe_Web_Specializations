@@ -7,9 +7,9 @@ axios.defaults.xsrfHeaderName = "X-CSRFTOKEN";
 axios.defaults.xsrfCookieName = "csrftoken";
 
 const axiosClient = axios.create({
-  // baseURL: "http://localhost:8080/api/v1",
-  baseURL:
-    "http://be-cafe-env-1.eba-pb8qynrr.ap-southeast-1.elasticbeanstalk.com/api/v1",
+  baseURL: "http://localhost:8080/api/v1",
+  // baseURL:
+  //   "http://be-cafe-env-1.eba-pb8qynrr.ap-southeast-1.elasticbeanstalk.com/api/v1",
   headers: { "Content-type": "application/json" },
 });
 // Add a request interceptor

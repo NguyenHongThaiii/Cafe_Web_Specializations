@@ -37,6 +37,7 @@ function SearchPage(props) {
       slugConvenience: queryParams.convenience
         ? queryParams.convenience
         : undefined,
+      status: 1,
     };
   });
   const scrollRef = useRef(null);

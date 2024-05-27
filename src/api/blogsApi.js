@@ -18,6 +18,10 @@ const blogsApi = {
     const url = `/products/${slug}`;
     return axiosClient.get(url, {});
   },
+  getBySlugAndStatus(slug, status) {
+    const url = `/products/${slug}/status/${status}`;
+    return axiosClient.get(url);
+  },
   getById(id) {
     const url = `/products/id/${id}`;
     return axiosClient.get(url);

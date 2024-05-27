@@ -46,7 +46,8 @@ function PlacePage(props) {
   useEffect(() => {
     (async () => {
       try {
-        const blog = await blogsApi.getBySlug(slug);
+        const blog = await blogsApi.getBySlugAndStatus(slug, 1);
+        // const blog = await blogsApi.getBySlug(slug);
         if (!blog?.id) {
           navigate("/not-found");
           return;
@@ -68,6 +69,7 @@ function PlacePage(props) {
         }
       } catch (error) {
         console.log("Error", error);
+        navigate("/not-found");
       }
     })();
 
