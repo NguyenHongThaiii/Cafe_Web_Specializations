@@ -10,7 +10,7 @@ function OutstandingArea(props) {
   const navigate = useNavigate();
   useEffect(() => {
     (async () => {
-      const blogs = await blogsApi.getAll({ outstanding: 1 });
+      const blogs = await blogsApi.getAll({ outstanding: 1, status: 1 });
       setState(blogs);
     })();
   }, []);

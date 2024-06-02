@@ -236,7 +236,7 @@ function EditBlogPage(props) {
       formData.append("kind_id", data?.kind_id);
       formData.append("purpose_id", data?.purpose_id);
 
-      formData.append("status", data?.status);
+      formData.append("status", 1);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
       if (data?.email?.length > 0) {
