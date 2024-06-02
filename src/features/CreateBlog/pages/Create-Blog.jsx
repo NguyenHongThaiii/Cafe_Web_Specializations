@@ -113,6 +113,7 @@ function CreateBlog(props) {
   };
   const handleOnSubmit = async (data) => {
     data = { ...data, ...values };
+    console.log(data);
     try {
       if (!values?.listImageFile || values?.listImageFile?.length < 5) {
         setError({ image: "Ít nhất 5 images" });
@@ -146,8 +147,11 @@ function CreateBlog(props) {
       data.purpose_id = +data.purpose_id;
       data.longitude = data?.longitude ? parseFloat(data.longitude) : null;
       data.latitude = data?.latitude ? parseFloat(data.latitude) : null;
+
       data.status = 1;
       const formData = new FormData();
+      formData.append("latitude", data?.latitude);
+      formData.append("longitude", data?.longitude);
       if (data?.latitude || data?.longitude) {
         const regex = /^-?\d+(\.\d+)?$/;
         if (!regex.test(data?.latitude)) {
@@ -179,7 +183,7 @@ function CreateBlog(props) {
       formData.append("location", data?.location);
       formData.append("userId", user.id);
       formData.append("kind_id", data?.kind_id);
-      formData.append("status", 0);
+      formData.append("status", 1);
       formData.append("priceMin", data?.priceMin);
       formData.append("priceMax", data?.priceMax);
       if (data?.email?.length > 0) {

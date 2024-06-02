@@ -94,7 +94,7 @@ function ProfilePage(props) {
                   </li>
                   <li className="cursor-pointer text-base py-1 h-full flex items-center gap-x-[6px]">
                     <Link
-                      to="/"
+                      to="#"
                       className="flex items-center text-[#3b5998]  hover:bg-[#3b5998] hover:text-white  h-9 gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                     >
                       <FaFacebookF className="" />
@@ -102,7 +102,7 @@ function ProfilePage(props) {
                   </li>
                   <li className="cursor-pointer text-base py-1 h-full flex items-center gap-x-[6px]">
                     <Link
-                      to="/"
+                      to="#"
                       className="flex items-center text-[#cd486b] hover:bg-[#cd486b] hover:text-white h-9 gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                     >
                       <FaInstagram className=" " />
@@ -110,7 +110,7 @@ function ProfilePage(props) {
                   </li>
                   <li className="cursor-pointer text-base py-1 h-full flex items-center gap-x-[6px]">
                     <Link
-                      to="/"
+                      to="#"
                       className="flex hover:bg-[#e0e0e0] items-center h-9 gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                     >
                       <FaEllipsisH />
@@ -246,7 +246,7 @@ function ProfilePage(props) {
                 {state?.userDto?.facebook && (
                   <li className="cursor-pointer text-base py-1 h-full flex items-center gap-x-[6px]">
                     <Link
-                      to="/"
+                      to="#"
                       className="flex items-center text-[#3b5998]  hover:bg-[#3b5998] hover:text-white  h-9 gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                     >
                       <FaFacebookF className="" />
@@ -256,7 +256,7 @@ function ProfilePage(props) {
                 {state?.userDto?.instagram && (
                   <li className="cursor-pointer text-base py-1 h-full flex items-center gap-x-[6px]">
                     <Link
-                      to="/"
+                      to="#"
                       className="flex items-center text-[#cd486b] hover:bg-[#cd486b] hover:text-white h-9 gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                     >
                       <FaInstagram className=" " />
@@ -265,7 +265,7 @@ function ProfilePage(props) {
                 )}
                 <li className="cursor-pointer text-base py-1 h-full flex items-center gap-x-[6px]">
                   <Link
-                    to="/"
+                    to="#"
                     className="flex hover:bg-[#e0e0e0] items-center h-9 gap-x-2 py-[6px] px-[18px]  rounded-[6px] bg-[#efefef] font-medium transition-all"
                   >
                     <FaEllipsisH />
