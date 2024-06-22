@@ -7,7 +7,6 @@ import OutstandingArea from "../components/Outstanding-Area";
 ExplorePage.propTypes = {};
 
 function ExplorePage(props) {
-  const [state, setState] = useState([]);
   useEffect(() => {
     (async () => {})();
   }, []);
