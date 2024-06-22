@@ -202,7 +202,11 @@
     }
   }
 }
-
+@media (max-width: 990px) {
+  .pagination > li > a {
+    font-size: 12px;
+  }
+}
 .custom-input {
   input[type="range"] {
     -webkit-appearance: none;
