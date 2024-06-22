@@ -9,7 +9,7 @@ PostReview.propTypes = {
   itemHeight: PropTypes.number,
 };
 
-function PostReview({ itemHeight = 0 }) {
+function PostReview({ itemHeight = 20 }) {
   console.log(itemHeight);
   const [state, setState] = useState([]);
   const [filters, setFilters] = useState({
