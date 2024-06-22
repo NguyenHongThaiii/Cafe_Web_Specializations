@@ -3,11 +3,15 @@ import reviewsApi from "../../../api/reviewApi";
 import ReviewItem from "../../Profile/components/Review-Item";
 import InfiniteScroll from "react-infinite-scroll-component";
 import Pagination from "../../../common/Pagination";
-PostReview.propTypes = {};
+import PropTypes from "prop-types";
 
-function PostReview() {
+PostReview.propTypes = {
+  itemHeight: PropTypes.number,
+};
+
+function PostReview({ itemHeight = 0 }) {
+  console.log(itemHeight);
   const [state, setState] = useState([]);
-  const [itemHeight, setItemHeight] = useState(20);
   const [filters, setFilters] = useState({
     page: 1,
     outstanding: 1,
@@ -19,14 +23,7 @@ function PostReview() {
       const reviews = await reviewsApi.getAll(filters);
       setState(reviews);
     })();
-  }, [filters]);
-  useEffect(() => {
-    (async () => {
-      const reviews = await reviewsApi.getAll({ page: 0, outstanding: 1 });
-      console.log(reviews.length);
-      setItemHeight(reviews?.length);
-    })();
-  }, [filters]);
+  }, [filters, itemHeight]);
 
   const handlePageChange = (page) => {
     setFilters((prev) => ({ ...prev, page }));
