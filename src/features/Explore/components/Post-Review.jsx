@@ -53,7 +53,7 @@ function PostReview({ itemHeight = 20 }) {
           data={state}
           onChange={(page) => handlePageChange(page)}
           itemsPerPage={5}
-          count={itemHeight}
+          count={itemHeight > 0 ? itemHeight : 20}
           page={page}
         />
       </div>
