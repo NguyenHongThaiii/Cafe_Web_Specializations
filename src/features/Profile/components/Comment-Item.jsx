@@ -26,6 +26,7 @@ function CommentItem({ item = {}, user = {}, onReFetch = null }) {
     userId: user?.id,
   });
   const [amountFavoriteComment, setAmountFavoriteComment] = useState(0);
+  const [isExistFavorComment, setIsExistFavorComment] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
   useEffect(() => {
@@ -34,7 +35,12 @@ function CommentItem({ item = {}, user = {}, onReFetch = null }) {
         const data = await favoritesApi.getAmountFavoriteComment(
           filters?.commentId || item?.id
         );
+        const isExistComment = await favoritesApi.existsByCommentIdAndUserId(
+          item?.id,
+          user?.id || 0
+        );
         setAmountFavoriteComment(data);
+        setIsExistFavorComment(isExistComment);
       } catch (error) {
         console.log("Error", error);
       }
@@ -76,7 +82,8 @@ function CommentItem({ item = {}, user = {}, onReFetch = null }) {
         <button
           onClick={() => handleClickFavor(item?.id)}
           className={`text-xs flex items-center gap-x-1 ${
-            amountFavoriteComment > 0 && "text-primary"
+            amountFavoriteComment > 0 &&
+            `${isExistFavorComment ? "text-primary" : ""}`
           }`}
         >
           {amountFavoriteComment > 0 ? (

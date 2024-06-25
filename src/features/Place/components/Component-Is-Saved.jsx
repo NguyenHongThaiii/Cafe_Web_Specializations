@@ -32,7 +32,6 @@ function ComponentIsSaved({ data = {}, user = {} }) {
     })();
   }, [filters, data]);
   const handleSaveBlogs = async () => {
-    console.log(user);
     if (!user?.id) {
       dispatch(showLoginPage());
       return;

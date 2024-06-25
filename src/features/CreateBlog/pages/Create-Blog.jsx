@@ -113,7 +113,6 @@ function CreateBlog(props) {
   };
   const handleOnSubmit = async (data) => {
     data = { ...data, ...values };
-    console.log(data);
     try {
       if (!values?.listImageFile || values?.listImageFile?.length < 5) {
         setError({ image: "Ít nhất 5 images" });

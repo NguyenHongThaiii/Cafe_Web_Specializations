@@ -28,6 +28,7 @@ function ReviewItem({ data = {} }) {
   const [state, setState] = useState({});
   const [show, setShow] = useState(false);
   const [hideTextarea, setHideTextarea] = useState(true);
+  const [isExistFavorReview, setIsExistFavorReview] = useState(false);
   const [filterFavor, setFilterFavor] = useState({});
   const [filterComment, setFilterComment] = useState({});
   const [loadingFavor, setLoadingFavor] = useState(false);
@@ -44,7 +45,12 @@ function ReviewItem({ data = {} }) {
           page: filterComment?.page || 0,
           reviewId: filterComment?.reviewId || data?.id,
         });
+        const isExistReview = await favoritesApi.existsByReviewIdAndUserId(
+          data?.id,
+          user?.id || 0
+        );
         const blog = await blogsApi.getById(data?.productId);
+        setIsExistFavorReview(isExistReview);
         setState({ favorite: favor, comments, blog });
       } catch (error) {
         console.log("Error", error);
@@ -149,7 +155,7 @@ function ReviewItem({ data = {} }) {
             <span className=" lg:text-sm text-xs text-[#898c95] block">
               Đã đánh giá{" "}
               {handleCalculateDateFromNow(
-                new Date(state?.createdAt).toLocaleDateString("en-US")
+                new Date(data?.createdAt).toLocaleDateString("en-US")
               )}
             </span>
           </div>
@@ -173,12 +179,16 @@ function ReviewItem({ data = {} }) {
         <button
           onClick={handleClickFavor}
           className={`w-full flex items-center justify-center gap-x-2 text-base py-1 outline-none bg-transparent transition-all hover:bg-[#eee] rounded-[6px] ${
-            state?.favorite > 0 ? "text-primary" : ""
+            state?.favorite > 0
+              ? `${isExistFavorReview ? "text-primary" : ""}`
+              : ""
           }`}
         >
           {state?.favorite > 0 ? (
             <>
-              <FaHeart className="text-primary" />
+              <FaHeart
+                className={`${isExistFavorReview ? "text-primary" : ""}`}
+              />
               {state?.favorite} Thích
             </>
           ) : (

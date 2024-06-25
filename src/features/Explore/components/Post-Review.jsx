@@ -10,7 +10,6 @@ PostReview.propTypes = {
 };
 
 function PostReview({ itemHeight = 20 }) {
-  console.log(itemHeight);
   const [state, setState] = useState([]);
   const [filters, setFilters] = useState({
     page: 1,

@@ -43,6 +43,7 @@ function JudgePublic({
         page: 0,
         productId: item?.id || 0,
       });
+
       setReviews(data);
       setCount(count?.length);
     })();
