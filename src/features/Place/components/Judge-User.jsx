@@ -57,6 +57,9 @@ function JudgeUser({
     reviewId: item.id,
     page: 0,
   });
+  const [isExistFavorReview, setIsExistFavorReview] = useState(false);
+  console.log(item?.id);
+  console.log(user?.id);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
   const handleClickFavor = (reviewId) => {
@@ -85,6 +88,11 @@ function JudgeUser({
       try {
         const data = await commentsApi.getAll(filters);
         const favor = await favoritesApi.getAmountFavoriteReview(item?.id);
+        const isExistReview = await favoritesApi.existsByReviewIdAndUserId(
+          item?.id,
+          user?.id || 0
+        );
+        setIsExistFavorReview(isExistReview);
         setAmountFavoriteReviews(favor);
         setReplies(data);
       } catch (error) {}
@@ -224,7 +232,9 @@ function JudgeUser({
           <button
             onClick={() => handleClickFavor(item.id)}
             className={`flex items-center lg:text-sm  ${
-              amountFavoriteReviews > 0 ? "text-primary  " : ""
+              amountFavoriteReviews > 0 && isExistFavorReview
+                ? "text-primary  "
+                : ""
             }`}
           >
             {amountFavoriteReviews > 0 ? (

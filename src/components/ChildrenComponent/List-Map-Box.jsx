@@ -13,7 +13,6 @@ ListMapBox.propTypes = {
 };
 
 function ListMapBox({ data = [], hideMap = null }) {
-  console.log(data);
   const mapContainer = useRef(null);
   const map = useRef(null);
   useEffect(() => {
@@ -30,8 +29,6 @@ function ListMapBox({ data = [], hideMap = null }) {
 
     // Add markers for each data item
     data.forEach((item) => {
-      console.log(item.latitude);
-
       const el = document.createElement("div");
       el.className = "marker";
 
@@ -66,7 +63,6 @@ function ListMapBox({ data = [], hideMap = null }) {
 
       map.current.markers.push(marker);
     });
-    console.log(map.current);
 
     // Add controls if needed
     map.current.addControl(

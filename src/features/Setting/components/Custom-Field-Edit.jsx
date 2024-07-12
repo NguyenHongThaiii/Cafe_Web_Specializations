@@ -68,7 +68,6 @@ function CustomFieldEdit({
     try {
       if (type === "password") {
         userData.email = user.email;
-        console.log(userData);
         const userUpdate = await usersApi.changePassword(userData);
         dispatch(updateUserNotImage({ ...userData, field: name }));
         toast("Cập nhật thông tin thành công");
